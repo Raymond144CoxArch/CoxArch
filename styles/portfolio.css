@@ -1,4 +1,4 @@
-/* Portfolio Page Styles */
+﻿/* Portfolio Page Styles */
 
 /* Hero Section */
 .portfolio-hero-section {
@@ -180,7 +180,7 @@
     margin-bottom: 1rem;
 }
 
-/* Adjust image positioning for Dilworth Renovation */
+/* Adjust image positioning for dilworth-renovation */
 .project-card[data-project-id="dilworth-renovation"] .project-image {
     object-position: center 20%;
 }

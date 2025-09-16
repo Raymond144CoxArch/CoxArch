@@ -1,4 +1,4 @@
-  // Event Listener Management System
+﻿  // Event Listener Management System
   class EventListenerManager {
     constructor() {
       this.listeners = new Map();
@@ -78,7 +78,7 @@
 
   // Wait for DOM to be ready
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('🏠 DOM is ready, starting homepage initialization...');
+    console.log('ðŸ  DOM is ready, starting homepage initialization...');
     
     // Initialize event listener manager
     const eventManager = new EventListenerManager();
@@ -175,71 +175,71 @@
       const featuredProjects = [
         {
           id: 'williams-lake-house',
-          name: 'Lake House',
-          type: 'New Construction',
+          name: 'lake-house',
+          type: 'new-construction',
           description: 'Luxury lakefront residence with contemporary design and natural materials.',
-          hero_image: 'images/Portfolio/New Construction/Lake House/Lakehouse (Hero).jpg',
+          hero_image: 'images/Portfolio/New\\ Construction/lake-house/lakehouse-hero-\\.jpg',
           images: [
-            'images/Portfolio/New Construction/Lake House/LakeHouse (1).jpg',
-            'images/Portfolio/New Construction/Lake House/LakeHouse (9).jpg',
-            'images/Portfolio/New Construction/Lake House/LakeHouse (18).jpg',
-            'images/Portfolio/New Construction/Lake House/LakeHouse (19).jpg',
-            'images/Portfolio/New Construction/Lake House/LakeHouse (20).jpg',
-            'images/Portfolio/New Construction/Lake House/LakeHouse (21).jpg',
-            'images/Portfolio/New Construction/Lake House/LakeHouse (22).jpg',
-            'images/Portfolio/New Construction/Lake House/LakeHouse (23).jpg',
-            'images/Portfolio/New Construction/Lake House/LakeHouse (24).jpg',
-            'images/Portfolio/New Construction/Lake House/LakeHouse (25).jpg'
+            'images/Portfolio/New\\ Construction/lake-house/lakehouse-1-\\.jpg',
+            'images/Portfolio/New\\ Construction/Lake\\ House/lakehouse-9-\\.jpg',
+            'images/Portfolio/New\\ Construction/Lake\\ House/lakehouse-18-\\.jpg',
+            'images/Portfolio/New\\ Construction/Lake\\ House/lakehouse-19-\\.jpg',
+            'images/Portfolio/New\\ Construction/lake-house/lakehouse-20-\\.jpg',
+            'images/Portfolio/New\\ Construction/Lake\\ House/lakehouse-21-\\.jpg',
+            'images/Portfolio/New\\ Construction/lake-house/lakehouse-22-\\.jpg',
+            'images/Portfolio/New\\ Construction/lake-house/lakehouse-23-\\.jpg',
+            'images/Portfolio/New\\ Construction/lake-house/lakehouse-24-\\.jpg',
+            'images/Portfolio/New\\ Construction/lake-house/lakehouse-25-\\.jpg'
           ],
           featured: true
         },
         {
           id: 'split-level-makeover',
-          name: 'Split Level Makeover', // Changed from 'title' to 'name'
-          type: 'Renovation+Addition', // Changed from 'category' to 'type'
+          name: 'split-level-makeover', // Changed from 'title' to 'name'
+          type: 'renovation-addition', // Changed from 'category' to 'type'
           description: 'Complete split-level home transformation with modern open concept design.',
-          hero_image: 'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (Hero).jpg', // Changed from 'heroImage' to 'hero_image'
+          hero_image: 'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-hero-\\.jpg', // Changed from 'heroImage' to 'hero_image'
           images: [
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (1).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (2).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (3).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (4).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (5).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (6).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (7).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (8).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (9).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (10).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (11).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (12).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (13).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (14).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (15).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (16).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (17).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (18).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (19).jpg',
-            'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (20).jpg'
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-1-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-2-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-3-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-4-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-5-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-6-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-7-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-8-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/Splitlevelmakerover (9).jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-10-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-11-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-12-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-13-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-14-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-15-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-16-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-17-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-18-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-19-\\.jpg',
+            'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-20-\\.jpg'
           ],
           featured: true
         },
         {
           id: 'heavy-timber-pool-house',
-          name: 'Heavy Timber Pool House', // Changed from 'title' to 'name'
-          type: 'Renovation+Addition', // Changed from 'category' to 'type'
-          description: 'Custom heavy timber pool house addition with rustic elegance and modern amenities.',
-          hero_image: 'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/Heavy+Timber_01.jpg', // Changed from 'heroImage' to 'hero_image'
+          name: 'heavy-timber-pool-house', // Changed from 'title' to 'name'
+          type: 'renovation-addition', // Changed from 'category' to 'type'
+          description: 'Custom heavy-timber-pool-house addition with rustic elegance and modern amenities.',
+          hero_image: 'images/Portfolio/renovation-addition/heavy-timber-pool-house/heavy-timber_01\\.jpg', // Changed from 'heroImage' to 'hero_image'
           images: [
-            'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/Heavy+Timber_01.jpg',
-            'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/IMG_0503.JPG',
-            'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/IMG_0506.JPG',
-            'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/IMG_0523.jpg',
-            'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/IMG_0526.jpg',
-            'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/IMG_0527.jpg',
-            'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/IMG_0528.jpg',
-            'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/IMG_0529.JPG',
-            'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/IMG_0531.jpg',
-            'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/IMG-0500.jpg'
+            'images/Portfolio/renovation-addition/heavy-timber-pool-house/heavy-timber_01\\.jpg',
+            'images/Portfolio/renovation-addition/heavy-timber-pool-house/IMG_0503.JPG',
+            'images/Portfolio/renovation-addition/heavy-timber-pool-house/IMG_0506.JPG',
+            'images/Portfolio/renovation-addition/heavy-timber-pool-house/IMG_0523.jpg',
+            'images/Portfolio/renovation-addition/heavy-timber-pool-house/IMG_0526.jpg',
+            'images/Portfolio/renovation-addition/heavy-timber-pool-house/IMG_0527.jpg',
+            'images/Portfolio/renovation-addition/heavy-timber-pool-house/IMG_0528.jpg',
+            'images/Portfolio/renovation-addition/heavy-timber-pool-house/IMG_0529.JPG',
+            'images/Portfolio/renovation-addition/heavy-timber-pool-house/IMG_0531.jpg',
+            'images/Portfolio/renovation-addition/heavy-timber-pool-house/IMG-0500.jpg'
           ],
           featured: true
         }
@@ -295,7 +295,7 @@
         // Use hero image if available, otherwise first image, otherwise default
         const imageSrc = project.hero_image ||
           (project.images && project.images.length > 0 ? project.images[0] : null) ||
-          'images/Portfolio/Contemporary French/contemporaryfrench (1).png';
+          'images/Portfolio/contemporary-french/contemporaryfrench (1).png';
 
         projectElement.innerHTML = `
           <div class="project-image">
@@ -370,13 +370,13 @@
 
   const getDefaultImages = () => {
     return [
-      'images/Portfolio/New Construction/Lake House/Lakehouse (Hero).jpg',
-      'images/Portfolio/New Construction/Modern Warehouse/Modern Warehouse (Hero).jpg',
-      'images/Portfolio/New Construction/Sabik/Sabik (Hero).JPG',
-      'images/Portfolio/Renovation+Addition/Homeowner Haven/Homeowner Haven (Hero).jpg',
-      'images/Portfolio/Renovation+Addition/Lake House Renovation/DSC_3069.JPG',
-      'images/Portfolio/New Construction/Sabik/Sabik (18).JPG',
-      'images/Portfolio/New Construction/Riverchase/riverchase (Hero).jpg'
+      'images/Portfolio/New\\ Construction/lake-house/lakehouse-hero-\\.jpg',
+      'images/Portfolio/New\\ Construction/Modern\\ Warehouse/modern-warehouse-hero-\\.jpg',
+      'images/Portfolio/New\\ Construction/Sabik/sabik-hero-\\.jpg',
+      'images/Portfolio/renovation-addition/homeowner-haven/homeowner-haven-hero-\\.jpg',
+      'images/Portfolio/renovation-addition/lake-house-renovation/DSC_3069.JPG',
+      'images/Portfolio/new-construction/Sabik/sabik-18-\\.jpg',
+      'images/Portfolio/new-construction/Riverchase/riverchase-hero-\\.jpg'
     ];
   };
 
@@ -465,32 +465,32 @@
     await initializeSlideshow();
   };
 
-  // Continuous gallery: use Hero images from both New Construction and Renovation+Addition
+  // Continuous gallery: use Hero images from both new-construction and renovation-addition
   const refreshContinuousGallery = async () => {
     try {
       const track = document.getElementById('featuredContinuousGallery');
       if (!track) {return;}
       
-      // Mix of Hero images from both New Construction and Renovation+Addition projects with project names
+      // Mix of Hero images from both new-construction and renovation-addition projects with project names
       const heroImages = [
-        // New Construction Hero Images
-        { src: 'images/Portfolio/New Construction/Modern Warehouse/Modern Warehouse (Hero).jpg', name: 'Modern Warehouse' },
-        { src: 'images/Portfolio/New Construction/Riverchase/riverchase (Hero).jpg', name: 'Riverchase' },
-        { src: 'images/Portfolio/New Construction/Woodland/Woodland (Hero).jpg', name: 'Woodland' },
-        { src: 'images/Portfolio/New Construction/Contemporary French/contemporaryfrench  (Hero).png', name: 'Contemporary French' },
-        { src: 'images/Portfolio/New Construction/French Country/French Country (Hero).jpg', name: 'French Country' },
-        { src: 'images/Portfolio/New Construction/Low Country Cabin/LowCountryCabin (Hero).jpg', name: 'Low Country Cabin' },
-        { src: 'images/Portfolio/New Construction/Melchor Residence/Melchor Residence (Hero).jpg', name: 'Melchor Residence' },
-        { src: 'images/Portfolio/New Construction/Sabik/Sabik (Hero).JPG', name: 'Sabik' },
-        { src: 'images/Portfolio/New Construction/Shingle Style/Shingle Style (Hero).jpg', name: 'Shingle Style' },
+        // new-construction Hero Images
+        { src: 'images/Portfolio/New\\ Construction/Modern\\ Warehouse/modern-warehouse-hero-\\.jpg', name: 'modern-warehouse' },
+        { src: 'images/Portfolio/new-construction/Riverchase/riverchase-hero-\\.jpg', name: 'Riverchase' },
+        { src: 'images/Portfolio/new-construction/Woodland/woodland-hero-\\.jpg', name: 'Woodland' },
+        { src: 'images/Portfolio/new-construction/contemporary-french/contemporaryfrench-hero-\\.png', name: 'contemporary-french' },
+        { src: 'images/Portfolio/new-construction/french-country/french-country (Hero).jpg', name: 'french-country' },
+        { src: 'images/Portfolio/New\\ Construction/Low\\ Country\\ Cabin/lowcountrycabin-hero-\\.jpg', name: 'low-country-cabin' },
+        { src: 'images/Portfolio/new-construction/melchor-residence/melchor-residence-hero-\\.jpg', name: 'melchor-residence' },
+        { src: 'images/Portfolio/New\\ Construction/Sabik/sabik-hero-\\.jpg', name: 'Sabik' },
+        { src: 'images/Portfolio/new-construction/shingle-style/shingle-style (Hero).jpg', name: 'shingle-style' },
         
-        // Renovation+Addition Hero Images
-        { src: 'images/Portfolio/Renovation+Addition/Homeowner Haven/Homeowner Haven (Hero).jpg', name: 'Homeowner Haven' },
-        { src: 'images/Portfolio/Renovation+Addition/Selwyn Park Cottage/Selwyn Park Cottage (Hero).jpg', name: 'Selwyn Park Cottage' },
-        { src: 'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (Hero).jpg', name: 'Split Level Makeover' },
-        { src: 'images/Portfolio/Renovation+Addition/Ranch Renovation/Ranch Renovation (Hero).jpg', name: 'Ranch Renovation' },
-        { src: 'images/Portfolio/Renovation+Addition/Mid Century Modern Addition/Mid Century Modern Addition  Renovation (Hero).jpg', name: 'Mid Century Modern Addition + Renovation' },
-        { src: 'images/Portfolio/Renovation+Addition/Wine Pavlion/WP6.jpg', name: 'Wine Pavilion' }
+        // renovation-addition Hero Images
+        { src: 'images/Portfolio/renovation-addition/homeowner-haven/homeowner-haven-hero-\\.jpg', name: 'homeowner-haven' },
+        { src: 'images/Portfolio/renovation-addition/selwyn-park-cottage/selwyn-park-cottage (Hero).jpg', name: 'selwyn-park-cottage' },
+        { src: 'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-hero-\\.jpg', name: 'split-level-makeover' },
+        { src: 'images/Portfolio/Renovation\\+Addition/Ranch\\ Renovation/ranch-renovation-hero-\\.jpg', name: 'ranch-renovation' },
+        { src: 'images/Portfolio/renovation-addition/mid-century-modern-addition/mid-century-modern-addition  Renovation (Hero).jpg', name: 'mid-century-modern-addition + Renovation' },
+        { src: 'images/Portfolio/renovation-addition/wine-pavlion/WP6.jpg', name: 'Wine Pavilion' }
       ];
 
       // Stop any existing animation
@@ -761,43 +761,43 @@
     const defaultProjects = {
       'williams-lake-house': {
         id: 'williams-lake-house',
-        name: 'Lake House',
-        type: 'New Construction',
+        name: 'lake-house',
+        type: 'new-construction',
         description: 'Luxury lakefront residence with contemporary design and natural materials.',
-        hero_image: 'images/Portfolio/New Construction/Lake House/Lakehouse (Hero).jpg',
+        hero_image: 'images/Portfolio/New\\ Construction/lake-house/lakehouse-hero-\\.jpg',
         images: [
-          'images/Portfolio/New Construction/Lake House/Lakehouse (Hero).jpg',
-          'images/Portfolio/New Construction/Lake House/LakeHouse (1).jpg',
-          'images/Portfolio/New Construction/Lake House/LakeHouse (9).jpg',
-          'images/Portfolio/New Construction/Lake House/LakeHouse (18).jpg'
+          'images/Portfolio/New\\ Construction/lake-house/lakehouse-hero-\\.jpg',
+          'images/Portfolio/New\\ Construction/lake-house/lakehouse-1-\\.jpg',
+          'images/Portfolio/New\\ Construction/Lake\\ House/lakehouse-9-\\.jpg',
+          'images/Portfolio/New\\ Construction/Lake\\ House/lakehouse-18-\\.jpg'
         ],
         featured: true
       },
       'split-level-makeover': {
         id: 'split-level-makeover',
-        name: 'Split Level Makeover',
-        type: 'Renovation+Addition',
+        name: 'split-level-makeover',
+        type: 'renovation-addition',
         description: 'Complete split-level home transformation with modern open concept design.',
-        hero_image: 'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (Hero).jpg',
+        hero_image: 'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-hero-\\.jpg',
         images: [
-          'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (Hero).jpg',
-          'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (10).jpg',
-          'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (19).jpg',
-          'images/Portfolio/Renovation+Addition/Split Level Makeover/Splitlevelmakerover (20).jpg'
+          'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-hero-\\.jpg',
+          'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-10-\\.jpg',
+          'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-19-\\.jpg',
+          'images/Portfolio/renovation-addition/split-level-makeover/splitlevelmakerover-20-\\.jpg'
         ],
         featured: true
       },
       'heavy-timber-pool-house': {
         id: 'heavy-timber-pool-house',
-        name: 'Heavy Timber Pool House',
-        type: 'Renovation+Addition',
-        description: 'Custom heavy timber pool house addition with rustic elegance and modern amenities.',
-        hero_image: 'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/Heavy+Timber_01.jpg',
+        name: 'heavy-timber-pool-house',
+        type: 'renovation-addition',
+        description: 'Custom heavy-timber-pool-house addition with rustic elegance and modern amenities.',
+        hero_image: 'images/Portfolio/renovation-addition/heavy-timber-pool-house/heavy-timber_01\\.jpg',
         images: [
-          'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/Heavy+Timber_01.jpg',
-          'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/IMG_0503.JPG',
-          'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/IMG_0506.JPG',
-          'images/Portfolio/Renovation+Addition/Heavy Timber Pool House/IMG_0523.jpg'
+          'images/Portfolio/renovation-addition/heavy-timber-pool-house/heavy-timber_01\\.jpg',
+          'images/Portfolio/renovation-addition/heavy-timber-pool-house/IMG_0503.JPG',
+          'images/Portfolio/renovation-addition/heavy-timber-pool-house/IMG_0506.JPG',
+          'images/Portfolio/renovation-addition/heavy-timber-pool-house/IMG_0523.jpg'
         ],
         featured: true
       }
@@ -1003,4 +1003,5 @@
     }
   }
 });
+
 

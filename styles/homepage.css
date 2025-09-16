@@ -1,4 +1,4 @@
-/* General Styles and Variables */
+﻿/* General Styles and Variables */
 :root {
     --primary-color: #000000;
     --secondary-color: #666666;
@@ -861,7 +861,7 @@ body.homepage .contact-btn:hover {
     box-shadow: 0 0 10px rgba(255, 121, 0, 0.5);
 }
 
-/* What We Do Section */
+/* what-we-do Section */
 .services-section {
     padding: 8rem 0;
     text-align: center;
@@ -1883,3 +1883,4 @@ img {
         gap: 2rem;
     }
 }
+
