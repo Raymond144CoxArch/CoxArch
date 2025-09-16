@@ -760,7 +760,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <img data-lazy-src="${project.hero_image}" alt="${project.name}" class="lazy-loading" />
             </div>
             <div class="project-info">
-                <h3>${project.name}</h3>
+                <h3>${project.displayName || project.name}</h3>
                 <p class="project-type">${project.type}</p>
             </div>
         `;

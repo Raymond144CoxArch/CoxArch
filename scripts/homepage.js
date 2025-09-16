@@ -176,7 +176,8 @@
         {
           id: 'williams-lake-house',
           name: 'lake-house',
-          type: 'new-construction',
+          displayName: 'Lake House',
+          type: 'New Construction',
           description: 'Luxury lakefront residence with contemporary design and natural materials.',
           hero_image: 'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
           images: [
@@ -196,7 +197,8 @@
         {
           id: 'split-level-makeover',
           name: 'split-level-makeover', // Changed from 'title' to 'name'
-          type: 'Renovation+Addition', // Changed from 'category' to 'type'
+          displayName: 'Split Level Makeover',
+          type: 'Renovation + Addition', // Changed from 'category' to 'type'
           description: 'Complete split-level home transformation with modern open concept design.',
           hero_image: 'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg', // Changed from 'heroImage' to 'hero_image'
           images: [
@@ -226,7 +228,8 @@
         {
           id: 'heavy-timber-pool-house',
           name: 'heavy-timber-pool-house', // Changed from 'title' to 'name'
-          type: 'Renovation+Addition', // Changed from 'category' to 'type'
+          displayName: 'Heavy Timber Pool House',
+          type: 'Renovation + Addition', // Changed from 'category' to 'type'
           description: 'Custom heavy-timber-pool-house addition with rustic elegance and modern amenities.',
           hero_image: 'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg', // Changed from 'heroImage' to 'hero_image'
           images: [
@@ -302,7 +305,7 @@
             <img src="${imageSrc}" alt="${project.name}" />
           </div>
           <div class="project-info">
-            <h3>${project.name}</h3>
+            <h3>${project.displayName || project.name}</h3>
             <p class="project-type">${project.type}</p>
             <p class="project-description">${project.description || ''}</p>
           </div>
@@ -323,7 +326,7 @@
           item.innerHTML = `
             <img class="continuous-gallery-image" src="${imageSrc}" alt="${project.name}">
             <div class="continuous-gallery-overlay">
-              <div class="continuous-gallery-title">${project.name}</div>
+              <div class="continuous-gallery-title">${project.displayName || project.name}</div>
             </div>
           `;
           // Click handler is automatically handled by gallery-modal.js via event delegation

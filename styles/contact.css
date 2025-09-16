@@ -72,6 +72,27 @@
 .contact-section {
   padding: 6rem 0;
   background-color: #f8f8f8;
+  background-image: url('../images/HeroProjects/background-image.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(248, 248, 248, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+  z-index: 1;
+}
+
+.contact-section .container {
+  position: relative;
+  z-index: 2;
 }
 
 .section-header {
