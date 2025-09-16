@@ -592,7 +592,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <img src="${heroImage}" alt="${project.name}" loading="lazy" />
             </div>
             <div class="project-info">
-                <h3>${project.name}</h3>
+                <h3>${project.displayName || project.name}</h3>
                 <p class="project-type">${project.type}</p>
             </div>
         `;
