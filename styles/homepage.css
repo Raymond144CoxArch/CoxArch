@@ -739,7 +739,7 @@ body.homepage .contact-btn:hover {
 .glass-button {
     display: inline-flex !important;
     align-items: center !important;
-    padding: 0.5rem 1rem !important;
+    padding: 0.75rem 1.5rem !important;
     border-radius: 0 !important;
     background: transparent !important;
     color: var(--accent-color) !important;
@@ -749,8 +749,8 @@ body.homepage .contact-btn:hover {
     cursor: pointer !important;
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
-    font-size: 0.7rem !important;
-    align-self: flex-end;
+    font-size: 0.8rem !important;
+    align-self: center;
 }
 
 
