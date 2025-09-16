@@ -1,0 +1,60 @@
+{
+  "name": "cox-architecture-website",
+  "version": "1.0.0",
+  "description": "Professional website for Cox Architecture & Design - Charlotte residential architecture firm",
+  "main": "homepage.html",
+  "scripts": {
+    "start": "http-server -p 8000 -o",
+    "dev": "http-server -p 3000 -o",
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "echo \"No linting configured\" && exit 0"
+  },
+  "keywords": [
+    "architecture",
+    "residential",
+    "charlotte",
+    "nc",
+    "portfolio",
+    "website",
+    "responsive",
+    "lazy-loading"
+  ],
+  "author": "Cox Architecture & Design LLC",
+  "license": "UNLICENSED",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RGROSS97/CoxArchSite.git"
+  },
+  "homepage": "https://www.coxarchitecture.com",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "description_long": "A modern, responsive website for Cox Architecture & Design featuring a comprehensive portfolio gallery with lazy loading, interactive modals, and optimized performance. Built with vanilla HTML, CSS, and JavaScript for maximum compatibility and speed.",
+  "features": [
+    "Responsive Design",
+    "Lazy Loading Images",
+    "Interactive Portfolio Gallery",
+    "404 Error Handling",
+    "SEO Optimized",
+    "Accessibility Focused",
+    "Mobile-First Approach",
+    "Cross-Browser Compatible"
+  ],
+  "technologies": [
+    "HTML5",
+    "CSS3",
+    "Vanilla JavaScript",
+    "Intersection Observer API",
+    "Font Awesome",
+    "Google Fonts"
+  ]
+}

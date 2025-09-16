@@ -1,0 +1,398 @@
+/* 404 Error Page Styles - Matching Cox Architecture Design */
+
+/* Use existing CSS variables from homepage.css */
+
+/* Error Page Layout */
+.error-page {
+    padding-top: 7rem; /* Match contact page padding */
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+/* Hero Section - Match contact page style */
+.error-hero-section {
+    padding: 2rem 0 1rem 0;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.3; /* Match contact page opacity */
+}
+
+.error-hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 25vh;
+}
+
+.error-code {
+    font-size: 6rem;
+    font-weight: 300; /* Match site's light font weight */
+    color: var(--accent-color);
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: 3px; /* Match site's letter spacing */
+    text-transform: uppercase;
+}
+
+.page-title {
+    font-size: 2.2rem; /* Smaller to fit on one line */
+    font-weight: 300; /* Match site's light font weight */
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px; /* Match contact page letter spacing */
+    text-align: center;
+}
+
+.hero-intro {
+    font-size: 2.2rem; /* Same size as page-title */
+    font-weight: 300; /* Match site's light font weight */
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px; /* Match contact page letter spacing */
+    text-align: center;
+}
+
+.hero-subtitle {
+    font-size: 0.95rem; /* Smaller than hero-intro */
+    line-height: 1.6;
+    color: var(--text-color);
+    max-width: 600px;
+    font-weight: 300; /* Match site's light font weight */
+    text-align: center;
+    margin: 1rem auto 0 auto;
+    opacity: 0.7;
+}
+
+/* Error Content Section - Match site's section styling */
+.error-content-section {
+    padding: 6rem 0; /* Match contact page padding */
+    background-color: #f8f8f8; /* Match contact page background */
+}
+
+.error-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.error-message {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.error-message h2 {
+    font-size: 2.5rem; /* Match contact page section header size */
+    font-weight: 300; /* Match site's light font weight */
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px; /* Match contact page letter spacing */
+}
+
+.error-message p {
+    font-size: 1.1rem; /* Match contact page paragraph size */
+    line-height: 1.6;
+    color: var(--text-color);
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 300; /* Match site's light font weight */
+}
+
+/* CTA Buttons - Match site's button styling */
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+
+/* Social Section - Match site's footer styling */
+.social-section {
+    padding: 4rem 0;
+    background: var(--light-gray); /* Match site's light gray background */
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-size: 1.8rem; /* Match site's section header size */
+    font-weight: 300; /* Match site's light font weight */
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    letter-spacing: 2px; /* Match site's letter spacing */
+    text-transform: uppercase;
+}
+
+.section-header p {
+    font-size: 1rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    font-weight: 300; /* Match site's light font weight */
+}
+
+.social-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.social-icons-section {
+    display: flex;
+    justify-content: center;
+}
+
+.social-icons-grid {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.social-icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    padding: 1rem;
+    border-radius: 0; /* Match site's no border radius */
+}
+
+.social-icon-link:hover {
+    transform: translateY(-3px);
+    color: var(--accent-color);
+}
+
+.social-icon-link img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+    filter: brightness(0) saturate(100%); /* Match site's social icon filter */
+}
+
+.social-icon-link:hover img {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(16deg) brightness(118%) contrast(119%); /* Match site's orange hover filter */
+}
+
+.social-label {
+    font-size: 0.9rem;
+    font-weight: 300; /* Match site's light font weight */
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Match site's letter spacing */
+}
+
+/* Responsive Design - Match site's responsive patterns */
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 4rem;
+    }
+    
+    .page-title {
+        font-size: 2.5rem; /* Match contact page mobile title size */
+    }
+    
+    .hero-intro {
+        font-size: 1rem; /* Match contact page mobile intro size */
+    }
+    
+    .error-content-section {
+        padding: 4rem 0; /* Match contact page mobile padding */
+    }
+    
+    .error-message h2 {
+        font-size: 2rem; /* Match contact page mobile section header size */
+    }
+    
+    .error-message p {
+        font-size: 1rem; /* Match contact page mobile paragraph size */
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .social-icons-grid {
+        gap: 1.5rem;
+    }
+    
+    .social-icon-link img {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-code {
+        font-size: 3rem;
+    }
+    
+    .page-title {
+        font-size: 2.2rem; /* Match contact page small mobile title size */
+        letter-spacing: 2px; /* Match contact page small mobile letter spacing */
+    }
+    
+    .hero-intro {
+        font-size: 1rem;
+    }
+    
+    .hero-content {
+        padding: 0 1rem;
+    }
+    
+    .social-icons-grid {
+        gap: 1rem;
+    }
+    
+    .social-icon-link {
+        padding: 0.5rem;
+    }
+    
+    .social-icon-link img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* Search Section Styles */
+.search-section {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 500px;
+}
+
+.search-box {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: white;
+    transition: border-color 0.3s ease;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.search-btn {
+    padding: 0.75rem 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+}
+
+.search-btn:hover {
+    background-color: #d4731a;
+}
+
+.search-results {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.search-result-item {
+    display: block;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--text-color);
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+
+.search-result-item:hover {
+    background-color: #f8f8f8;
+    color: var(--accent-color);
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item strong {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.search-result-item span {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.no-results {
+    padding: 1rem;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* Responsive search styles */
+@media (max-width: 768px) {
+    .search-section {
+        margin-top: 1.5rem;
+        max-width: 100%;
+    }
+    
+    .search-box {
+        flex-direction: column;
+    }
+    
+    .search-btn {
+        width: 100%;
+    }
+}

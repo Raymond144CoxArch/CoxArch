@@ -1,0 +1,299 @@
+/* Portfolio Page Styles */
+
+/* Hero Section */
+.portfolio-hero-section {
+    padding: 4rem 0 2rem 0;
+    text-align: left;
+    background-color: var(--background-color);
+}
+
+.page-title {
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.filter-search-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.filter-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.portfolio-hero-section .filter-btn {
+    background-color: transparent !important;
+    border: none !important;
+    color: var(--text-color) !important;
+    padding: 0.5rem 0 !important;
+    font-size: 0.8rem !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-weight: 300 !important;
+    letter-spacing: 1px !important;
+    text-transform: none !important;
+    position: relative !important;
+    border-radius: 0 !important;
+    display: inline-block !important;
+    align-items: unset !important;
+    gap: unset !important;
+    outline: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    text-shadow: none !important;
+}
+
+.portfolio-hero-section .filter-btn::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.portfolio-hero-section .filter-btn.active, 
+.portfolio-hero-section .filter-btn:hover {
+    color: var(--accent-color) !important;
+    background: transparent !important;
+    border: none !important;
+    transform: none !important; /* ensure no glow or shadow */
+    outline: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    text-shadow: none !important;
+}
+
+.portfolio-hero-section .filter-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+.portfolio-hero-section .filter-btn:hover::before,
+.portfolio-hero-section .filter-btn.active::before {
+    width: 100%;
+}
+
+/* Remove glow/outline in all interaction states */
+.portfolio-hero-section .filter-btn:focus,
+.portfolio-hero-section .filter-btn:active,
+.portfolio-hero-section .filter-btn:focus-visible {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    text-shadow: none !important;
+}
+
+.search-bar {
+    position: relative;
+}
+
+.search-bar input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 0;
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    font-weight: 300;
+    letter-spacing: 1px;
+    width: 200px;
+    font-size: 0.8rem;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-bottom-color: var(--accent-color);
+}
+
+.search-bar input::placeholder {
+    color: var(--secondary-color);
+    font-weight: 300;
+}
+
+.search-bar i {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+}
+
+/* Project Grid */
+.portfolio-grid-section {
+    padding: 0 0 5rem 0;
+    background-color: var(--background-color);
+}
+
+.masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.project-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    transform: none;
+    box-shadow: none;
+    outline: 1px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.project-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center center;
+    transition: transform 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+/* Adjust image positioning for Dilworth Renovation */
+.project-card[data-project-id="dilworth-renovation"] .project-image {
+    object-position: center 20%;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.02);
+}
+
+.project-title {
+    padding: 0;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--text-color);
+    margin: 0 0 0.3rem 0;
+    letter-spacing: 1px;
+    text-transform: none;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+}
+
+.project-meta {
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: var(--secondary-color);
+    margin: 0;
+    letter-spacing: 1px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Legacy dropdown styles removed - now using gallery modal system */
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .masonry-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        max-width: 800px;
+    }
+    
+    .filter-search-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .masonry-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .search-bar input {
+        width: 150px;
+    }
+}
+
+/* Legacy responsive dropdown styles removed */
+
+/* Load More Button Styles */
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    padding: 2rem 0;
+}
+
+.load-more-btn {
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.load-more-btn:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 121, 0, 0.3);
+}
+
+.load-more-btn i {
+    transition: transform 0.3s ease;
+}
+
+.load-more-btn:hover i {
+    transform: translateY(2px);
+}
+
+/* Mobile Load More Button */
+@media (max-width: 767px) {
+    .load-more-container {
+        margin-top: 2rem;
+        padding: 1.5rem 0;
+    }
+    
+    .load-more-btn {
+        padding: 0.875rem 1.75rem;
+        font-size: 0.85rem;
+    }
+}

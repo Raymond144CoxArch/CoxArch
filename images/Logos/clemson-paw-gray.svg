@@ -1,0 +1,19 @@
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <g fill="#F56600">
+    <!-- More detailed Clemson paw print -->
+    <!-- Top left toe (more rounded) -->
+    <path d="M4 2 Q6 0 8 2 Q7 4 5 4 Q4 3 4 2"/>
+    <!-- Top right toe (more rounded) -->
+    <path d="M16 2 Q18 0 20 2 Q19 4 17 4 Q16 3 16 2"/>
+    <!-- Middle left toe -->
+    <path d="M6 6 Q8 4 10 6 Q9 8 7 8 Q6 7 6 6"/>
+    <!-- Middle right toe -->
+    <path d="M14 6 Q16 4 18 6 Q17 8 15 8 Q14 7 14 6"/>
+    <!-- Bottom left toe -->
+    <path d="M8 10 Q10 8 12 10 Q11 12 9 12 Q8 11 8 10"/>
+    <!-- Bottom right toe -->
+    <path d="M12 10 Q14 8 16 10 Q15 12 13 12 Q12 11 12 10"/>
+    <!-- Main paw pad (larger, more realistic) -->
+    <path d="M9 13 Q12 11 15 13 Q13 17 9 17 Q7 15 7 13 Q8 12 9 13"/>
+  </g>
+</svg>
