@@ -181,16 +181,16 @@
           description: 'Luxury lakefront residence with contemporary design and natural materials.',
           hero_image: 'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
           images: [
-            'images/Portfolio/New Construction/lake-house/lakehouse-1-.jpg',
-            'images/Portfolio/New Construction/lake-house/lakehouse-9-.jpg',
-            'images/Portfolio/New Construction/lake-house/lakehouse-18-.jpg',
+            'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
+            'images/Portfolio/New Construction/lake-house/lakehouse-25-.jpg',
             'images/Portfolio/New Construction/lake-house/lakehouse-19-.jpg',
-            'images/Portfolio/New Construction/lake-house/lakehouse-20-.jpg',
-            'images/Portfolio/New Construction/lake-house/lakehouse-21-.jpg',
-            'images/Portfolio/New Construction/lake-house/lakehouse-22-.jpg',
-            'images/Portfolio/New Construction/lake-house/lakehouse-23-.jpg',
-            'images/Portfolio/New Construction/lake-house/lakehouse-24-.jpg',
-            'images/Portfolio/New Construction/lake-house/lakehouse-25-.jpg'
+            'images/Portfolio/New Construction/lake-house/lakehouse-25-.jpg',
+            'images/Portfolio/New Construction/lake-house/lakehouse-42-.jpg',
+            'images/Portfolio/New Construction/lake-house/lakehouse-43-.jpg',
+            'images/Portfolio/New Construction/lake-house/lakehouse-42-.jpg',
+            'images/Portfolio/New Construction/lake-house/lakehouse-9-.jpg',
+            'images/Portfolio/New Construction/lake-house/lakehouse-48-.jpg',
+            'images/Portfolio/New Construction/lake-house/lakehouse-20-.jpg'
           ],
           featured: true
         },
@@ -202,26 +202,15 @@
           description: 'Complete split-level home transformation with modern open concept design.',
           hero_image: 'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg', // Changed from 'heroImage' to 'hero_image'
           images: [
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-1-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-2-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-3-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-4-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-5-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-6-.jpg',
+            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg',
             'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-7-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-8-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-9-.jpg',
+            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-1-.jpg',
             'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-10-.jpg',
             'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-11-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-12-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-13-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-14-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-15-.jpg',
             'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-16-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-17-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-18-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-19-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-20-.jpg'
+            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-26-.jpg',
+            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-24-.jpg',
+            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-30-.jpg'
           ],
           featured: true
         },
