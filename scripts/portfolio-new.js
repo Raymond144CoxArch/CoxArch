@@ -637,9 +637,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'pelham-woods-renovation',
                 name: 'pelham-woods-renovation',
                 images: [
-                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/pelham-woods-renovation (Hero).jpg'
+                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/pelham-woods-renovation-hero-.jpg'
                 ],
-                hero_image: 'images/Portfolio/Renovation+Addition/pelham-woods-renovation/pelham-woods-renovation (Hero).jpg',
+                hero_image: 'images/Portfolio/Renovation+Addition/pelham-woods-renovation/pelham-woods-renovation-hero-.jpg',
                 type: 'renovation-addition',
                 description: 'pelham-woods-renovation with natural setting integration.',
                 location: 'Charlotte, NC',
