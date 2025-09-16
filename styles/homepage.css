@@ -120,6 +120,11 @@ body.homepage .text-meta {
     .container {
         padding: 0 0.75rem;
     }
+    
+    /* Hide glass box on mobile - only show on desktop/tablet */
+    .desktop-glass-box {
+        display: none;
+    }
 }
 
 a {
@@ -524,11 +529,11 @@ body.homepage .contact-btn:hover {
     }
     
     .desktop-glass-box {
-        display: none;
+        display: none !important;
     }
     
     .mobile-glass-section {
-        display: block;
+        display: block !important;
         padding: clamp(1.5rem, 5vw, 2rem) 0;
         background: var(--light-gray);
     }
@@ -567,6 +572,17 @@ body.homepage .contact-btn:hover {
     .slideshow-dot {
         width: 10px;
         height: 10px;
+    }
+    
+    /* Keep mobile glass box button text orange on hover - more specific selectors */
+    .mobile-glass-section .mobile-glass-box .glass-button:hover,
+    .mobile-glass-box .glass-button:hover {
+        color: var(--accent-color) !important;
+    }
+    
+    .mobile-glass-section .mobile-glass-box .glass-button:hover i,
+    .mobile-glass-box .glass-button:hover i {
+        color: var(--accent-color) !important;
     }
 }
 
@@ -654,6 +670,42 @@ body.homepage .contact-btn:hover {
     /* Override glass button color for mobile */
     .mobile-glass-section .mobile-glass-box .glass-button,
     .mobile-glass-box .glass-button {
+        color: var(--accent-color) !important;
+    }
+    
+    /* Keep mobile glass box button text orange on hover - more specific selectors */
+    .mobile-glass-section .mobile-glass-box .glass-button:hover,
+    .mobile-glass-box .glass-button:hover {
+        color: var(--accent-color) !important;
+    }
+    
+    .mobile-glass-section .mobile-glass-box .glass-button:hover i,
+    .mobile-glass-box .glass-button:hover i {
+        color: var(--accent-color) !important;
+    }
+}
+
+/* Mobile glass box centering for screens 481px-767px */
+@media (min-width: 481px) and (max-width: 767px) {
+    .mobile-glass-box {
+        max-width: 350px;
+        padding: 1rem;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    
+    /* Keep mobile glass box button text orange on hover - more specific selectors */
+    .mobile-glass-section .mobile-glass-box .glass-button:hover,
+    .mobile-glass-box .glass-button:hover {
+        color: var(--accent-color) !important;
+    }
+    
+    .mobile-glass-section .mobile-glass-box .glass-button:hover i,
+    .mobile-glass-box .glass-button:hover i {
         color: var(--accent-color) !important;
     }
 }
@@ -1334,7 +1386,7 @@ body.homepage .contact-btn:hover {
         margin-top: 0;
     }
     .mobile-glass-section {
-        display: none;
+        display: none !important;
     }
     .services-section .service-cards-container {
         display: grid;
@@ -1892,4 +1944,5 @@ img {
         gap: 2rem;
     }
 }
+
 
