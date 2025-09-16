@@ -801,30 +801,7 @@
       portfolioProjects[projectId] = { ...defaultProjects[projectId] };
     });
 
-    // Set the global portfolioProjects variable
-    window.portfolioProjects = portfolioProjects;
-
-    // NEW: Explicitly tell the gallery modal that the data is ready
-    if (window.galleryModal && window.portfolioProjects) {
-      window.galleryModal.setProjectsData(window.portfolioProjects);
-      logger.success('Portfolio data set in gallery modal', { projectCount: Object.keys(portfolioProjects).length });
-    } else {
-      // Fallback: wait a bit and try again if gallery modal isn't ready yet
-      logger.warn('Gallery modal not ready yet, will retry', { 
-        hasGalleryModal: !!window.galleryModal,
-        hasPortfolioProjects: !!window.portfolioProjects 
-      });
-      
-      // Retry after a short delay
-      setTimeout(() => {
-        if (window.galleryModal && window.portfolioProjects) {
-          window.galleryModal.setProjectsData(window.portfolioProjects);
-          logger.success('Portfolio data set in gallery modal (retry)', { projectCount: Object.keys(portfolioProjects).length });
-        } else {
-          logger.error('Gallery modal still not available after retry');
-        }
-      }, 100);
-    }
+    // Note: Not setting window.portfolioProjects here to avoid overriding featured projects data
 
     // Build continuous gallery from the data
     const galleryTrack = document.getElementById('featuredContinuousGallery');
