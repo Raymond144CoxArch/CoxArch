@@ -129,7 +129,6 @@ body:not(.homepage) .logo-image {
 
 body:not(.homepage) .logo-link:hover .logo-image {
     transform: scale(1.1);
-    filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(2000%) hue-rotate(25deg) brightness(120%) contrast(100%);
 }
 
 /* ===== NON-HOMEPAGE DESKTOP NAVIGATION ===== */
@@ -403,7 +402,6 @@ body:not(.homepage) .footer-divider {
 }
 
 .footer-logo-link:hover .footer-logo {
-    filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(2000%) hue-rotate(25deg) brightness(120%) contrast(100%);
     transform: scale(1.05);
 }
 
@@ -487,7 +485,6 @@ body:not(.homepage) .footer-divider {
 }
 
 .footer-social-icons a:hover img {
-    filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(2000%) hue-rotate(25deg) brightness(120%) contrast(100%);
     transform: scale(1.1);
 }
 

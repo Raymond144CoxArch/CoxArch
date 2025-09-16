@@ -218,7 +218,6 @@ body.homepage .logo-image {
 }
 
 body.homepage .logo-link:hover .logo-image {
-    filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(2000%) hue-rotate(25deg) brightness(120%) contrast(100%) !important;
     transform: scale(1.05) !important;
 }
 
