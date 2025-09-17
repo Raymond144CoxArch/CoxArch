@@ -689,9 +689,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Initialize and expose the logger globally
-const logger = new Logger();
-window.logger = logger;
+// Logger is already initialized and exposed globally above
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {

@@ -1,4 +1,4 @@
-// A production-ready logger for consistent messaging
+// Use the existing global logger
 const logger = window.logger;
 
 // Format project type for display
@@ -17,8 +17,8 @@ const formatProjectType = (type) => {
 const eventManager = new EventListenerManager();
 
 // ===== HOMEPAGE SLIDESHOW - CONSOLIDATED & CORRECTED =====
-const slideshowContainer = document.querySelector('.hero-slideshow');
-const dotsContainer = document.querySelector('.slideshow-dots');
+let slideshowContainer;
+let dotsContainer;
 let currentSlide = 0;
 let slides = [];
 let slideInterval;
@@ -161,7 +161,11 @@ const initializeSwipe = () => {
 
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', () => {
-    // Other homepage initialization code...
+    // Initialize slideshow containers after DOM is ready
+    slideshowContainer = document.querySelector('.hero-slideshow');
+    dotsContainer = document.querySelector('.slideshow-dots');
+    
+    // Initialize slideshow and swipe functionality
     initializeSlideshow();
     initializeSwipe();
 });
