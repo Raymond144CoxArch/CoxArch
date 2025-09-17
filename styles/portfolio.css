@@ -309,10 +309,25 @@
     .load-more-container {
         margin-top: 2rem;
         padding: 1.5rem 0;
+        display: flex;
+        justify-content: center;
     }
     
     .load-more-btn {
-        padding: 0.875rem 1.75rem;
-        font-size: 0.85rem;
+        padding: 1rem 2rem;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 400px; /* Match typical project card width */
+        background: var(--accent-color);
+        color: white;
+        border: 1px solid var(--accent-color);
+        margin: 0 auto;
+    }
+    
+    .load-more-btn:hover {
+        background: #e55a00;
+        border-color: #e55a00;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 102, 0, 0.4);
     }
 }

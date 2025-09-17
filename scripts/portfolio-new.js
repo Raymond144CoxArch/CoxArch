@@ -57,6 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- Project Data ----
     let projects = [];
+    let displayedProjects = [];
+    let currentPage = 0;
+    const PROJECTS_PER_PAGE = 8;
 
     // Static project data based on actual file system structure
     const getDefaultProjects = () => {
@@ -840,6 +843,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Check if device is mobile
+    const isMobileDevice = () => {
+        return window.innerWidth <= 768;
+    };
+
     // Filter projects by type
     const filterProjects = (type) => {
         const filteredProjects = type === 'all' ? projects : projects.filter(project => project.type === type);
@@ -850,7 +858,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(`[data-filter="${type}"]`).classList.add('active');
     };
 
-    // Display projects in grid
+    // Display projects in grid with mobile pagination
     const displayProjects = (projectsToShow) => {
         console.log('Displaying projects:', projectsToShow.length);
         if (!projectGrid) {
@@ -858,14 +866,69 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
+        // Store the full filtered projects list
+        displayedProjects = projectsToShow;
+        
+        // Reset pagination
+        currentPage = 0;
+        
+        // Clear grid
         projectGrid.innerHTML = '';
+        
+        // Show initial projects
+        loadMoreProjects();
+        
+        console.log('Projects displayed in grid');
+    };
 
+    // Load more projects (for mobile pagination)
+    const loadMoreProjects = () => {
+        if (!isMobileDevice()) {
+            // On desktop, show all projects
+            displayedProjects.forEach(project => {
+                const projectCard = createProjectCard(project);
+                projectGrid.appendChild(projectCard);
+            });
+            hideLoadMoreButton();
+            return;
+        }
+        
+        // On mobile, show paginated projects
+        const startIndex = currentPage * PROJECTS_PER_PAGE;
+        const endIndex = startIndex + PROJECTS_PER_PAGE;
+        const projectsToShow = displayedProjects.slice(startIndex, endIndex);
+        
         projectsToShow.forEach(project => {
             const projectCard = createProjectCard(project);
             projectGrid.appendChild(projectCard);
         });
         
-        console.log('Projects displayed in grid');
+        currentPage++;
+        
+        // Show/hide load more button
+        if (endIndex >= displayedProjects.length) {
+            hideLoadMoreButton();
+        } else {
+            showLoadMoreButton();
+        }
+        
+        console.log(`Loaded ${projectsToShow.length} more projects. Total displayed: ${startIndex + projectsToShow.length}/${displayedProjects.length}`);
+    };
+
+    // Show load more button
+    const showLoadMoreButton = () => {
+        const loadMoreContainer = document.getElementById('loadMoreContainer');
+        if (loadMoreContainer && isMobileDevice()) {
+            loadMoreContainer.style.display = 'block';
+        }
+    };
+
+    // Hide load more button
+    const hideLoadMoreButton = () => {
+        const loadMoreContainer = document.getElementById('loadMoreContainer');
+        if (loadMoreContainer) {
+            loadMoreContainer.style.display = 'none';
+        }
     };
 
     // Create project card element
@@ -947,6 +1010,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
+            // Display filtered projects (will handle pagination automatically)
             displayProjects(filteredProjects);
         };
 
@@ -992,6 +1056,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize with all projects
     filterProjects('all');
+
+    // ---- Load More Button Event Listener ----
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadMoreProjects();
+        });
+        console.log('Load more button event listener added');
+    } else {
+        console.warn('Load more button not found');
+    }
+
+    // Handle window resize to update pagination
+    window.addEventListener('resize', () => {
+        // Re-display current filtered projects when screen size changes
+        if (displayedProjects.length > 0) {
+            displayProjects(displayedProjects);
+        }
+    });
 
     // ---- Gallery Modal Integration ----
     // Ensure the gallery modal is properly initialized for portfolio project cards

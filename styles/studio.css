@@ -149,44 +149,37 @@
 
 .school-badge {
     position: absolute;
-    top: -8px;
-    right: 0px;
+    top: -12px;
+    right: -10px;
     background: white;
     border-radius: 50%;
-    padding: 8px;
+    padding: 12px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
     z-index: 10;
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    border: 2px solid;
+    border: 3px solid #ccc; /* Default light gray border */
 }
 
 /* Clemson logo outline (orange) */
 .team-member:first-child .school-badge {
-    right: -4px;
-    border-color: #F56600;
+    right: -14px;
+    border: 3px solid #F56600 !important;
 }
 
-.team-member:last-child .school-badge:nth-child(2) {
-    right: 8px;
-    border-color: #F56600;
-}
+/* Raymond's Clemson badge - now handled below */
 
 /* Judson logo outline (blue) */
 .team-member:nth-child(2) .school-badge {
-    right: -4px;
-    border-color: #1B365D;
+    right: -11px;
+    border: 3px solid #1B365D !important;
 }
 
-/* College of Charleston logo outline (maroon) */
-.team-member:last-child .school-badge:nth-child(3) {
-    right: -20px;
-    border-color: #8B0000;
-}
+/* Raymond's College of Charleston badge - now handled below */
 
 .school-badge:hover {
     transform: scale(1.3);
@@ -197,22 +190,24 @@
 
 
 .school-icon {
-    width: 24px;
-    height: 24px;
+    width: 48px;
+    height: 48px;
     opacity: 0.9;
     display: block;
     transition: all 0.3s ease;
 }
 
-/* Special styles for Raymond's logos - spread them apart more */
-.team-member:last-child .school-badge:nth-child(2) {
-    right: 8px;
-    border-color: #F56600;
+/* Special styles for Raymond's logos - stack them vertically */
+.team-member:last-child .school-badge:nth-child(3) {
+    right: -10px;
+    top: -12px;
+    border: 3px solid #8B0000 !important; /* College of Charleston - maroon */
 }
 
-.team-member:last-child .school-badge:nth-child(3) {
-    right: -20px;
-    border-color: #8B0000;
+.team-member:last-child .school-badge:nth-child(4) {
+    right: -10px;
+    top: 60px;
+    border: 3px solid #F56600 !important; /* Clemson - orange */
 }
 
 /* Enhanced hover effect for Raymond's logos */
@@ -222,13 +217,7 @@
 }
 
 
-.team-member:last-child .school-badge:nth-child(2):hover {
-    right: 6px;
-}
-
-.team-member:last-child .school-badge:nth-child(3):hover {
-    right: 2px;
-}
+/* Raymond's badge hover effects - now simplified */
 
 .member-overlay .member-name {
     font-size: 1.1rem;
@@ -261,6 +250,89 @@
     padding: 2rem;
     height: 400px;
     overflow-y: visible;
+    position: relative;
+    z-index: 1;
+}
+
+/* Bio toggle functionality - mobile only */
+@media (max-width: 768px) {
+    .bio-toggle-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        height: 48px;
+        min-height: 48px;
+        padding: 0.75rem 1rem;
+        background: var(--accent-color);
+        color: white;
+        border: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 0;
+        box-sizing: border-box;
+        flex-shrink: 0;
+    }
+    
+    .bio-toggle-btn:hover {
+        background: #e55a00;
+        transform: translateY(-1px);
+    }
+    
+    .bio-arrow {
+        transition: transform 0.3s ease;
+        font-size: 0.8rem;
+    }
+    
+    .bio-toggle-btn.expanded .bio-arrow {
+        transform: rotate(180deg);
+    }
+    
+    /* Override desktop bio styles for mobile */
+    .member-bio {
+        display: none !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: visible !important;
+        position: static !important;
+        z-index: auto !important;
+    }
+    
+    /* Show bio when expanded */
+    .member-bio.expanded {
+        display: block !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        padding: 1.5rem !important;
+        margin-top: 1rem !important;
+        margin-bottom: 2rem !important;
+        background-color: #f8f8f8 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        width: 100% !important;
+        clear: both !important;
+        overflow: visible !important;
+        position: static !important;
+        z-index: auto !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* Ensure team grid properly handles expanding content */
+    .team-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4rem !important;
+        align-items: stretch !important;
+    }
 }
 
 .member-bio p {
@@ -271,12 +343,36 @@
     margin-bottom: 0;
 }
 
+/* Bio toggle button - hidden on desktop, shown on mobile */
+.bio-toggle-btn {
+    display: none;
+    min-height: 48px;
+    box-sizing: border-box;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .team-member {
         flex-direction: column;
-        gap: 2rem;
+        gap: 0.5rem;
         text-align: center;
+        margin-bottom: 3rem;
+        overflow: visible;
+        position: relative;
+        width: 100%;
+        align-items: stretch;
+        min-height: fit-content;
+    }
+    
+    /* Ensure member-info container handles bio expansion properly */
+    .member-info {
+        width: 100%;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        min-height: fit-content;
     }
     
     .member-image {
@@ -285,8 +381,9 @@
         align-items: center;
         width: 100%;
         margin: 0 auto;
-        position: relative;
+        min-height: 300px;
         justify-content: center;
+        position: relative;
     }
     
     .team-photo {
@@ -318,14 +415,14 @@
     }
     
     .school-badge {
-        width: 36px;
-        height: 36px;
-        padding: 6px;
+        width: 72px;
+        height: 72px;
+        padding: 10px;
     }
     
     .school-icon {
-        width: 22px;
-        height: 22px;
+        width: 44px;
+        height: 44px;
         opacity: 0.9;
     }
     
@@ -337,12 +434,41 @@
         font-size: 0.7rem;
     }
     
-    .member-bio {
+    /* Bio styles now handled globally above */
+    
+    .bio-toggle-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        min-height: 48px;
+        padding: 0.75rem 1rem;
+        background: var(--accent-color);
+        color: white;
+        border: none;
         font-size: 0.9rem;
-        text-align: left;
-        height: auto;
-        padding: 1.5rem;
-        overflow-y: visible;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 2px;
+        box-sizing: border-box;
+    }
+    
+    .bio-toggle-btn:hover {
+        background: #e55a00;
+        transform: translateY(-1px);
+    }
+    
+    .bio-arrow {
+        transition: transform 0.3s ease;
+        font-size: 0.8rem;
+    }
+    
+    .bio-toggle-btn.expanded .bio-arrow {
+        transform: rotate(180deg);
     }
     
     .page-title {

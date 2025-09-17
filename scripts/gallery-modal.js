@@ -106,6 +106,12 @@ class GalleryModal {
         
         // Setup mobile close button positioning
         this.setupMobileCloseButton();
+        
+        // Setup mobile thumbnail toggle
+        this.setupMobileThumbnailToggle();
+        
+        // Handle mobile browser UI
+        this.handleMobileBrowserUI();
     }
     
     setupMobileCloseButton() {
@@ -152,6 +158,136 @@ class GalleryModal {
         
         // Position on window resize
         window.addEventListener('resize', positionCloseButtonForMobile);
+    }
+    
+    setupMobileThumbnailToggle() {
+        if (!this.elements.thumbnailsColumn) return;
+        
+        // Function to check if we're on mobile
+        const isMobile = () => window.innerWidth <= 768;
+        
+        // Create toggle button
+        const toggleButton = document.createElement('button');
+        toggleButton.className = 'thumbnails-toggle';
+        toggleButton.textContent = 'Show Thumbnails';
+        toggleButton.setAttribute('aria-label', 'Toggle thumbnail view');
+        
+        // Add toggle functionality
+        toggleButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const isExpanded = this.elements.thumbnailsColumn.classList.contains('expanded');
+            
+            if (isExpanded) {
+                // Collapse thumbnails
+                this.elements.thumbnailsColumn.classList.remove('expanded');
+                toggleButton.textContent = 'Show Thumbnails';
+            } else {
+                // Expand thumbnails
+                this.elements.thumbnailsColumn.classList.add('expanded');
+                toggleButton.textContent = 'Hide Thumbnails';
+            }
+        });
+        
+        // Add button to thumbnails column
+        this.elements.thumbnailsColumn.appendChild(toggleButton);
+        
+        // Function to handle mobile thumbnail visibility
+        const handleMobileThumbnails = () => {
+            if (isMobile()) {
+                // On mobile, start with thumbnails collapsed
+                this.elements.thumbnailsColumn.classList.remove('expanded');
+                toggleButton.style.display = 'block';
+            } else {
+                // On desktop, always show thumbnails
+                this.elements.thumbnailsColumn.classList.add('expanded');
+                toggleButton.style.display = 'none';
+            }
+        };
+        
+        // Set initial state and listen for resize
+        window.addEventListener('resize', handleMobileThumbnails);
+        handleMobileThumbnails();
+    }
+    
+    // Handle mobile browser UI (address bar, navigation buttons)
+    handleMobileBrowserUI() {
+        if (!this.isMobileDevice()) return;
+        
+        // Function to adjust modal height for mobile browser UI
+        const adjustForMobileBrowser = () => {
+            if (!this.modal) return;
+            
+            const modal = this.modal;
+            const modalContainer = this.elements.modalContainer;
+            
+            if (!modal || !modalContainer) return;
+            
+            // Get actual viewport height (excluding browser UI)
+            const actualViewportHeight = window.innerHeight;
+            const documentHeight = document.documentElement.clientHeight;
+            
+            // Use the smaller of the two to avoid browser UI overlap
+            const safeHeight = Math.min(actualViewportHeight, documentHeight);
+            
+            // Apply safe height to modal
+            modal.style.height = `${safeHeight}px`;
+            modalContainer.style.height = `${safeHeight}px`;
+            
+            logger.debug('Adjusted modal height for mobile browser UI', {
+                actualViewportHeight,
+                documentHeight,
+                safeHeight
+            });
+        };
+        
+        // Adjust on initial load
+        adjustForMobileBrowser();
+        
+        // Adjust when orientation changes or browser UI shows/hides
+        window.addEventListener('resize', adjustForMobileBrowser);
+        window.addEventListener('orientationchange', () => {
+            // Delay to allow orientation change to complete
+            setTimeout(adjustForMobileBrowser, 100);
+        });
+        
+        // Adjust when modal opens
+        const originalOpenModal = this.openModal.bind(this);
+        this.openModal = (...args) => {
+            const result = originalOpenModal(...args);
+            setTimeout(adjustForMobileBrowser, 100);
+            return result;
+        };
+    }
+    
+    // Debug function to check modal layout
+    debugModalLayout() {
+        if (!this.modal) {
+            logger.error('Modal not found for layout debugging');
+            return;
+        }
+        
+        const elements = {
+            modal: this.modal,
+            header: this.elements.modalHeader,
+            title: this.elements.title,
+            projectType: this.elements.projectType,
+            closeBtn: this.elements.closeBtn,
+            thumbnailsColumn: this.elements.thumbnailsColumn,
+            mainImageContainer: this.elements.mainImageContainer
+        };
+        
+        logger.info('Modal layout debug info:', {
+            isMobile: this.isMobileDevice(),
+            currentProject: this.currentProject?.name || 'None',
+            elements: Object.entries(elements).map(([name, element]) => ({
+                name,
+                exists: !!element,
+                visible: element ? window.getComputedStyle(element).display !== 'none' : false,
+                classes: element ? element.className : 'N/A'
+            }))
+        });
     }
 
     setupEventListeners() {
@@ -619,7 +755,7 @@ class GalleryModal {
                         <img src="${currentImageSrc}" alt="${projectName}" onload="this.style.opacity=1" style="opacity:0; transition: opacity 0.3s ease;">
                     </div>
                     <div class="instructions">
-                        Use your browser's zoom controls (Ctrl/Cmd + scroll) to zoom in/out
+                        <!-- Instructions removed -->
                     </div>
                     
                     <script>
@@ -768,6 +904,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Expose to global scope for external use and debugging
     window.galleryModal = galleryModal;
+    window.debugGalleryModal = () => galleryModal.debugModalLayout();
 
     // Enhanced click handler with better error handling
     document.addEventListener('click', async (e) => {

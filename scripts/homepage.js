@@ -616,15 +616,18 @@
   // ===== ENHANCED MOBILE SWIPE FUNCTIONALITY =====
   let touchStartX = 0;
   let touchEndX = 0;
+  let touchStartY = 0;
+  let touchEndY = 0;
   let isSwipeActive = false;
   let swipeStartTime = 0;
-  let isScrolling = false;
 
   const handleTouchStart = (e) => {
     touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
     swipeStartTime = Date.now();
     isSwipeActive = true;
-    isScrolling = false;
+    
+    logger.debug('Touch start', { x: touchStartX, y: touchStartY });
     
     if (slideshowContainer) {
       slideshowContainer.classList.add('swiping');
@@ -637,31 +640,30 @@
     const touchCurrentX = e.changedTouches[0].screenX;
     const touchCurrentY = e.changedTouches[0].screenY;
     const deltaX = Math.abs(touchCurrentX - touchStartX);
-    const deltaY = Math.abs(touchCurrentY - e.changedTouches[0].screenY);
+    const deltaY = Math.abs(touchCurrentY - touchStartY);
     
-    // Determine if this is a horizontal swipe or vertical scroll
+    // If horizontal movement is greater than vertical, prevent scrolling
     if (deltaX > deltaY && deltaX > 10) {
-      // This is a horizontal swipe - prevent scrolling
       e.preventDefault();
       e.stopPropagation();
-      isScrolling = false;
-      logger.debug('Horizontal swipe detected', { deltaX, deltaY });
-    } else if (deltaY > deltaX && deltaY > 10) {
-      // This is vertical scrolling - allow it
-      isScrolling = true;
-      isSwipeActive = false;
-      if (slideshowContainer) {
-        slideshowContainer.classList.remove('swiping');
-      }
-      logger.debug('Vertical scroll detected, canceling swipe', { deltaX, deltaY });
+      logger.debug('Horizontal swipe detected, preventing scroll', { deltaX, deltaY });
     }
   };
 
   const handleTouchEnd = (e) => {
-    if (!isSwipeActive || isScrolling) return;
+    if (!isSwipeActive) return;
     
     touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
     const swipeDuration = Date.now() - swipeStartTime;
+    
+    logger.debug('Touch end', { 
+      x: touchEndX, 
+      y: touchEndY, 
+      duration: swipeDuration,
+      deltaX: Math.abs(touchEndX - touchStartX),
+      deltaY: Math.abs(touchEndY - touchStartY)
+    });
     
     handleSwipe(swipeDuration);
     
@@ -673,22 +675,40 @@
 
   const handleSwipe = (swipeDuration) => {
     const swipeThreshold = 50; // Minimum distance for a swipe
-    const timeThreshold = 300; // Maximum time for a swipe (ms)
+    const timeThreshold = 500; // Maximum time for a swipe (ms)
     const swipeDistance = touchStartX - touchEndX;
+    const verticalDistance = Math.abs(touchEndY - touchStartY);
 
-    // Check if it's a valid swipe (enough distance and quick enough)
-    if (Math.abs(swipeDistance) > swipeThreshold && swipeDuration < timeThreshold) {
+    // Check if it's a valid horizontal swipe
+    if (Math.abs(swipeDistance) > swipeThreshold && 
+        swipeDuration < timeThreshold && 
+        Math.abs(swipeDistance) > verticalDistance) {
+      
       if (swipeDistance > 0) {
         // Swipe left - next slide
         nextSlide();
-        logger.debug('Swipe left detected - next slide', { distance: swipeDistance, duration: swipeDuration });
+        logger.info('✅ Swipe left detected - next slide', { 
+          distance: swipeDistance, 
+          duration: swipeDuration,
+          verticalDistance: verticalDistance
+        });
       } else {
         // Swipe right - previous slide
         previousSlide();
-        logger.debug('Swipe right detected - previous slide', { distance: swipeDistance, duration: swipeDuration });
+        logger.info('✅ Swipe right detected - previous slide', { 
+          distance: swipeDistance, 
+          duration: swipeDuration,
+          verticalDistance: verticalDistance
+        });
       }
     } else {
-      logger.debug('Swipe not registered', { distance: swipeDistance, duration: swipeDuration, threshold: swipeThreshold });
+      logger.debug('❌ Swipe not registered', { 
+        distance: swipeDistance, 
+        duration: swipeDuration, 
+        verticalDistance: verticalDistance,
+        threshold: swipeThreshold,
+        timeThreshold: timeThreshold
+      });
     }
   };
 
@@ -706,10 +726,10 @@
     slideshowContainer.removeEventListener('touchmove', handleTouchMove);
     slideshowContainer.removeEventListener('touchend', handleTouchEnd);
     
-    // Add new listeners
-    eventManager.addListener(slideshowContainer, 'touchstart', handleTouchStart, { passive: false });
-    eventManager.addListener(slideshowContainer, 'touchmove', handleTouchMove, { passive: false });
-    eventManager.addListener(slideshowContainer, 'touchend', handleTouchEnd, { passive: false });
+    // Add new listeners directly (not through event manager for better control)
+    slideshowContainer.addEventListener('touchstart', handleTouchStart, { passive: false });
+    slideshowContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
+    slideshowContainer.addEventListener('touchend', handleTouchEnd, { passive: false });
     
     // Add swipe hint removal after first interaction
     const removeSwipeHint = () => {
@@ -721,7 +741,8 @@
     logger.info('Mobile swipe functionality added to slideshow', {
       container: !!slideshowContainer,
       containerClass: slideshowContainer.className,
-      isMobile: window.innerWidth <= 768
+      isMobile: window.innerWidth <= 768,
+      hasTouchStart: typeof slideshowContainer.ontouchstart !== 'undefined'
     });
   } else {
     logger.error('Cannot add swipe functionality - slideshow container not found');
@@ -857,7 +878,7 @@
               <img src="${imageSrc}" alt="${imageAlt}" />
             </div>
             <div class="instructions">
-              Use your browser's zoom controls (Ctrl/Cmd + scroll) to zoom in/out
+              <!-- Instructions removed -->
             </div>
           </body>
           </html>
@@ -1089,6 +1110,16 @@
       logger.info('Simulating swipe right (previous slide)');
       previousSlide();
     }, 1000);
+  };
+  
+  // Manual swipe trigger for testing
+  window.triggerSwipe = (direction = 'left') => {
+    logger.info(`Manually triggering ${direction} swipe`);
+    if (direction === 'left') {
+      nextSlide();
+    } else {
+      previousSlide();
+    }
   };
   
   // Check slideshow container for issues

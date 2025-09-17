@@ -1,4 +1,11 @@
+console.log('=== STUDIO.JS LOADED ===');
+
+// Test if we can find buttons immediately
+console.log('Immediate button check:', document.querySelectorAll('.bio-toggle-btn').length);
+
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('=== DOM CONTENT LOADED ===');
+  console.log('Buttons found on DOM ready:', document.querySelectorAll('.bio-toggle-btn').length);
   const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
   const mobileMenu = document.querySelector('.mobile-menu');
 
@@ -52,8 +59,73 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Load updated team member bios from localStorage
+  // Simple bio toggle for mobile
+  console.log('Setting up bio toggle...');
+  console.log('Current window width:', window.innerWidth);
+  
+  // Test button visibility
+  const buttons = document.querySelectorAll('.bio-toggle-btn');
+  buttons.forEach((btn, i) => {
+    console.log(`Button ${i}:`, btn);
+    console.log(`Button display:`, window.getComputedStyle(btn).display);
+  });
+  
+  setupBioToggle();
+  
+  // Load updated team member bios from localStorage AFTER bio toggle is set up
   loadUpdatedBios();
+  
+  // Debug function - call this in console to test
+  window.testBioToggle = function() {
+    console.log('=== TESTING BIO TOGGLE ===');
+    const buttons = document.querySelectorAll('.bio-toggle-btn');
+    console.log('Found buttons:', buttons.length);
+    buttons.forEach((btn, i) => {
+      console.log(`Button ${i}:`, btn);
+      console.log(`Button style display:`, window.getComputedStyle(btn).display);
+      console.log(`Button visible:`, btn.offsetWidth > 0 && btn.offsetHeight > 0);
+      console.log(`Button text:`, btn.textContent);
+    });
+    
+    const bios = document.querySelectorAll('.member-bio');
+    console.log('Found bios:', bios.length);
+    bios.forEach((bio, i) => {
+      console.log(`Bio ${i}:`, bio);
+      console.log(`Bio classes:`, bio.className);
+      console.log(`Bio style max-height:`, window.getComputedStyle(bio).maxHeight);
+      console.log(`Bio style opacity:`, window.getComputedStyle(bio).opacity);
+      console.log(`Bio style display:`, window.getComputedStyle(bio).display);
+    });
+    
+    // Try manual toggle
+    const firstBio = document.getElementById('craig-bio');
+    if (firstBio) {
+      console.log('Testing manual toggle on Craig bio...');
+      firstBio.classList.add('expanded');
+      console.log('Added expanded class');
+      console.log('Bio classes after:', firstBio.className);
+    }
+  };
+  
+  // Simple test function
+  window.simpleTest = function() {
+    console.log('=== SIMPLE TEST ===');
+    const button = document.querySelector('.bio-toggle-btn');
+    const bio = document.getElementById('craig-bio');
+    
+    console.log('Button found:', !!button);
+    console.log('Bio found:', !!bio);
+    
+    if (button) {
+      console.log('Button display:', window.getComputedStyle(button).display);
+      console.log('Button clickable:', button.offsetWidth > 0 && button.offsetHeight > 0);
+    }
+    
+    if (bio) {
+      console.log('Bio max-height:', window.getComputedStyle(bio).maxHeight);
+      console.log('Bio opacity:', window.getComputedStyle(bio).opacity);
+    }
+  };
 });
 
 function loadUpdatedBios() {
@@ -180,7 +252,10 @@ function updateTeamMemberBio(userKey, bioData) {
     }
 
     bioElement.innerHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
-    console.log('Updated bio with paragraphs:', paragraphs);
+    
+    // IMPORTANT: Ensure bio stays hidden after content update
+    bioElement.classList.remove('expanded');
+    console.log('Updated bio with paragraphs and ensured it stays hidden:', paragraphs);
   }
 
   if (imageElement && bioData.image) {
@@ -192,4 +267,38 @@ function updateTeamMemberBio(userKey, bioData) {
       console.log('Skipping image update - invalid or localhost URL:', bioData.image);
     }
   }
+}
+
+// Simple bio toggle function
+function setupBioToggle() {
+  const buttons = document.querySelectorAll('.bio-toggle-btn');
+  console.log('Found', buttons.length, 'bio toggle buttons');
+  
+  buttons.forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log('Button clicked!');
+      
+      const targetId = this.getAttribute('data-target');
+      const bio = document.getElementById(targetId);
+      
+      if (bio) {
+        console.log('Found bio element:', targetId);
+        
+        if (bio.classList.contains('expanded')) {
+          // Hide bio
+          bio.classList.remove('expanded');
+          this.classList.remove('expanded');
+          console.log('Bio hidden');
+        } else {
+          // Show bio
+          bio.classList.add('expanded');
+          this.classList.add('expanded');
+          console.log('Bio shown');
+        }
+      } else {
+        console.error('Bio not found:', targetId);
+      }
+    });
+  });
 }
