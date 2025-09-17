@@ -1,17 +1,13 @@
 {
   "redirects": [
     {
-      "source": "https://www.coxarchitecture.com/:path*",
-      "destination": "https://coxarchitecture.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "http://www.coxarchitecture.com/:path*",
-      "destination": "https://coxarchitecture.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "http://coxarchitecture.com/:path*",
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.coxarchitecture.com"
+        }
+      ],
       "destination": "https://coxarchitecture.com/:path*",
       "permanent": true
     }
