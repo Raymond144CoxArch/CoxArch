@@ -61,23 +61,80 @@ document.addEventListener('DOMContentLoaded', () => {
     // Static project data based on actual file system structure
     const getDefaultProjects = () => {
         return [
-            // Top tier - Projects with dedicated Hero images (highest quality)
+            // Featured projects - reordered as requested
             {
-                id: 'modern-warehouse',
-                name: 'Modern Warehouse',
-                displayName: 'Modern Warehouse',
+                id: 'williams-lake-house',
+                name: 'Lake House',
+                displayName: 'Lake House',
                 images: [
-                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-1-.jpg',
-                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-1-.jpeg',
-                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-3-.jpg',
-                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-4-.jpg',
-                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-5-.jpg',
-                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-6-.jpg',
-                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-7-.jpg'
+                    'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-1-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-9-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-18-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-19-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-20-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-21-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-22-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-23-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-24-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-25-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-26-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-27-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-28-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-29-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-30-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-31-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-32-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-33-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-34-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-35-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-36-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-37-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-38-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-39-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-40-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-41-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-42-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-43-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-44-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-45-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-46-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-47-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-48-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-49-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-50-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-51-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-52-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-53-.jpg'
                 ],
-                hero_image: 'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
+                hero_image: 'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
                 type: 'new-construction',
-                description: 'Industrial-inspired modern home featuring open spaces and contemporary design.',
+                description: 'Lakeside residence designed to maximize water views and outdoor living.',
+                location: 'Charlotte, NC',
+                year: '2023'
+            },
+            {
+                id: 'melchor-residence',
+                name: 'Melchor Residence',
+                displayName: 'Melchor Residence',
+                images: [
+                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-hero-.jpg',
+                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-1-.jpg',
+                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-2-.jpg',
+                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-3-.jpg',
+                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-4-.jpg',
+                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-5-.jpg',
+                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-6-.jpg',
+                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-7-.jpg',
+                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-8-.jpg',
+                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-9-.jpg',
+                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-10-.jpg',
+                    'images/Portfolio/New Construction/melchor-residence/DSC_0046.JPG',
+                    'images/Portfolio/New Construction/melchor-residence/DSC_0057.JPG'
+                ],
+                hero_image: 'images/Portfolio/New Construction/melchor-residence/melchor-residence-hero-.jpg',
+                type: 'new-construction',
+                description: 'Custom residential design blending modern amenities with timeless architectural elements.',
                 location: 'Charlotte, NC',
                 year: '2023'
             },
@@ -86,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Homeowner Haven',
                 displayName: 'Homeowner Haven',
                 images: [
+                    'images/Portfolio/Renovation+Addition/homeowner-haven/hero.png',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-1-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-2-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-3-.jpg',
@@ -103,15 +161,57 @@ document.addEventListener('DOMContentLoaded', () => {
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-15-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-16-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-17-.jpg',
-                    'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-18-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-19-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-20-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-21-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-22-.jpg'
                 ],
-                hero_image: 'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-hero-.jpg',
+                hero_image: 'images/Portfolio/Renovation+Addition/homeowner-haven/hero.png',
                 type: 'renovation-addition',
                 description: 'Comprehensive home renovation creating a personalized haven for modern living.',
+                location: 'Charlotte, NC',
+                year: '2023'
+            },
+            {
+                id: 'heavy-timber-pool-house',
+                name: 'Heavy Timber Pool House',
+                displayName: 'Heavy Timber Pool House',
+                images: [
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0503.JPG',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0506.JPG',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0523.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0526.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0527.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0528.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0529.JPG',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0531.jpg'
+                ],
+                hero_image: 'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
+                type: 'renovation-addition',
+                description: 'Custom heavy-timber-pool-house addition with rustic elegance and modern amenities.',
+                location: 'Charlotte, NC',
+                year: '2023'
+            },
+            // Other projects continue below
+            {
+                id: 'modern-warehouse',
+                name: 'Modern Warehouse',
+                displayName: 'Modern Warehouse',
+                images: [
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-1-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-1-.jpeg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-3-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-4-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-5-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-6-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-7-.jpg'
+                ],
+                hero_image: 'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
+                type: 'new-construction',
+                description: 'Industrial-inspired modern home featuring open spaces and contemporary design.',
                 location: 'Charlotte, NC',
                 year: '2023'
             },
@@ -119,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'riverchase',
                 name: 'Riverchase',
                 images: [
+                    'images/Portfolio/New Construction/Riverchase/riverchase-hero-.jpg',
                     'images/Portfolio/New Construction/Riverchase/riverchase-1-.jpg',
                     'images/Portfolio/New Construction/Riverchase/riverchase-2-.jpg',
                     'images/Portfolio/New Construction/Riverchase/riverchase-3-.jpg',
@@ -139,6 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Selwyn Park Cottage',
                 displayName: 'Selwyn Park Cottage',
                 images: [
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-hero-.jpg',
                     'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-1-.jpg',
                     'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-2-.jpg',
                     'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-3-.jpg',
@@ -163,6 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'woodland',
                 name: 'Woodland',
                 images: [
+                    'images/Portfolio/New Construction/Woodland/woodland-hero-.jpg',
                     'images/Portfolio/New Construction/Woodland/woodland-1-.jpg',
                     'images/Portfolio/New Construction/Woodland/woodland-3-.jpg',
                     'images/Portfolio/New Construction/Woodland/woodland-4-.jpg',
@@ -188,6 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Split Level Makeover',
                 displayName: 'Split Level Makeover',
                 images: [
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-1-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-2-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-3-.jpg',
@@ -232,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Ranch Renovation',
                 displayName: 'Ranch Renovation',
                 images: [
+                    'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-hero-.jpg',
                     'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-1-.jpg',
                     'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation (2).JPG',
                     'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-3-.jpg',
@@ -251,6 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Mid-Century Modern Addition',
                 displayName: 'Mid-Century Modern Addition + Renovation',
                 images: [
+                    'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-hero-.jpg',
                     'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-1-.jpg',
                     'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-2-.jpg',
                     'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-3-.jpg',
@@ -272,32 +378,11 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             // Second tier - Projects with good hero images
             {
-                id: 'williams-lake-house',
-                name: 'Lake House',
-                displayName: 'Lake House',
-                images: [
-                    'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
-                    'images/Portfolio/New Construction/lake-house/lakehouse-25-.jpg',
-                    'images/Portfolio/New Construction/lake-house/lakehouse-19-.jpg',
-                    'images/Portfolio/New Construction/lake-house/lakehouse-25-.jpg',
-                    'images/Portfolio/New Construction/lake-house/lakehouse-42-.jpg',
-                    'images/Portfolio/New Construction/lake-house/lakehouse-43-.jpg',
-                    'images/Portfolio/New Construction/lake-house/lakehouse-42-.jpg',
-                    'images/Portfolio/New Construction/lake-house/lakehouse-9-.jpg',
-                    'images/Portfolio/New Construction/lake-house/lakehouse-48-.jpg',
-                    'images/Portfolio/New Construction/lake-house/lakehouse-20-.jpg'
-                ],
-                hero_image: 'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
-                type: 'new-construction',
-                description: 'Lakeside residence designed to maximize water views and outdoor living.',
-                location: 'Charlotte, NC',
-                year: '2023'
-            },
-            {
                 id: 'contemporary-french',
                 name: 'Contemporary French',
                 displayName: 'Contemporary French',
                 images: [
+                    'images/Portfolio/New Construction/contemporary-french/contemporaryfrench-hero-.png',
                     'images/Portfolio/New Construction/contemporary-french/contemporaryfrench-1-.png',
                     'images/Portfolio/New Construction/contemporary-french/contemporaryfrench-3-.png',
                     'images/Portfolio/New Construction/contemporary-french/contemporaryfrench-4-.png',
@@ -344,6 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'French Country',
                 displayName: 'French Country',
                 images: [
+                    'images/Portfolio/New Construction/french-country/french-country-hero-.jpg',
                     'images/Portfolio/New Construction/french-country/french-country-2-.jpg',
                     'images/Portfolio/New Construction/french-country/french-country-3-.jpg',
                     'images/Portfolio/New Construction/french-country/french-country-4-.jpg',
@@ -367,6 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Low Country Cabin',
                 displayName: 'Low Country Cabin',
                 images: [
+                    'images/Portfolio/New Construction/low-country-cabin/lowcountrycabin-hero-.jpg',
                     'images/Portfolio/New Construction/low-country-cabin/lowcountrycabin-1-.jpg',
                     'images/Portfolio/New Construction/low-country-cabin/lowcountrycabin-2-.jpg',
                     'images/Portfolio/New Construction/low-country-cabin/lowcountrycabin-4-.jpg',
@@ -379,35 +466,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 year: '2023'
             },
             {
-                id: 'melchor-residence',
-                name: 'Melchor Residence',
-                displayName: 'Melchor Residence',
-                images: [
-                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-1-.jpg',
-                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-2-.jpg',
-                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-3-.jpg',
-                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-4-.jpg',
-                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-5-.jpg',
-                    'images/Portfolio/New Construction/melchor-residence/melchor-residence (6).jpg',
-                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-7-.jpg',
-                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-8-.jpg',
-                    'images/Portfolio/New Construction/melchor-residence/melchor-residence-9-.jpg'
-                ],
-                hero_image: 'images/Portfolio/New Construction/melchor-residence/melchor-residence-hero-.jpg',
-                type: 'new-construction',
-                description: 'Custom residential design blending modern amenities with timeless architectural elements.',
-                location: 'Charlotte, NC',
-                year: '2023'
-            },
-            {
                 id: 'sabik',
                 name: 'Modern Craftsman',
                 images: [
-                    'images/Portfolio/New Construction/Sabik/sabik-1-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-3-.jpg',
-                    'images/Portfolio/New Construction/Sabik/sabik-4-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-5-.jpg',
-                    'images/Portfolio/New Construction/Sabik/sabik-6-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-7-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-10-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-11-.jpg',
@@ -444,6 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Dilworth Renovation',
                 displayName: 'Dilworth Renovation',
                 images: [
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-hero-.jpg',
                     'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-1-.jpg',
                     'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-2-.jpg',
                     'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-3-.jpg',
@@ -461,28 +526,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 hero_image: 'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-1-.jpg',
                 type: 'renovation-addition',
                 description: 'Comprehensive dilworth-renovation preserving neighborhood character while modernizing functionality.',
-                location: 'Charlotte, NC',
-                year: '2023'
-            },
-            {
-                id: 'heavy-timber-pool-house',
-                name: 'Heavy Timber Pool House',
-                displayName: 'Heavy Timber Pool House',
-                images: [
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0503.JPG',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0506.JPG',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0523.jpg',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0526.jpg',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0527.jpg',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0528.jpg',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0529.JPG',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0531.jpg',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG-0500.jpg'
-                ],
-                hero_image: 'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
-                type: 'renovation-addition',
-                description: 'Custom heavy-timber-pool-house addition with rustic elegance and modern amenities.',
                 location: 'Charlotte, NC',
                 year: '2023'
             },
@@ -511,7 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'screened-porch-addition',
                 name: 'Screened Porch Addition',
                 images: [
-                    'images/Portfolio/Renovation+Addition/screened-porch-additon/DSC_0044.JPG',
+                    'images/Portfolio/Renovation+Addition/screened-porch-additon/hero.JPG',
                     'images/Portfolio/Renovation+Addition/screened-porch-additon/DSC_0045.JPG',
                     'images/Portfolio/Renovation+Addition/screened-porch-additon/DSC_0046.JPG',
                     'images/Portfolio/Renovation+Addition/screened-porch-additon/DSC_0047.JPG',
@@ -547,7 +590,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'images/Portfolio/Renovation+Addition/screened-porch-additon/DSC_0077.JPG',
                     'images/Portfolio/Renovation+Addition/screened-porch-additon/DSC_0078.JPG'
                 ],
-                hero_image: 'images/Portfolio/Renovation+Addition/screened-porch-additon/DSC_0044.JPG',
+                hero_image: 'images/Portfolio/Renovation+Addition/screened-porch-additon/hero.JPG',
                 type: 'renovation-addition',
                 description: 'Screened porch addition creating year-round outdoor living space.',
                 location: 'Charlotte, NC',
@@ -557,14 +600,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'wine-pavilion',
                 name: 'Wine Pavilion',
                 images: [
+                    'images/Portfolio/Renovation+Addition/wine-pavlion/hero.png',
+                    'images/Portfolio/Renovation+Addition/wine-pavlion/WP6.jpg',
                     'images/Portfolio/Renovation+Addition/wine-pavlion/DSC_1425.JPG',
                     'images/Portfolio/Renovation+Addition/wine-pavlion/DSC_1477.JPG',
                     'images/Portfolio/Renovation+Addition/wine-pavlion/DSC_1485.JPG',
                     'images/Portfolio/Renovation+Addition/wine-pavlion/WP2.jpg',
-                    'images/Portfolio/Renovation+Addition/wine-pavlion/WP5.jpg',
-                    'images/Portfolio/Renovation+Addition/wine-pavlion/WP6.jpg'
+                    'images/Portfolio/Renovation+Addition/wine-pavlion/WP5.jpg'
                 ],
-                hero_image: 'images/Portfolio/Renovation+Addition/wine-pavlion/WP6.jpg',
+                hero_image: 'images/Portfolio/Renovation+Addition/wine-pavlion/hero.png',
                 type: 'renovation-addition',
                 description: 'Custom wine pavilion addition for entertaining and wine storage.',
                 location: 'Charlotte, NC',
@@ -575,12 +619,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Myers Park Renovation',
                 displayName: 'Myers Park Renovation',
                 images: [
+                    'images/Portfolio/Renovation+Addition/myers-park-renovation/hero.jpg',
+                    'images/Portfolio/Renovation+Addition/myers-park-renovation/1.jpg',
+                    'images/Portfolio/Renovation+Addition/myers-park-renovation/2.jpg',
                     'images/Portfolio/Renovation+Addition/myers-park-renovation/Front_After.jpg',
                     'images/Portfolio/Renovation+Addition/myers-park-renovation/front_after-copy.jpg',
                     'images/Portfolio/Renovation+Addition/myers-park-renovation/kitchen_after-copy.jpg',
                     'images/Portfolio/Renovation+Addition/myers-park-renovation/rear_after-copy.jpg'
                 ],
-                hero_image: 'images/Portfolio/Renovation+Addition/myers-park-renovation/Front_After.jpg',
+                hero_image: 'images/Portfolio/Renovation+Addition/myers-park-renovation/hero.jpg',
                 type: 'renovation-addition',
                 description: 'myers-park-renovation maintaining neighborhood character with modern updates.',
                 location: 'Charlotte, NC',
@@ -591,11 +638,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Early Classical Facade Renovation',
                 displayName: 'Early Classical Facade Renovation',
                 images: [
+                    'images/Portfolio/Renovation+Addition/early-classical-facade-renovation/hero.jpg',
                     'images/Portfolio/Renovation+Addition/early-classical-facade-renovation/dsc_1370-rev.jpg',
-                    'images/Portfolio/Renovation+Addition/early-classical-facade-renovation/DSC_2724.JPG',
-                    'images/Portfolio/Renovation+Addition/early-classical-facade-renovation/DSC_2725.jpg'
+                    'images/Portfolio/Renovation+Addition/early-classical-facade-renovation/DSC_2724.JPG'
                 ],
-                hero_image: 'images/Portfolio/Renovation+Addition/early-classical-facade-renovation/dsc_1370-rev.jpg',
+                hero_image: 'images/Portfolio/Renovation+Addition/early-classical-facade-renovation/hero.jpg',
                 type: 'renovation-addition',
                 description: 'Early Classical facade restoration maintaining historical architectural integrity.',
                 location: 'Charlotte, NC',
@@ -606,6 +653,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Laurel Conversion',
                 displayName: 'Laurel Conversion',
                 images: [
+                    'images/Portfolio/Renovation+Addition/laurel-conversion/Hero.JPG',
                     'images/Portfolio/Renovation+Addition/laurel-conversion/1.JPG',
                     'images/Portfolio/Renovation+Addition/laurel-conversion/2.JPG',
                     'images/Portfolio/Renovation+Addition/laurel-conversion/3.jpg'
@@ -621,6 +669,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Montibello Backyard Getaway',
                 displayName: 'Montibello Backyard Getaway',
                 images: [
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/Hero.JPG',
                     'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2143.JPG',
                     'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2155.JPG',
                     'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2167.JPG',
@@ -665,6 +714,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Pelham Woods Renovation',
                 displayName: 'Pelham Woods Renovation',
                 images: [
+                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/pelham-woods-renovation-hero-.jpg',
                     'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0101.JPG',
                     'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0109.JPG',
                     'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0116.JPG',
@@ -687,7 +737,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Colonial Revival',
                 displayName: 'Colonial Revival',
                 images: [
-                    'images/Portfolio/Renovation+Addition/colonial-revival/FrontFacade.jpg'
+                    'images/Portfolio/Renovation+Addition/colonial-revival/FrontFacade.jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (1).JPG',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (2).jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (3).JPG',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (4).jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (5).JPG',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (6).jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (7).JPG',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (8).jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (9).JPG',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (10).jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (11).jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (12).jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (13).jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (14).jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (15).JPG',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (16).jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (17).jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (18).jpg',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (19).JPG',
+                    'images/Portfolio/Renovation+Addition/colonial-revival/colonialrevival (20).jpg'
                 ],
                 hero_image: 'images/Portfolio/Renovation+Addition/colonial-revival/FrontFacade.jpg',
                 type: 'renovation-addition',
@@ -724,6 +794,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Federal Makeover',
                 displayName: 'Federal Makeover',
                 images: [
+                    'images/Portfolio/Renovation+Addition/federal-makeover/hero.jpg',
                     'images/Portfolio/Renovation+Addition/federal-makeover/_DSC0144.jpg',
                     'images/Portfolio/Renovation+Addition/federal-makeover/_DSC0197.jpg',
                     'images/Portfolio/Renovation+Addition/federal-makeover/_DSC0208.jpg',

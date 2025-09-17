@@ -17,6 +17,25 @@
     padding: 0;
 }
 
+/* Performance optimizations */
+* {
+    will-change: auto;
+}
+
+img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* GPU acceleration for animations */
+.hero-slideshow,
+.slide-item,
+.slide-image {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
 /* Prevent horizontal overflow on all elements */
 * {
     max-width: 100%;

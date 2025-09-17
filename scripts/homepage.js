@@ -232,8 +232,9 @@
           displayName: 'Heavy Timber Pool House',
           type: 'Renovation + Addition', // Changed from 'category' to 'type'
           description: 'Custom heavy-timber-pool-house addition with rustic elegance and modern amenities.',
-          hero_image: 'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg', // Changed from 'heroImage' to 'hero_image'
+          hero_image: 'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png', // Changed from 'heroImage' to 'hero_image'
           images: [
+            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
             'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
             'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0503.JPG',
             'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0506.JPG',
@@ -242,8 +243,7 @@
             'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0527.jpg',
             'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0528.jpg',
             'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0529.JPG',
-            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0531.jpg',
-            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG-0500.jpg'
+            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0531.jpg'
           ],
           featured: true
         }
@@ -366,18 +366,28 @@
     
     // Use the new default project images
     const images = getDefaultImages();
-    logger.success('Using default project images', { imageCount: images.length });
+    logger.success('Using default project images', { imageCount: images.length, images });
     logger.info('Slideshow loading complete');
     return images;
   };
 
 
   const getDefaultImages = () => {
+    // Load only the most critical images initially for faster page load
     return [
       'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
-      'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
       'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
-      'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-hero-.jpg',
+      'images/Portfolio/Renovation+Addition/myers-park-renovation/2.jpg',
+      'images/Portfolio/New Construction/Woodland/woodland-hero-.jpg',
+      'images/HeroProjects/hero-19.jpg',
+      'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg'
+    ];
+  };
+  
+  const getAdditionalImages = () => {
+    // Load additional images after initial page load
+    return [
+      'images/Portfolio/Renovation+Addition/homeowner-haven/hero.png',
       'images/Portfolio/Renovation+Addition/lake-house-renovation/DSC_3069.JPG',
       'images/Portfolio/New Construction/Sabik/sabik-18-.jpg',
       'images/Portfolio/New Construction/Riverchase/riverchase-hero-.jpg'
@@ -398,16 +408,38 @@
       slideItem.className = 'slide-item';
       if (index === 0) {slideItem.classList.add('active');}
 
-      slideItem.innerHTML = `
-        <img src="${imageSrc}" alt="Hero slide ${index + 1}" class="slide-image" />
-      `;
+      // Validate image source before creating
+      if (!imageSrc || imageSrc.includes('homepage.html') || imageSrc.includes('C:\\')) {
+        logger.error(`Invalid image source detected: ${imageSrc}`);
+        return;
+      }
 
+      // Create image element manually to ensure proper attributes
+      const imgElement = document.createElement('img');
+      imgElement.src = imageSrc;
+      imgElement.alt = `Hero slide ${index + 1}`;
+      imgElement.className = 'slide-image';
+      imgElement.loading = 'eager';
+      
+      // Add error handling for this specific image
+      imgElement.onerror = function() {
+        logger.error(`Failed to load slideshow image: ${this.src}`);
+      };
+      
+      imgElement.onload = function() {
+        logger.success(`Successfully loaded slideshow image: ${this.src}`);
+      };
+
+      slideItem.appendChild(imgElement);
       slideshowContainer.appendChild(slideItem);
+      
+      // Log each image being added
+      logger.debug(`Added slide ${index + 1}`, { imageSrc, slideItem, imgElement });
     });
 
     // Update slides reference
     slides = document.querySelectorAll('.slide-item');
-    logger.debug('Created slides', { slideCount: slides.length });
+    logger.debug('Created slides', { slideCount: slides.length, slideImages: Array.from(slides).map(s => s.querySelector('img').src) });
 
     // Create dots
     if (dotsContainer) {
@@ -448,14 +480,49 @@
     }
   };
 
+  // Load additional images after initial page load
+  const loadAdditionalSlideshowImages = async () => {
+    logger.info('Loading additional slideshow images');
+    const additionalImages = getAdditionalImages();
+    
+    // Preload additional images
+    additionalImages.forEach(imageSrc => {
+      const img = new Image();
+      img.src = imageSrc;
+    });
+    
+    logger.info('Additional images preloaded');
+  };
+
   // Initialize slideshow
   if (slideshowContainer) {
     logger.info('Slideshow container found, initializing');
     initializeSlideshow().catch(error => {
       logger.error('Error initializing slideshow', error);
     });
+    
+    // Load additional images after initial render
+    setTimeout(() => {
+      loadAdditionalSlideshowImages();
+    }, 2000);
+    
+    // Add a small delay to ensure DOM is fully ready
+    setTimeout(() => {
+      logger.info('Slideshow should be ready now');
+      window.debugSlideshow();
+    }, 1000);
   } else {
-    logger.error('Slideshow container not found');
+    logger.error('Slideshow container not found - checking for alternative selectors');
+    const altContainer = document.querySelector('.hero-slideshow');
+    if (altContainer) {
+      logger.info('Found slideshow container with alternative selector');
+      slideshowContainer = altContainer;
+      initializeSlideshow().catch(error => {
+        logger.error('Error initializing slideshow with alternative selector', error);
+      });
+    } else {
+      logger.error('No slideshow container found with any selector');
+    }
   }
 
   // Auto-advance slides
@@ -701,12 +768,12 @@
         { src: 'images/Portfolio/New Construction/shingle-style/shingle-style-hero-.jpg', name: 'Shingle Style' },
         
         // renovation-addition Hero Images
-        { src: 'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-hero-.jpg', name: 'Homeowner Haven' },
+        { src: 'images/Portfolio/Renovation+Addition/homeowner-haven/hero.png', name: 'Homeowner Haven' },
         { src: 'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-hero-.jpg', name: 'Selwyn Park Cottage' },
         { src: 'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg', name: 'Split Level Makeover' },
         { src: 'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-hero-.jpg', name: 'Ranch Renovation' },
         { src: 'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-hero-.jpg', name: 'Mid-Century Modern Addition + Renovation' },
-        { src: 'images/Portfolio/Renovation+Addition/wine-pavlion/WP6.jpg', name: 'Wine Pavilion' }
+        { src: 'images/Portfolio/Renovation+Addition/wine-pavlion/hero.png', name: 'Wine Pavilion' }
       ];
 
       // Stop any existing animation
@@ -823,7 +890,122 @@
   // Force refresh function
   window.forceRefreshSlideshow = () => {
     logger.info('Force refreshing slideshow');
-    initializeSlideshow();
+    initializeSlideshow().catch(error => {
+      logger.error('Failed to force refresh slideshow', error);
+    });
+  };
+  
+  // Clean up problematic images
+  window.cleanupProblematicImages = () => {
+    const allImages = document.querySelectorAll('img');
+    let cleanedCount = 0;
+    
+    allImages.forEach((img, index) => {
+      const isProblematic = !img.src || img.src.includes('homepage.html') || img.src === window.location.href;
+      
+      if (isProblematic) {
+        logger.warn(`Removing problematic image ${index + 1}: ${img.src}`);
+        img.remove();
+        cleanedCount++;
+      }
+    });
+    
+    logger.info(`Cleaned up ${cleanedCount} problematic images`);
+    return cleanedCount;
+  };
+  
+  // Debug function to check slideshow state
+  window.debugSlideshow = () => {
+    logger.debug('Slideshow debug info', {
+      container: !!slideshowContainer,
+      containerHTML: slideshowContainer ? slideshowContainer.innerHTML.substring(0, 200) : 'No container',
+      slides: slides.length,
+      currentSlide,
+      slideImages: Array.from(slides).map(s => s.querySelector('img').src),
+      dots: document.querySelectorAll('.slideshow-dot').length
+    });
+  };
+  
+  // Check slideshow container for issues
+  window.checkSlideshowContainer = () => {
+    if (!slideshowContainer) {
+      logger.error('Slideshow container not found');
+      return;
+    }
+    
+    logger.info('Checking slideshow container...');
+    logger.debug('Container element:', slideshowContainer);
+    logger.debug('Container HTML:', slideshowContainer.innerHTML);
+    
+    const containerImages = slideshowContainer.querySelectorAll('img');
+    logger.info(`Found ${containerImages.length} images in slideshow container`);
+    
+    containerImages.forEach((img, index) => {
+      logger.debug(`Container image ${index + 1}:`, {
+        src: img.src,
+        alt: img.alt,
+        complete: img.complete,
+        naturalWidth: img.naturalWidth,
+        naturalHeight: img.naturalHeight
+      });
+    });
+  };
+  
+  // Test function to check if specific images exist
+  window.testImagePaths = async () => {
+    const testImages = [
+      'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
+      'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
+      'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
+      'images/Portfolio/Renovation+Addition/myers-park-renovation/2.jpg',
+      'images/Portfolio/New Construction/Woodland/woodland-hero-.jpg',
+      'images/HeroProjects/hero-19.jpg'
+    ];
+    
+    logger.info('Testing image paths...');
+    
+    for (const imagePath of testImages) {
+      try {
+        const response = await fetch(imagePath, { method: 'HEAD' });
+        if (response.ok) {
+          logger.success(`✓ ${imagePath} - OK`);
+        } else {
+          logger.error(`✗ ${imagePath} - HTTP ${response.status}`);
+        }
+      } catch (error) {
+        logger.error(`✗ ${imagePath} - Error: ${error.message}`);
+      }
+    }
+  };
+  
+  // Debug function to check all images on the page
+  window.debugAllImages = () => {
+    const allImages = document.querySelectorAll('img');
+    logger.info(`Found ${allImages.length} images on page`);
+    
+    allImages.forEach((img, index) => {
+      const isProblematic = !img.src || img.src.includes('homepage.html') || img.src === window.location.href;
+      
+      if (isProblematic) {
+        logger.error(`PROBLEMATIC Image ${index + 1}:`, {
+          src: img.src,
+          alt: img.alt,
+          complete: img.complete,
+          naturalWidth: img.naturalWidth,
+          naturalHeight: img.naturalHeight,
+          element: img
+        });
+      } else {
+        logger.debug(`Image ${index + 1}:`, {
+          src: img.src,
+          alt: img.alt,
+          complete: img.complete,
+          naturalWidth: img.naturalWidth,
+          naturalHeight: img.naturalHeight,
+          element: img
+        });
+      }
+    });
   };
 
   // Test function to check localStorage
@@ -1008,8 +1190,9 @@
         name: 'heavy-timber-pool-house',
         type: 'renovation-addition',
         description: 'Custom heavy-timber-pool-house addition with rustic elegance and modern amenities.',
-        hero_image: 'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
+        hero_image: 'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
         images: [
+          'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
           'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
           'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0503.JPG',
           'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0506.JPG',

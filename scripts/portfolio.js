@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'homeowner-haven',
                 name: 'Homeowner Haven',
                 images: [
+                    'images/Portfolio/Renovation+Addition/homeowner-haven/hero.png',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-1-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven (2).jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven (3).jpg',
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-21-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-22-.jpg'
                 ],
-                hero_image: 'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-hero-.jpg',
+                hero_image: 'images/Portfolio/Renovation+Addition/homeowner-haven/hero.png',
                 type: 'renovation-addition'
             },
             {
@@ -393,6 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'heavy-timber-pool-house',
                 name: 'Heavy Timber Pool House',
                 images: [
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0503.JPG',
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0506.JPG',
@@ -401,10 +403,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0527.jpg',
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0528.jpg',
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0529.JPG',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0531.jpg',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG-0500.jpg'
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0531.jpg'
                 ],
-                hero_image: 'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
+                hero_image: 'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
                 type: 'renovation-addition'
             },
             {
@@ -446,6 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'wine-pavilion',
                 name: 'Wine Pavilion',
                 images: [
+                    'images/Portfolio/Renovation+Addition/wine-pavlion/hero.png',
                     'images/Portfolio/Renovation+Addition/wine-pavlion/DSC_1425.JPG',
                     'images/Portfolio/Renovation+Addition/wine-pavlion/DSC_1477.JPG',
                     'images/Portfolio/Renovation+Addition/wine-pavlion/DSC_1485.JPG',
@@ -453,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'images/Portfolio/Renovation+Addition/wine-pavlion/WP5.jpg',
                     'images/Portfolio/Renovation+Addition/wine-pavlion/WP6.jpg'
                 ],
-                hero_image: 'images/Portfolio/Renovation+Addition/wine-pavlion/DSC_1425.JPG',
+                hero_image: 'images/Portfolio/Renovation+Addition/wine-pavlion/hero.png',
                 type: 'renovation-addition'
             },
             {

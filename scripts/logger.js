@@ -384,9 +384,10 @@ class Logger {
         // Network errors
         window.addEventListener('error', (event) => {
             if (event.target !== window && event.target.tagName === 'IMG') {
-                this.error('Image failed to load', null, {
+                this.error(`Image failed to load: ${event.target.src}`, null, {
                     src: event.target.src,
-                    alt: event.target.alt
+                    alt: event.target.alt,
+                    element: event.target
                 });
             }
         }, true);

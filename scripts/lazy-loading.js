@@ -5,8 +5,8 @@ class LazyLoader {
     constructor(options = {}) {
         this.options = {
             root: null,
-            rootMargin: '50px',
-            threshold: 0.1,
+            rootMargin: '100px', // Increased from 50px for earlier loading
+            threshold: 0.01, // Reduced from 0.1 for earlier loading
             loadingClass: 'lazy-loading',
             loadedClass: 'lazy-loaded',
             errorClass: 'lazy-error',

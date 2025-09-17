@@ -189,6 +189,11 @@
     object-position: center 20%;
 }
 
+/* Adjust image positioning for heavy-timber-pool-house to show more of the top */
+.project-card[data-project-id="heavy-timber-pool-house"] .project-image {
+    object-position: center 15%;
+}
+
 .project-card:hover .project-image {
     transform: scale(1.02);
 }
