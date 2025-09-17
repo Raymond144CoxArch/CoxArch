@@ -252,13 +252,15 @@ class GalleryModal {
             setTimeout(adjustForMobileBrowser, 100);
         });
         
-        // Adjust when modal opens
-        const originalOpenModal = this.openModal.bind(this);
-        this.openModal = (...args) => {
-            const result = originalOpenModal(...args);
-            setTimeout(adjustForMobileBrowser, 100);
-            return result;
-        };
+        // Adjust when modal opens (only if openModal exists)
+        if (this.openModal && typeof this.openModal === 'function') {
+            const originalOpenModal = this.openModal.bind(this);
+            this.openModal = (...args) => {
+                const result = originalOpenModal(...args);
+                setTimeout(adjustForMobileBrowser, 100);
+                return result;
+            };
+        }
     }
     
     // Debug function to check modal layout

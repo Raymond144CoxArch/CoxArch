@@ -771,6 +771,11 @@ body.homepage .contact-btn:hover {
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     }
     
+    /* Ensure mobile glass button text stays orange */
+    .mobile-glass-section .mobile-glass-box .glass-button,
+    .mobile-glass-box .glass-button {
+        color: var(--accent-color) !important;
+    }
     
     /* Keep mobile glass box button text orange on hover - more specific selectors */
     .mobile-glass-section .mobile-glass-box .glass-button:hover,
@@ -920,9 +925,11 @@ body.homepage .contact-btn:hover {
     color: white !important;
 }
 
-/* Hero glass box button - white text */
-.glass-box .glass-button {
-    color: rgba(255, 255, 255, 0.9) !important;
+/* Hero glass box button - white text (desktop only) */
+@media (min-width: 768px) {
+    .glass-box .glass-button {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
 }
 
 .glass-button i {
