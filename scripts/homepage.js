@@ -88,6 +88,64 @@
     }
   };
 
+  // ===== SLIDESHOW SWIPE FUNCTIONALITY FOR MOBILE =====
+  const initializeSwipe = () => {
+    const slideshowContainer = document.querySelector('.hero-slideshow');
+    if (!slideshowContainer) {
+      console.error('❌ Hero slideshow container not found, cannot initialize swipe functionality.');
+      return;
+    }
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Minimum pixel distance for a swipe
+
+    // Handle touch start event
+    const handleTouchStart = (e) => {
+      touchStartX = e.touches[0].clientX;
+      console.log('🖐️ Touch start:', touchStartX);
+    };
+
+    // Handle touch move event
+    const handleTouchMove = (e) => {
+      touchEndX = e.touches[0].clientX;
+    };
+
+    // Handle touch end event
+    const handleTouchEnd = () => {
+      const swipeDistance = touchStartX - touchEndX;
+      console.log('🔄 Swipe distance:', swipeDistance, 'Threshold:', swipeThreshold);
+
+      if (Math.abs(swipeDistance) > swipeThreshold) {
+        if (swipeDistance > 0) {
+          // Swiped left - go to next slide
+          console.log('✅ Swipe left detected - next slide');
+          if (typeof window.nextSlide === 'function') {
+            window.nextSlide();
+          } else {
+            console.error('❌ nextSlide function not found');
+          }
+        } else {
+          // Swiped right - go to previous slide
+          console.log('✅ Swipe right detected - previous slide');
+          if (typeof window.previousSlide === 'function') {
+            window.previousSlide();
+          } else {
+            console.error('❌ previousSlide function not found');
+          }
+        }
+      } else {
+        console.log('❌ Swipe too short:', Math.abs(swipeDistance), 'px');
+      }
+    };
+
+    // Add touch event listeners
+    slideshowContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+    slideshowContainer.addEventListener('touchmove', handleTouchMove, { passive: true });
+    slideshowContainer.addEventListener('touchend', handleTouchEnd);
+    console.log('✅ Touch event listeners added to hero slideshow');
+  };
+
   // Wait for DOM to be ready
   document.addEventListener('DOMContentLoaded', () => {
     console.log('🏠 DOM is ready, starting homepage initialization...');
@@ -587,6 +645,11 @@
     const isMobile = window.innerWidth <= 768;
     const delay = isMobile ? 1000 : 2000; // Load additional images sooner on mobile
     
+    // Initialize swipe functionality after slideshow is set up
+    setTimeout(() => {
+      initializeSwipe();
+    }, delay);
+    
     setTimeout(() => {
       loadAdditionalSlideshowImages();
     }, delay);
@@ -627,6 +690,7 @@
     swipeStartTime = Date.now();
     isSwipeActive = true;
     
+    console.log('🖐️ Touch start detected', { x: touchStartX, y: touchStartY });
     logger.debug('Touch start', { x: touchStartX, y: touchStartY });
     
     if (slideshowContainer) {
@@ -657,6 +721,14 @@
     touchEndY = e.changedTouches[0].screenY;
     const swipeDuration = Date.now() - swipeStartTime;
     
+    console.log('🖐️ Touch end detected', { 
+      x: touchEndX, 
+      y: touchEndY, 
+      duration: swipeDuration,
+      deltaX: Math.abs(touchEndX - touchStartX),
+      deltaY: Math.abs(touchEndY - touchStartY)
+    });
+    
     logger.debug('Touch end', { 
       x: touchEndX, 
       y: touchEndY, 
@@ -679,6 +751,17 @@
     const swipeDistance = touchStartX - touchEndX;
     const verticalDistance = Math.abs(touchEndY - touchStartY);
 
+    console.log('🔄 Swipe analysis:', {
+      swipeDistance,
+      swipeDuration,
+      verticalDistance,
+      swipeThreshold,
+      timeThreshold,
+      isValid: Math.abs(swipeDistance) > swipeThreshold && 
+               swipeDuration < timeThreshold && 
+               Math.abs(swipeDistance) > verticalDistance
+    });
+
     // Check if it's a valid horizontal swipe
     if (Math.abs(swipeDistance) > swipeThreshold && 
         swipeDuration < timeThreshold && 
@@ -686,6 +769,7 @@
       
       if (swipeDistance > 0) {
         // Swipe left - next slide
+        console.log('✅ Swipe left detected - next slide');
         nextSlide();
         logger.info('✅ Swipe left detected - next slide', { 
           distance: swipeDistance, 
@@ -694,6 +778,7 @@
         });
       } else {
         // Swipe right - previous slide
+        console.log('✅ Swipe right detected - previous slide');
         previousSlide();
         logger.info('✅ Swipe right detected - previous slide', { 
           distance: swipeDistance, 
@@ -702,6 +787,13 @@
         });
       }
     } else {
+      console.log('❌ Swipe not registered', { 
+        distance: swipeDistance, 
+        duration: swipeDuration, 
+        verticalDistance: verticalDistance,
+        threshold: swipeThreshold,
+        timeThreshold: timeThreshold
+      });
       logger.debug('❌ Swipe not registered', { 
         distance: swipeDistance, 
         duration: swipeDuration, 
@@ -719,6 +811,10 @@
     }
   };
 
+  // Make slide functions globally available for swipe functionality
+  window.nextSlide = nextSlide;
+  window.previousSlide = previousSlide;
+
   // Add touch event listeners to slideshow container
   if (slideshowContainer) {
     // Remove any existing listeners first to avoid duplicates
@@ -730,6 +826,8 @@
     slideshowContainer.addEventListener('touchstart', handleTouchStart, { passive: false });
     slideshowContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
     slideshowContainer.addEventListener('touchend', handleTouchEnd, { passive: false });
+    
+    console.log('📱 Touch event listeners added to slideshow container');
     
     // Add swipe hint removal after first interaction
     const removeSwipeHint = () => {
