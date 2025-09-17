@@ -785,11 +785,17 @@ body.portfolio-page .see-more-work-container {
         /* Ensure content doesn't get cut off by browser UI */
         padding-top: env(safe-area-inset-top, 0px);
         padding-bottom: env(safe-area-inset-bottom, 0px);
+        /* Ensure modal content fits within viewport */
+        box-sizing: border-box;
+        overflow: hidden;
     }
     
     .main-image-column {
         padding-left: 0.75rem;
         padding-right: 0.75rem;
+        /* Ensure content fits within viewport */
+        max-height: calc(100dvh - 120px); /* Account for header height */
+        overflow-y: auto;
     }
     
     .main-image-container {
@@ -800,10 +806,17 @@ body.portfolio-page .see-more-work-container {
         padding: 1rem 1.5rem;
         position: relative;
         z-index: 10;
-        display: flex;
+        display: flex !important;
         justify-content: space-between;
         align-items: center;
         flex-shrink: 0;
+        /* Ensure header stays at top and is visible */
+        position: sticky !important;
+        top: 0 !important;
+        background-color: #fff !important;
+        border-bottom: 1px solid #e5e5e5 !important;
+        /* Add safe area padding for mobile */
+        padding-top: calc(1rem + env(safe-area-inset-top, 0px)) !important;
     }
     
     /* Position close button properly on mobile */
@@ -854,7 +867,7 @@ body.portfolio-page .see-more-work-container {
     /* Force the close button to be positioned absolutely relative to modal container */
     .modal-container .modal-close-btn {
         position: absolute !important;
-        top: 0.5rem !important;
+        top: calc(0.5rem + env(safe-area-inset-top, 0px)) !important;
         right: 0.5rem !important;
         z-index: 10000 !important;
         background: transparent !important;
@@ -868,6 +881,9 @@ body.portfolio-page .see-more-work-container {
         font-size: 24px !important;
         color: #ff6600 !important;
         border: none !important;
+        /* Ensure button is always visible */
+        visibility: visible !important;
+        opacity: 1 !important;
         cursor: pointer !important;
         font-weight: bold !important;
         visibility: visible !important;
