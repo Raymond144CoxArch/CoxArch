@@ -4,6 +4,16 @@
       "source": "www.coxarchitecture.com/(.*)",
       "destination": "https://coxarchitecture.com/$1",
       "permanent": true
+    },
+    {
+      "source": "http://coxarchitecture.com/(.*)",
+      "destination": "https://coxarchitecture.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "http://www.coxarchitecture.com/(.*)",
+      "destination": "https://coxarchitecture.com/$1",
+      "permanent": true
     }
   ],
   "headers": [
