@@ -584,6 +584,44 @@ body.homepage .contact-btn:hover {
         cursor: grabbing;
     }
     
+    /* Enhanced swipe feedback */
+    .hero-slideshow.swiping {
+        transition: none !important;
+    }
+    
+    .hero-slideshow.swiping .slide-item {
+        transition: transform 0.1s ease-out;
+    }
+    
+    /* Add visual indicator for swipe capability */
+    .hero-slideshow::after {
+        content: "← Swipe to navigate →";
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        z-index: 10;
+        opacity: 0;
+        animation: swipeHint 3s ease-in-out;
+        pointer-events: none;
+    }
+    
+    @keyframes swipeHint {
+        0%, 100% { opacity: 0; }
+        10%, 90% { opacity: 1; }
+    }
+    
+    /* Hide swipe hint after user interaction */
+    .hero-slideshow.swiped::after {
+        display: none;
+    }
+    
     .hero-content {
         padding: 1rem;
         text-align: center;

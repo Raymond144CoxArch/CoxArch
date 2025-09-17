@@ -613,14 +613,19 @@
   // Auto-advance slides
   setInterval(nextSlide, 5000);
 
-  // ===== MOBILE SWIPE FUNCTIONALITY =====
+  // ===== ENHANCED MOBILE SWIPE FUNCTIONALITY =====
   let touchStartX = 0;
   let touchEndX = 0;
   let isSwipeActive = false;
+  let swipeStartTime = 0;
+  let isScrolling = false;
 
   const handleTouchStart = (e) => {
     touchStartX = e.changedTouches[0].screenX;
+    swipeStartTime = Date.now();
     isSwipeActive = true;
+    isScrolling = false;
+    
     if (slideshowContainer) {
       slideshowContainer.classList.add('swiping');
     }
@@ -628,33 +633,62 @@
 
   const handleTouchMove = (e) => {
     if (!isSwipeActive) return;
-    e.preventDefault(); // Prevent scrolling while swiping
+    
+    const touchCurrentX = e.changedTouches[0].screenX;
+    const touchCurrentY = e.changedTouches[0].screenY;
+    const deltaX = Math.abs(touchCurrentX - touchStartX);
+    const deltaY = Math.abs(touchCurrentY - e.changedTouches[0].screenY);
+    
+    // Determine if this is a horizontal swipe or vertical scroll
+    if (deltaX > deltaY && deltaX > 10) {
+      // This is a horizontal swipe - prevent scrolling
+      e.preventDefault();
+      e.stopPropagation();
+      isScrolling = false;
+      logger.debug('Horizontal swipe detected', { deltaX, deltaY });
+    } else if (deltaY > deltaX && deltaY > 10) {
+      // This is vertical scrolling - allow it
+      isScrolling = true;
+      isSwipeActive = false;
+      if (slideshowContainer) {
+        slideshowContainer.classList.remove('swiping');
+      }
+      logger.debug('Vertical scroll detected, canceling swipe', { deltaX, deltaY });
+    }
   };
 
   const handleTouchEnd = (e) => {
-    if (!isSwipeActive) return;
+    if (!isSwipeActive || isScrolling) return;
+    
     touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
+    const swipeDuration = Date.now() - swipeStartTime;
+    
+    handleSwipe(swipeDuration);
+    
     isSwipeActive = false;
     if (slideshowContainer) {
       slideshowContainer.classList.remove('swiping');
     }
   };
 
-  const handleSwipe = () => {
+  const handleSwipe = (swipeDuration) => {
     const swipeThreshold = 50; // Minimum distance for a swipe
+    const timeThreshold = 300; // Maximum time for a swipe (ms)
     const swipeDistance = touchStartX - touchEndX;
 
-    if (Math.abs(swipeDistance) > swipeThreshold) {
+    // Check if it's a valid swipe (enough distance and quick enough)
+    if (Math.abs(swipeDistance) > swipeThreshold && swipeDuration < timeThreshold) {
       if (swipeDistance > 0) {
         // Swipe left - next slide
         nextSlide();
-        logger.debug('Swipe left detected - next slide');
+        logger.debug('Swipe left detected - next slide', { distance: swipeDistance, duration: swipeDuration });
       } else {
         // Swipe right - previous slide
         previousSlide();
-        logger.debug('Swipe right detected - previous slide');
+        logger.debug('Swipe right detected - previous slide', { distance: swipeDistance, duration: swipeDuration });
       }
+    } else {
+      logger.debug('Swipe not registered', { distance: swipeDistance, duration: swipeDuration, threshold: swipeThreshold });
     }
   };
 
@@ -667,11 +701,30 @@
 
   // Add touch event listeners to slideshow container
   if (slideshowContainer) {
+    // Remove any existing listeners first to avoid duplicates
+    slideshowContainer.removeEventListener('touchstart', handleTouchStart);
+    slideshowContainer.removeEventListener('touchmove', handleTouchMove);
+    slideshowContainer.removeEventListener('touchend', handleTouchEnd);
+    
+    // Add new listeners
     eventManager.addListener(slideshowContainer, 'touchstart', handleTouchStart, { passive: false });
     eventManager.addListener(slideshowContainer, 'touchmove', handleTouchMove, { passive: false });
     eventManager.addListener(slideshowContainer, 'touchend', handleTouchEnd, { passive: false });
     
-    logger.info('Mobile swipe functionality added to slideshow');
+    // Add swipe hint removal after first interaction
+    const removeSwipeHint = () => {
+      slideshowContainer.classList.add('swiped');
+      slideshowContainer.removeEventListener('touchstart', removeSwipeHint);
+    };
+    slideshowContainer.addEventListener('touchstart', removeSwipeHint, { once: true });
+    
+    logger.info('Mobile swipe functionality added to slideshow', {
+      container: !!slideshowContainer,
+      containerClass: slideshowContainer.className,
+      isMobile: window.innerWidth <= 768
+    });
+  } else {
+    logger.error('Cannot add swipe functionality - slideshow container not found');
   }
 
   // ===== MOBILE SLIDESHOW NEW WINDOW FUNCTIONALITY =====
@@ -1009,6 +1062,33 @@
       slideImages: Array.from(slides).map(s => s.querySelector('img').src),
       dots: document.querySelectorAll('.slideshow-dot').length
     });
+  };
+  
+  // Test swipe functionality
+  window.testSwipe = () => {
+    logger.info('Testing swipe functionality...');
+    
+    if (!slideshowContainer) {
+      logger.error('No slideshow container found for swipe testing');
+      return;
+    }
+    
+    logger.info('Swipe test info:', {
+      container: slideshowContainer,
+      hasTouchStart: slideshowContainer.onclick === null, // Check if event listeners are attached
+      isMobile: window.innerWidth <= 768,
+      slidesCount: slides.length,
+      currentSlide: currentSlide
+    });
+    
+    // Simulate a swipe left (next slide)
+    logger.info('Simulating swipe left (next slide)');
+    nextSlide();
+    
+    setTimeout(() => {
+      logger.info('Simulating swipe right (previous slide)');
+      previousSlide();
+    }, 1000);
   };
   
   // Check slideshow container for issues
