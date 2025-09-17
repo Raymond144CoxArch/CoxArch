@@ -1,0 +1,82 @@
+{
+  "redirects": [
+    {
+      "source": "www.coxarchitecture.com/(.*)",
+      "destination": "https://coxarchitecture.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "http://coxarchitecture.com/(.*)",
+      "destination": "https://coxarchitecture.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "http://www.coxarchitecture.com/(.*)",
+      "destination": "https://coxarchitecture.com/$1",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self'; frame-src 'self' https://docs.google.com https://maps.google.com https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "cross-origin"
+        },
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "off"
+        },
+        {
+          "key": "Expect-CT",
+          "value": "max-age=86400, enforce"
+        },
+        {
+          "key": "Clear-Site-Data",
+          "value": "\"cache\", \"cookies\", \"storage\""
+        },
+        {
+          "key": "Feature-Policy",
+          "value": "accelerometer 'none'; autoplay 'none'; encrypted-media 'none'; fullscreen 'self'; gyroscope 'none'; magnetometer 'none'; midi 'none'; payment 'none'; picture-in-picture 'none'; sync-xhr 'none'; usb 'none'; xr-spatial-tracking 'none'"
+        },
+        {
+          "key": "Server",
+          "value": "CoxArchitecture/1.0"
+        }
+      ]
+    }
+  ]
+}
