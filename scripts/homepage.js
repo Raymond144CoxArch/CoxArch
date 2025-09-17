@@ -74,37 +74,22 @@ const stopAutoSlide = () => {
     ] : [
         'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
         'images/Portfolio/Renovation+Addition/myers-park-renovation/2.jpg',
-        'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
         'images/Portfolio/New Construction/Woodland/woodland-hero-.jpg',
+        'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
         'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
-        'images/Portfolio/New Construction/french-country/french-country-hero-.jpg',
-        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg',
-        'images/Portfolio/New Construction/melchor-residence/melchor-residence-hero-.jpg',
-        'images/HeroProjects/hero-19.jpg',
-        'images/HeroProjects/hero-20-.jpg',
-        'images/HeroProjects/hero-21.JPG',
-        'images/HeroProjects/hero-22-.jpg'
+        'images/HeroProjects/hero-19.jpg'
     ];
   };
 
   const initializeSlideshow = async () => {
-    console.log('🎬 Initializing slideshow...');
-    console.log('🎬 Container exists:', !!slideshowContainer);
-    
     if (!slideshowContainer) {
-        console.error('❌ Slideshow container not found, cannot initialize.');
-        logger.error('Slideshow container not found, cannot initialize.');
         return;
     }
     
     const images = getDefaultImages();
-    console.log('🎬 Images to load:', images);
-    
     slideshowContainer.innerHTML = '';
 
     images.forEach((imageSrc, index) => {
-        console.log(`🎬 Creating slide ${index + 1}: ${imageSrc}`);
-        
       const slideItem = document.createElement('div');
       slideItem.className = 'slide-item';
         if (index === 0) {
@@ -120,8 +105,6 @@ const stopAutoSlide = () => {
         
         slideItem.appendChild(imgElement);
       slideshowContainer.appendChild(slideItem);
-        
-        console.log(`🎬 Slide ${index + 1} created and added to container`);
     });
 
     slides = document.querySelectorAll('.slide-item');
@@ -147,11 +130,6 @@ const stopAutoSlide = () => {
     currentSlide = 0;
     window.showSlide(currentSlide);
     startAutoSlide();
-    
-    console.log('🎬 Slideshow initialization complete!');
-    console.log('🎬 Total slides created:', slides.length);
-    console.log('🎬 Current slide:', currentSlide);
-    console.log('🎬 Auto-slide started:', !!slideInterval);
 };
 
 // ===== MOBILE SWIPE FUNCTIONALITY =====
@@ -182,83 +160,142 @@ const initializeSwipe = () => {
         startAutoSlide(); // Restart auto-advance after swipe ends
     });
   };
-  
-// Wait for DOM to be ready
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('🏠 DOM is ready, initializing homepage...');
-    
+
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', () => {
     // ===== MOBILE MENU TOGGLE =====
     const mobileMenu = document.querySelector('.mobile-menu');
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     
     if (mobileMenu && mobileMenuBtn) {
-        // Function to update button icon
-        function updateButtonIcon(isOpen) {
-            if (isOpen) {
-                mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
-            } else {
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            }
+      // Function to update button icon
+      function updateButtonIcon(isOpen) {
+        if (isOpen) {
+          mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         }
+      }
 
-        // Function to toggle menu
-        function toggleMenu() {
-            const isActive = mobileMenu.classList.contains('active');
-            
-            if (isActive) {
-                mobileMenu.classList.remove('active');
-                updateButtonIcon(false);
-            } else {
-                mobileMenu.classList.add('active');
-                updateButtonIcon(true);
-            }
-        }
-
-        // Add click event to hamburger button
-        mobileMenuBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleMenu();
-        });
-
-        // Close menu when clicking on menu links
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.remove('active');
-                updateButtonIcon(false);
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                if (mobileMenu.classList.contains('active')) {
-                    mobileMenu.classList.remove('active');
-                    updateButtonIcon(false);
-                }
-            }
-        });
+      // Function to toggle menu
+      function toggleMenu() {
+        const isActive = mobileMenu.classList.contains('active');
         
-        console.log('📱 Mobile menu initialized');
+        if (isActive) {
+          mobileMenu.classList.remove('active');
+          updateButtonIcon(false);
+        } else {
+          mobileMenu.classList.add('active');
+          updateButtonIcon(true);
+        }
+      }
+
+      // Add click event to hamburger button
+      mobileMenuBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      // Close menu when clicking on menu links
+      const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+      mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.remove('active');
+          updateButtonIcon(false);
+        });
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+          if (mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            updateButtonIcon(false);
+          }
+        }
+      });
     }
-    
+
     // Initialize slideshow containers after DOM is ready
     slideshowContainer = document.querySelector('.hero-slideshow');
     dotsContainer = document.querySelector('.slideshow-dots');
-    
-    console.log('📋 Slideshow container found:', !!slideshowContainer);
-    console.log('📋 Dots container found:', !!dotsContainer);
-    
-    if (slideshowContainer) {
-        console.log('📋 Container HTML before init:', slideshowContainer.innerHTML);
-    }
     
     // Initialize slideshow and swipe functionality
     initializeSlideshow();
     initializeSwipe();
     
-    if (slideshowContainer) {
-        console.log('📋 Container HTML after init:', slideshowContainer.innerHTML);
-    }
+    // Check if gallery modal is available and working
+    setTimeout(() => {
+        if (window.galleryModal) {
+            console.log('✅ Gallery modal is available');
+            
+            // Set up project data for featured projects
+            const projectData = {
+                'williams-lake-house': {
+          name: 'Lake House',
+          type: 'New Construction',
+          images: [
+            'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
+                        'images/Portfolio/New Construction/lake-house/lakehouse-1-.jpg',
+                        'images/Portfolio/New Construction/lake-house/lakehouse-9-.jpg',
+                        'images/Portfolio/New Construction/lake-house/lakehouse-18-.jpg',
+            'images/Portfolio/New Construction/lake-house/lakehouse-19-.jpg',
+                        'images/Portfolio/New Construction/lake-house/lakehouse-20-.jpg',
+                        'images/Portfolio/New Construction/lake-house/lakehouse-21-.jpg',
+                        'images/Portfolio/New Construction/lake-house/lakehouse-22-.jpg',
+                        'images/Portfolio/New Construction/lake-house/lakehouse-23-.jpg',
+                        'images/Portfolio/New Construction/lake-house/lakehouse-24-.jpg'
+                    ]
+                },
+                'split-level-makeover': {
+                    name: 'Split Level Makeover',
+                    type: 'Renovation + Addition',
+          images: [
+            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg',
+                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-1-.jpg',
+                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-2-.jpg',
+                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-3-.jpg',
+                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-4-.jpg',
+                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-5-.jpg',
+                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-6-.jpg',
+            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-7-.jpg',
+                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-8-.jpg',
+                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-10-.jpg'
+                    ]
+                },
+                'heavy-timber-pool-house': {
+                    name: 'Heavy Timber Pool House',
+                    type: 'Renovation + Addition',
+          images: [
+            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
+            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
+            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0503.JPG',
+            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0506.JPG',
+            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0523.jpg',
+            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0526.jpg',
+            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0527.jpg',
+            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0528.jpg',
+            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0529.JPG',
+            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0531.jpg'
+                    ]
+                }
+            };
+            
+            window.galleryModal.setProjectsData(projectData);
+            console.log('✅ Project data set for gallery modal');
+            console.log('🏊 Heavy Timber Pool House hero image:', projectData['heavy-timber-pool-house'].images[0]);
+  } else {
+            console.warn('⚠️ Gallery modal not found - featured projects may not work');
+        }
+        
+        // Test featured project click handlers
+        const featuredProjects = document.querySelectorAll('.featured-project[data-project-id]');
+        console.log(`📋 Found ${featuredProjects.length} featured projects with data-project-id`);
+        
+        featuredProjects.forEach((project, index) => {
+            const projectId = project.getAttribute('data-project-id');
+            console.log(`📋 Featured project ${index + 1}: ${projectId}`);
+        });
+    }, 1000);
 });

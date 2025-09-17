@@ -900,7 +900,9 @@ class GalleryModal {
 
 // Global initialization
 document.addEventListener('DOMContentLoaded', () => {
-    logger.info('Initializing Gallery Modal System');
+    if (window.logger) {
+        logger.info('Initializing Gallery Modal System');
+    }
     
     const galleryModal = new GalleryModal();
     
@@ -990,15 +992,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    logger.success('Gallery Modal System initialized');
-    logger.info('Debug utilities available', {
-        utilities: [
-            'window.debugGalleryModal() - Show debug info',
-            'window.testGalleryModal() - Test modal functionality',
-            'window.galleryModal.openProject(id) - Open specific project',
-            'window.galleryModal.setProjectsData(data) - Set project data',
-            'window.galleryModal.isDataAvailable() - Check if data is loaded',
-            'window.galleryModal.isReady() - Check if modal is ready'
-        ]
-    });
+    if (window.logger) {
+        logger.success('Gallery Modal System initialized');
+        logger.info('Debug utilities available', {
+            utilities: [
+                'window.debugGalleryModal() - Show debug info',
+                'window.testGalleryModal() - Test modal functionality',
+                'window.galleryModal.openProject(id) - Open specific project',
+                'window.galleryModal.setProjectsData(data) - Set project data',
+                'window.galleryModal.isDataAvailable() - Check if data is loaded',
+                'window.galleryModal.isReady() - Check if modal is ready'
+            ]
+        });
+    }
 });
