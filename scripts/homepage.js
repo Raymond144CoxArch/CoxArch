@@ -1,3 +1,15 @@
+  // Format project type for display
+  const formatProjectType = (type) => {
+    switch(type) {
+      case 'new-construction':
+        return 'New Construction';
+      case 'renovation-addition':
+        return 'Renovation + Addition';
+      default:
+        return type;
+    }
+  };
+
   // Event Listener Management System
   class EventListenerManager {
     constructor() {
@@ -175,7 +187,7 @@
       const featuredProjects = [
         {
           id: 'williams-lake-house',
-          name: 'lake-house',
+          name: 'Lake House',
           displayName: 'Lake House',
           type: 'New Construction',
           description: 'Luxury lakefront residence with contemporary design and natural materials.',
@@ -196,7 +208,7 @@
         },
         {
           id: 'split-level-makeover',
-          name: 'split-level-makeover', // Changed from 'title' to 'name'
+          name: 'Split Level Makeover', // Changed from 'title' to 'name'
           displayName: 'Split Level Makeover',
           type: 'Renovation + Addition', // Changed from 'category' to 'type'
           description: 'Complete split-level home transformation with modern open concept design.',
@@ -216,7 +228,7 @@
         },
         {
           id: 'heavy-timber-pool-house',
-          name: 'heavy-timber-pool-house', // Changed from 'title' to 'name'
+          name: 'Heavy Timber Pool House', // Changed from 'title' to 'name'
           displayName: 'Heavy Timber Pool House',
           type: 'Renovation + Addition', // Changed from 'category' to 'type'
           description: 'Custom heavy-timber-pool-house addition with rustic elegance and modern amenities.',
@@ -295,7 +307,7 @@
           </div>
           <div class="project-info">
             <h3>${project.displayName || project.name}</h3>
-            <p class="project-type">${project.type}</p>
+            <p class="project-type">${formatProjectType(project.type)}</p>
             <p class="project-description">${project.description || ''}</p>
           </div>
         `;
@@ -449,6 +461,218 @@
   // Auto-advance slides
   setInterval(nextSlide, 5000);
 
+  // ===== MOBILE SWIPE FUNCTIONALITY =====
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let isSwipeActive = false;
+
+  const handleTouchStart = (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    isSwipeActive = true;
+    if (slideshowContainer) {
+      slideshowContainer.classList.add('swiping');
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isSwipeActive) return;
+    e.preventDefault(); // Prevent scrolling while swiping
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!isSwipeActive) return;
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+    isSwipeActive = false;
+    if (slideshowContainer) {
+      slideshowContainer.classList.remove('swiping');
+    }
+  };
+
+  const handleSwipe = () => {
+    const swipeThreshold = 50; // Minimum distance for a swipe
+    const swipeDistance = touchStartX - touchEndX;
+
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+      if (swipeDistance > 0) {
+        // Swipe left - next slide
+        nextSlide();
+        logger.debug('Swipe left detected - next slide');
+      } else {
+        // Swipe right - previous slide
+        previousSlide();
+        logger.debug('Swipe right detected - previous slide');
+      }
+    }
+  };
+
+  const previousSlide = () => {
+    if (slides.length > 0) {
+      currentSlide = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+      showSlide(currentSlide);
+    }
+  };
+
+  // Add touch event listeners to slideshow container
+  if (slideshowContainer) {
+    eventManager.addListener(slideshowContainer, 'touchstart', handleTouchStart, { passive: false });
+    eventManager.addListener(slideshowContainer, 'touchmove', handleTouchMove, { passive: false });
+    eventManager.addListener(slideshowContainer, 'touchend', handleTouchEnd, { passive: false });
+    
+    logger.info('Mobile swipe functionality added to slideshow');
+  }
+
+  // ===== MOBILE SLIDESHOW NEW WINDOW FUNCTIONALITY =====
+  
+  // Add click handlers to slideshow images (mobile only)
+  const addSlideshowClickHandlers = () => {
+    const slideshowImages = document.querySelectorAll('.slide-image');
+    
+    slideshowImages.forEach(image => {
+      // Remove existing click handlers to avoid duplicates
+      image.removeEventListener('click', handleSlideshowImageClick);
+      image.addEventListener('click', handleSlideshowImageClick);
+    });
+  };
+  
+  const handleSlideshowImageClick = (e) => {
+    // Only open new window on mobile devices
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const imageSrc = e.target.src;
+      const imageAlt = e.target.alt || 'Slideshow image';
+      
+      // Create a new window with the image
+      const newWindow = window.open('', '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+      
+      if (newWindow) {
+        // Create HTML content for the new window
+        const htmlContent = `
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${imageAlt}</title>
+            <style>
+              * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+              }
+              
+              body {
+                background-color: #000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                font-family: Arial, sans-serif;
+                overflow: auto;
+              }
+              
+              .image-container {
+                max-width: 100%;
+                max-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+              }
+              
+              .image-container img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+              }
+              
+              .close-button {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(255, 255, 255, 0.9);
+                border: none;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                color: #333;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                z-index: 1000;
+                transition: all 0.3s ease;
+              }
+              
+              .close-button:hover {
+                background: rgba(255, 255, 255, 1);
+                transform: scale(1.1);
+              }
+              
+              .instructions {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(255, 255, 255, 0.9);
+                color: #333;
+                padding: 10px 20px;
+                border-radius: 20px;
+                font-size: 14px;
+                text-align: center;
+                z-index: 1000;
+              }
+              
+              @media (max-width: 768px) {
+                .close-button {
+                  width: 40px;
+                  height: 40px;
+                  font-size: 20px;
+                  top: 10px;
+                  right: 10px;
+                }
+                
+                .instructions {
+                  bottom: 10px;
+                  font-size: 12px;
+                  padding: 8px 16px;
+                }
+              }
+            </style>
+          </head>
+          <body>
+            <button class="close-button" onclick="window.close()">×</button>
+            <div class="image-container">
+              <img src="${imageSrc}" alt="${imageAlt}" />
+            </div>
+            <div class="instructions">
+              Use your browser's zoom controls (Ctrl/Cmd + scroll) to zoom in/out
+            </div>
+          </body>
+          </html>
+        `;
+        
+        newWindow.document.write(htmlContent);
+        newWindow.document.close();
+        
+        // Focus the new window
+        newWindow.focus();
+      } else {
+        // Fallback if popup is blocked
+        alert('Please allow popups for this site to view images in a new window.');
+      }
+    }
+  };
+  
+  // Add click handlers after slideshow is initialized
+  setTimeout(addSlideshowClickHandlers, 1000);
+
   // ===== HOMEPAGE UPDATE FUNCTIONS =====
 
   // Function to refresh slideshow (called from admin dashboard)
@@ -466,22 +690,22 @@
       // Mix of Hero images from both new-construction and renovation-addition projects with project names
       const heroImages = [
         // new-construction Hero Images
-        { src: 'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg', name: 'modern-warehouse' },
+        { src: 'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg', name: 'Modern Warehouse' },
         { src: 'images/Portfolio/New Construction/Riverchase/riverchase-hero-.jpg', name: 'Riverchase' },
         { src: 'images/Portfolio/New Construction/Woodland/woodland-hero-.jpg', name: 'Woodland' },
-        { src: 'images/Portfolio/New Construction/contemporary-french/contemporaryfrench-hero-.png', name: 'contemporary-french' },
-        { src: 'images/Portfolio/New Construction/french-country/french-country-hero-.jpg', name: 'french-country' },
-        { src: 'images/Portfolio/New Construction/low-country-cabin/lowcountrycabin-hero-.jpg', name: 'low-country-cabin' },
-        { src: 'images/Portfolio/New Construction/melchor-residence/melchor-residence-hero-.jpg', name: 'melchor-residence' },
-        { src: 'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg', name: 'Sabik' },
-        { src: 'images/Portfolio/New Construction/shingle-style/shingle-style-hero-.jpg', name: 'shingle-style' },
+        { src: 'images/Portfolio/New Construction/contemporary-french/contemporaryfrench-hero-.png', name: 'Contemporary French' },
+        { src: 'images/Portfolio/New Construction/french-country/french-country-hero-.jpg', name: 'French Country' },
+        { src: 'images/Portfolio/New Construction/low-country-cabin/lowcountrycabin-hero-.jpg', name: 'Low Country Cabin' },
+        { src: 'images/Portfolio/New Construction/melchor-residence/melchor-residence-hero-.jpg', name: 'Melchor Residence' },
+        { src: 'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg', name: 'Modern Craftsman' },
+        { src: 'images/Portfolio/New Construction/shingle-style/shingle-style-hero-.jpg', name: 'Shingle Style' },
         
         // renovation-addition Hero Images
-        { src: 'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-hero-.jpg', name: 'homeowner-haven' },
-        { src: 'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-hero-.jpg', name: 'selwyn-park-cottage' },
-        { src: 'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg', name: 'split-level-makeover' },
-        { src: 'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-hero-.jpg', name: 'ranch-renovation' },
-        { src: 'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-hero-.jpg', name: 'mid-century-modern-addition + Renovation' },
+        { src: 'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-hero-.jpg', name: 'Homeowner Haven' },
+        { src: 'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-hero-.jpg', name: 'Selwyn Park Cottage' },
+        { src: 'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg', name: 'Split Level Makeover' },
+        { src: 'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-hero-.jpg', name: 'Ranch Renovation' },
+        { src: 'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-hero-.jpg', name: 'Mid-Century Modern Addition + Renovation' },
         { src: 'images/Portfolio/Renovation+Addition/wine-pavlion/WP6.jpg', name: 'Wine Pavilion' }
       ];
 
@@ -753,7 +977,7 @@
     const defaultProjects = {
       'williams-lake-house': {
         id: 'williams-lake-house',
-        name: 'lake-house',
+        name: 'Lake House',
         type: 'new-construction',
         description: 'Luxury lakefront residence with contemporary design and natural materials.',
         hero_image: 'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',

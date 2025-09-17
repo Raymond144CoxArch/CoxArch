@@ -64,10 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Top tier - Projects with dedicated Hero images (highest quality)
             {
                 id: 'modern-warehouse',
-                name: 'modern-warehouse',
+                name: 'Modern Warehouse',
                 displayName: 'Modern Warehouse',
                 images: [
                     'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-1-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-1-.jpeg',
                     'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-3-.jpg',
                     'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-4-.jpg',
                     'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-5-.jpg',
@@ -82,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'homeowner-haven',
-                name: 'homeowner-haven',
+                name: 'Homeowner Haven',
                 displayName: 'Homeowner Haven',
                 images: [
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-1-.jpg',
@@ -102,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-15-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-16-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-17-.jpg',
+                    'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-18-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-19-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-20-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-21-.jpg',
@@ -134,22 +136,22 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'selwyn-park-cottage',
-                name: 'selwyn-park-cottage',
+                name: 'Selwyn Park Cottage',
                 displayName: 'Selwyn Park Cottage',
                 images: [
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg',
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg',
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg',
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg',
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg',
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg',
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg',
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg',
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg',
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg',
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg',
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg',
-                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-$1-.jpg'
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-1-.jpg',
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-2-.jpg',
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-3-.jpg',
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-4-.jpg',
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-5-.jpg',
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-6-.jpg',
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-7-.jpg',
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-8-.jpg',
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-9-.jpg',
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-10-.jpg',
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-11-.jpg',
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-12-.jpg',
+                    'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-13-.jpg'
                 ],
                 hero_image: 'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage-hero-.jpg',
                 type: 'renovation-addition',
@@ -183,18 +185,41 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'split-level-makeover',
-                name: 'split-level-makeover',
+                name: 'Split Level Makeover',
                 displayName: 'Split Level Makeover',
                 images: [
-                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg',
-                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-7-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-1-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-2-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-3-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-4-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-5-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-6-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-7-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-8-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-9-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-10-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-11-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-12-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-13-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-14-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-15-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-16-.jpg',
-                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-26-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-17-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-18-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-19-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-20-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-21-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-22-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-23-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-24-.jpg',
-                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-30-.jpg'
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-25-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-26-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-27-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-28-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-29-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-30-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-31-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-32-.jpg'
                 ],
                 hero_image: 'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg',
                 type: 'renovation-addition',
@@ -204,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'ranch-renovation',
-                name: 'ranch-renovation',
+                name: 'Ranch Renovation',
                 displayName: 'Ranch Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-1-.jpg',
@@ -223,8 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'mid-century-modern-addition',
-                name: 'mid-century-modern-addition',
-                displayName: 'Mid Century Modern Addition + Renovation',
+                name: 'Mid-Century Modern Addition',
+                displayName: 'Mid-Century Modern Addition + Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-1-.jpg',
                     'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-2-.jpg',
@@ -234,6 +259,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-6-.jpg',
                     'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-7-.jpg',
                     'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-8-.jpg',
+                    'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovaiton-7-.jpg',
+                    'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovaiton-8-.jpg',
                     'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovaiton-9-.jpg',
                     'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-10-.jpg'
                 ],
@@ -246,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Second tier - Projects with good hero images
             {
                 id: 'williams-lake-house',
-                name: 'lake-house',
+                name: 'Lake House',
                 displayName: 'Lake House',
                 images: [
                     'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
@@ -268,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'contemporary-french',
-                name: 'contemporary-french',
+                name: 'Contemporary French',
                 displayName: 'Contemporary French',
                 images: [
                     'images/Portfolio/New Construction/contemporary-french/contemporaryfrench-1-.png',
@@ -314,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'french-country',
-                name: 'french-country',
+                name: 'French Country',
                 displayName: 'French Country',
                 images: [
                     'images/Portfolio/New Construction/french-country/french-country-2-.jpg',
@@ -337,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'low-country-cabin',
-                name: 'low-country-cabin',
+                name: 'Low Country Cabin',
                 displayName: 'Low Country Cabin',
                 images: [
                     'images/Portfolio/New Construction/low-country-cabin/lowcountrycabin-1-.jpg',
@@ -353,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'melchor-residence',
-                name: 'melchor-residence',
+                name: 'Melchor Residence',
                 displayName: 'Melchor Residence',
                 images: [
                     'images/Portfolio/New Construction/melchor-residence/melchor-residence-1-.jpg',
@@ -374,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'sabik',
-                name: 'Sabik',
+                name: 'Modern Craftsman',
                 images: [
                     'images/Portfolio/New Construction/Sabik/sabik-1-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-3-.jpg',
@@ -400,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'shingle-style',
-                name: 'shingle-style',
+                name: 'Shingle Style',
                 displayName: 'Shingle Style',
                 images: [
                     'images/Portfolio/New Construction/shingle-style/shingle-style-hero-.jpg'
@@ -414,25 +441,22 @@ document.addEventListener('DOMContentLoaded', () => {
             // Third tier - Remaining projects mixed together
             {
                 id: 'dilworth-renovation',
-                name: 'dilworth-renovation',
+                name: 'Dilworth Renovation',
                 displayName: 'Dilworth Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-1-.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _04.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _05.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _06.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _07.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _08.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _09.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _10.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _11.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _12.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _13.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _14.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _15.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _16.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _17.jpg',
-                    'images/Portfolio/Renovation+Addition/dilworth-renovation/MtVernon _18.jpg'
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-2-.jpg',
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-3-.jpg',
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-4-.jpg',
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-5-.jpg',
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-6-.jpg',
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-7-.jpg',
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-8-.jpg',
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-9-.jpg',
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-10-.jpg',
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-11-.jpg',
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-12-.jpg',
+                    'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-13-.jpg'
                 ],
                 hero_image: 'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-1-.jpg',
                 type: 'renovation-addition',
@@ -442,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'heavy-timber-pool-house',
-                name: 'heavy-timber-pool-house',
+                name: 'Heavy Timber Pool House',
                 displayName: 'Heavy Timber Pool House',
                 images: [
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
@@ -464,7 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'lake-house-renovation',
-                name: 'lake-house-renovation',
+                name: 'Lake House Renovation',
                 displayName: 'Lake House Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/lake-house-renovation/DSC_3069.JPG',
@@ -548,10 +572,11 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'myers-park-renovation',
-                name: 'myers-park-renovation',
+                name: 'Myers Park Renovation',
                 displayName: 'Myers Park Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/myers-park-renovation/Front_After.jpg',
+                    'images/Portfolio/Renovation+Addition/myers-park-renovation/front_after-copy.jpg',
                     'images/Portfolio/Renovation+Addition/myers-park-renovation/kitchen_after-copy.jpg',
                     'images/Portfolio/Renovation+Addition/myers-park-renovation/rear_after-copy.jpg'
                 ],
@@ -563,7 +588,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'early-classical-facade-renovation',
-                name: 'early-classical-facade-renovation',
+                name: 'Early Classical Facade Renovation',
                 displayName: 'Early Classical Facade Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/early-classical-facade-renovation/dsc_1370-rev.jpg',
@@ -578,12 +603,14 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'laurel-conversion',
-                name: 'laurel-conversion',
+                name: 'Laurel Conversion',
                 displayName: 'Laurel Conversion',
                 images: [
-                    'images/Portfolio/Renovation+Addition/laurel-conversion/DSC_3127.jpg'
+                    'images/Portfolio/Renovation+Addition/laurel-conversion/1.JPG',
+                    'images/Portfolio/Renovation+Addition/laurel-conversion/2.JPG',
+                    'images/Portfolio/Renovation+Addition/laurel-conversion/3.jpg'
                 ],
-                hero_image: 'images/Portfolio/Renovation+Addition/laurel-conversion/DSC_3127.jpg',
+                hero_image: 'images/Portfolio/Renovation+Addition/laurel-conversion/Hero.JPG',
                 type: 'renovation-addition',
                 description: 'Creative space conversion in Laurel neighborhood with modern functionality.',
                 location: 'Charlotte, NC',
@@ -591,12 +618,43 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'montibello-backyard-getaway',
-                name: 'montibello-backyard-getaway',
+                name: 'Montibello Backyard Getaway',
                 displayName: 'Montibello Backyard Getaway',
                 images: [
-                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_1371.jpg'
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2143.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2155.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2167.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2172.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2180.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2195.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2205.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2216.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2231.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2239.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2243.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2247.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2257.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2272.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2277.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2278.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2287.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2319.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2327.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2336.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2355.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2363.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2364.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2369.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2371.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2372.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2374.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2378.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2379.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2380.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2394.JPG',
+                    'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_2403.JPG'
                 ],
-                hero_image: 'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_1371.jpg',
+                hero_image: 'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/Hero.JPG',
                 type: 'renovation-addition',
                 description: 'Backyard retreat addition creating a private outdoor sanctuary.',
                 location: 'Charlotte, NC',
@@ -604,10 +662,19 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'pelham-woods-renovation',
-                name: 'pelham-woods-renovation',
+                name: 'Pelham Woods Renovation',
                 displayName: 'Pelham Woods Renovation',
                 images: [
-                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/pelham-woods-renovation-hero-.jpg'
+                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0101.JPG',
+                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0109.JPG',
+                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0116.JPG',
+                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0118.JPG',
+                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0124.JPG',
+                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0130.JPG',
+                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0132.JPG',
+                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0133.JPG',
+                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0138.JPG',
+                    'images/Portfolio/Renovation+Addition/pelham-woods-renovation/DSC_0139.JPG'
                 ],
                 hero_image: 'images/Portfolio/Renovation+Addition/pelham-woods-renovation/pelham-woods-renovation-hero-.jpg',
                 type: 'renovation-addition',
@@ -617,7 +684,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'colonial-revival',
-                name: 'colonial-revival',
+                name: 'Colonial Revival',
                 displayName: 'Colonial Revival',
                 images: [
                     'images/Portfolio/Renovation+Addition/colonial-revival/FrontFacade.jpg'
@@ -630,10 +697,21 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'cotswold-outdoor-entertainment',
-                name: 'cotswold-outdoor-entertainment',
+                name: 'Cotswold Outdoor Entertainment',
                 displayName: 'Cotswold Outdoor Entertainment',
                 images: [
-                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116-faulkner-1.jpg'
+                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116-faulkner-1.jpg',
+                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116 Faulkner-2.jpg',
+                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116 Faulkner-3.jpg',
+                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116 Faulkner-4.jpg',
+                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116 Faulkner-5.jpg',
+                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116 Faulkner-6.jpg',
+                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116 Faulkner-7.jpg',
+                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116 Faulkner-8.jpg',
+                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116 Faulkner-9.jpg',
+                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116 Faulkner-10.jpg',
+                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116 Faulkner-11.jpg',
+                    'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116 Faulkner-12.jpg'
                 ],
                 hero_image: 'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116-faulkner-1.jpg',
                 type: 'renovation-addition',
@@ -643,12 +721,20 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'federal-makeover',
-                name: 'federal-makeover',
+                name: 'Federal Makeover',
                 displayName: 'Federal Makeover',
                 images: [
-                    'images/Portfolio/Renovation+Addition/federal-makeover/DSC_0006.jpg'
+                    'images/Portfolio/Renovation+Addition/federal-makeover/_DSC0144.jpg',
+                    'images/Portfolio/Renovation+Addition/federal-makeover/_DSC0197.jpg',
+                    'images/Portfolio/Renovation+Addition/federal-makeover/_DSC0208.jpg',
+                    'images/Portfolio/Renovation+Addition/federal-makeover/_DSC0227.jpg',
+                    'images/Portfolio/Renovation+Addition/federal-makeover/_DSC0272.jpg',
+                    'images/Portfolio/Renovation+Addition/federal-makeover/1.jpg',
+                    'images/Portfolio/Renovation+Addition/federal-makeover/2.jpg',
+                    'images/Portfolio/Renovation+Addition/federal-makeover/3.JPG',
+                    'images/Portfolio/Renovation+Addition/federal-makeover/DSC_0241.jpg'
                 ],
-                hero_image: 'images/Portfolio/Renovation+Addition/federal-makeover/DSC_0006.jpg',
+                hero_image: 'images/Portfolio/Renovation+Addition/federal-makeover/hero.jpg',
                 type: 'renovation-addition',
                 description: 'Federal style home renovation with period-appropriate updates and modern conveniences.',
                 location: 'Charlotte, NC',
@@ -670,6 +756,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- Filtering Logic ----
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectGrid = document.querySelector('#projectGrid');
+
+    // Format project type for display
+    const formatProjectType = (type) => {
+        switch(type) {
+            case 'new-construction':
+                return 'New Construction';
+            case 'renovation-addition':
+                return 'Renovation + Addition';
+            default:
+                return type;
+        }
+    };
 
     // Filter projects by type
     const filterProjects = (type) => {
@@ -711,7 +809,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="project-info">
                 <h3>${project.displayName || project.name}</h3>
-                <p class="project-type">${project.type}</p>
+                <p class="project-type">${formatProjectType(project.type)}</p>
             </div>
         `;
         
@@ -748,6 +846,78 @@ document.addEventListener('DOMContentLoaded', () => {
             filterProjects(filterType);
         });
     });
+
+    // ---- Search Functionality ----
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        let currentFilter = 'all';
+        let currentSearchTerm = '';
+
+        // Function to perform search and filter
+        const performSearchAndFilter = () => {
+            let filteredProjects = projects;
+
+            // Apply type filter
+            if (currentFilter !== 'all') {
+                filteredProjects = filteredProjects.filter(project => project.type === currentFilter);
+            }
+
+            // Apply search filter
+            if (currentSearchTerm.trim()) {
+                const searchTerm = currentSearchTerm.toLowerCase().trim();
+                filteredProjects = filteredProjects.filter(project => {
+                    const projectName = (project.displayName || project.name).toLowerCase();
+                    const projectType = formatProjectType(project.type).toLowerCase();
+                    const projectDescription = (project.description || '').toLowerCase();
+                    
+                    return projectName.includes(searchTerm) || 
+                           projectType.includes(searchTerm) || 
+                           projectDescription.includes(searchTerm);
+                });
+            }
+
+            displayProjects(filteredProjects);
+        };
+
+        // Search input event listener
+        searchInput.addEventListener('input', (e) => {
+            currentSearchTerm = e.target.value;
+            performSearchAndFilter();
+        });
+
+        // Create new filter function that works with search
+        const filterProjectsWithSearch = (type) => {
+            currentFilter = type;
+            performSearchAndFilter();
+            
+            // Update active filter button
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-pressed', 'false');
+            });
+            const activeButton = document.querySelector(`[data-filter="${type}"]`);
+            if (activeButton) {
+                activeButton.classList.add('active');
+                activeButton.setAttribute('aria-pressed', 'true');
+            }
+        };
+
+        // Update filter button event listeners to use the new function
+        filterButtons.forEach(button => {
+            button.removeEventListener('click', () => {
+                const filterType = button.getAttribute('data-filter');
+                filterProjects(filterType);
+            });
+            button.addEventListener('click', () => {
+                const filterType = button.getAttribute('data-filter');
+                filterProjectsWithSearch(filterType);
+            });
+        });
+
+        logger.success('Search functionality initialized');
+    } else {
+        logger.warn('Search input not found - search functionality disabled');
+    }
 
     // Initialize with all projects
     filterProjects('all');

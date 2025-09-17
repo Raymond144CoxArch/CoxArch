@@ -25,6 +25,10 @@
 .studio-hero-section .container {
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .page-title {
@@ -45,7 +49,7 @@
     letter-spacing: 0.3px;
     text-align: center;
     max-width: 600px;
-    margin-bottom: 3rem;
+    margin: 0 auto 3rem auto;
 }
 
 /* Team Section */
@@ -279,20 +283,27 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 200px;  /* Changed from 100% */
-        margin: 0 auto; /* Added to center the card */
+        width: 100%;
+        margin: 0 auto;
         position: relative;
+        justify-content: center;
     }
     
     .team-photo {
-        width: 200px;
-        height: 250px;
+        width: 100%;
+        height: 450px;
         margin-bottom: 0;
+        object-position: center center;
+    }
+    
+    /* Adjust Gregory Bartley's image positioning to show more of the top */
+    .team-member:nth-child(2) .team-photo {
+        object-position: center 5%;
     }
     
     .member-overlay {
         position: relative;
-        width: 200px;
+        width: 100%;
         margin-top: 1rem;
     }
     
@@ -345,8 +356,14 @@
 
 @media (max-width: 480px) {
     .team-photo {
-        width: 120px;
-        height: 120px;
+        width: 100%;
+        height: 350px;
+        object-position: center center;
+    }
+    
+    /* Adjust Gregory Bartley's image positioning for small mobile */
+    .team-member:nth-child(2) .team-photo {
+        object-position: center 5%;
     }
     
     .member-name {

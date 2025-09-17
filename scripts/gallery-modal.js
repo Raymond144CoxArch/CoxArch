@@ -66,6 +66,17 @@ class GalleryModal {
         }
     }
 
+    formatProjectType(type) {
+        switch(type) {
+            case 'new-construction':
+                return 'New Construction';
+            case 'renovation-addition':
+                return 'Renovation + Addition';
+            default:
+                return type;
+        }
+    }
+
     setupModal() {
         this.modal = document.getElementById('projectModal');
         if (!this.modal) {
@@ -92,6 +103,55 @@ class GalleryModal {
             logger.error('Missing required modal elements', null, { missingElements });
             this.modal = null; // Prevent further operations
         }
+        
+        // Setup mobile close button positioning
+        this.setupMobileCloseButton();
+    }
+    
+    setupMobileCloseButton() {
+        if (!this.elements.closeBtn) return;
+        
+        // Function to check if we're on mobile
+        const isMobile = () => window.innerWidth <= 768;
+        
+        // Function to position close button for mobile
+        const positionCloseButtonForMobile = () => {
+            if (isMobile()) {
+                // Override inline styles for mobile - just orange X, no background or shadow
+                this.elements.closeBtn.style.position = 'absolute';
+                this.elements.closeBtn.style.top = '0.5rem';
+                this.elements.closeBtn.style.right = '0.5rem';
+                this.elements.closeBtn.style.zIndex = '10000';
+                this.elements.closeBtn.style.background = 'transparent';
+                this.elements.closeBtn.style.borderRadius = '0';
+                this.elements.closeBtn.style.width = 'auto';
+                this.elements.closeBtn.style.height = 'auto';
+                this.elements.closeBtn.style.display = 'flex';
+                this.elements.closeBtn.style.alignItems = 'center';
+                this.elements.closeBtn.style.justifyContent = 'center';
+                this.elements.closeBtn.style.boxShadow = 'none';
+                this.elements.closeBtn.style.fontSize = '24px';
+                this.elements.closeBtn.style.color = '#ff6600';
+                this.elements.closeBtn.style.border = 'none';
+                this.elements.closeBtn.style.cursor = 'pointer';
+                this.elements.closeBtn.style.fontWeight = 'bold';
+                this.elements.closeBtn.style.visibility = 'visible';
+                this.elements.closeBtn.style.opacity = '1';
+                this.elements.closeBtn.style.outline = 'none';
+                this.elements.closeBtn.style.flex = 'none';
+                this.elements.closeBtn.style.margin = '0';
+                this.elements.closeBtn.style.padding = '0';
+                this.elements.closeBtn.style.transform = 'none';
+                this.elements.closeBtn.style.left = 'auto';
+                this.elements.closeBtn.style.bottom = 'auto';
+            }
+        };
+        
+        // Position on initial load
+        positionCloseButtonForMobile();
+        
+        // Position on window resize
+        window.addEventListener('resize', positionCloseButtonForMobile);
     }
 
     setupEventListeners() {
@@ -121,7 +181,7 @@ class GalleryModal {
         this.elements.thumbnailsContainer.addEventListener('scroll', this.updateScrollIndicators.bind(this));
 
         // Fullscreen toggle via main image click
-        this.elements.mainImageContainer.addEventListener('click', this.toggleFullscreen.bind(this));
+        this.elements.mainImageContainer.addEventListener('click', this.handleMainImageClick.bind(this));
     }
 
     // Event Handlers
@@ -256,7 +316,7 @@ class GalleryModal {
         const { name, type, images, hero_image } = this.currentProject;
         
         this.elements.title.textContent = name;
-        this.elements.projectType.textContent = type;
+        this.elements.projectType.textContent = this.formatProjectType(type);
 
         const orderedImages = this.orderImages(images, hero_image);
         this.currentProject.images = orderedImages;
@@ -399,6 +459,192 @@ class GalleryModal {
         this.toggleFullscreen(false); // Ensure fullscreen is off
         if (this.lastFocusedElement) {
             this.lastFocusedElement.focus();
+        }
+    }
+
+    // Handle main image click - mobile opens new window, desktop toggles fullscreen
+    handleMainImageClick(e) {
+        // Check if we're on mobile
+        if (this.isMobileDevice()) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.openImageInNewWindow();
+        } else {
+            // Desktop behavior - toggle fullscreen
+            this.toggleFullscreen();
+        }
+    }
+
+    // Check if device is mobile
+    isMobileDevice() {
+        return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    // Open current image in a new window for mobile zooming
+    openImageInNewWindow() {
+        if (!this.currentProject || !this.currentProject.images || !this.currentProject.images[this.currentIndex]) {
+            logger.error('No image available to open in new window');
+            return;
+        }
+
+        const currentImageSrc = this.currentProject.images[this.currentIndex];
+        const projectName = this.currentProject.name || 'Project Image';
+        
+        // Create a new window with the image
+        const newWindow = window.open('', '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+        
+        if (newWindow) {
+            newWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${projectName} - Cox Architecture & Design</title>
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+                        
+                        body {
+                            background: #000;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            min-height: 100vh;
+                            font-family: 'Inter', sans-serif;
+                        }
+                        
+                        .image-container {
+                            position: relative;
+                            max-width: 100%;
+                            max-height: 100vh;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                        
+                        .image-container img {
+                            max-width: 100%;
+                            max-height: 100vh;
+                            object-fit: contain;
+                            cursor: zoom-in;
+                            transition: transform 0.3s ease;
+                        }
+                        
+                        .image-container img:hover {
+                            transform: scale(1.05);
+                        }
+                        
+                        .close-btn {
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            background: rgba(255, 255, 255, 0.9);
+                            border: none;
+                            border-radius: 50%;
+                            width: 50px;
+                            height: 50px;
+                            font-size: 24px;
+                            color: #ff6600;
+                            cursor: pointer;
+                            z-index: 1000;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+                        }
+                        
+                        .close-btn:hover {
+                            background: rgba(255, 255, 255, 1);
+                            transform: scale(1.1);
+                        }
+                        
+                        .project-title {
+                            position: fixed;
+                            top: 20px;
+                            left: 20px;
+                            background: rgba(0, 0, 0, 0.7);
+                            color: white;
+                            padding: 10px 15px;
+                            border-radius: 5px;
+                            font-size: 16px;
+                            z-index: 1000;
+                        }
+                        
+                        .instructions {
+                            position: fixed;
+                            bottom: 20px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(0, 0, 0, 0.7);
+                            color: white;
+                            padding: 10px 15px;
+                            border-radius: 5px;
+                            font-size: 14px;
+                            z-index: 1000;
+                            text-align: center;
+                        }
+                        
+                        @media (max-width: 768px) {
+                            .close-btn {
+                                top: 10px;
+                                right: 10px;
+                                width: 40px;
+                                height: 40px;
+                                font-size: 20px;
+                            }
+                            
+                            .project-title {
+                                top: 10px;
+                                left: 10px;
+                                font-size: 14px;
+                                padding: 8px 12px;
+                            }
+                            
+                            .instructions {
+                                bottom: 10px;
+                                font-size: 12px;
+                                padding: 8px 12px;
+                            }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <button class="close-btn" onclick="window.close()" title="Close">×</button>
+                    <div class="project-title">${projectName}</div>
+                    <div class="image-container">
+                        <img src="${currentImageSrc}" alt="${projectName}" onload="this.style.opacity=1" style="opacity:0; transition: opacity 0.3s ease;">
+                    </div>
+                    <div class="instructions">
+                        Use your browser's zoom controls (Ctrl/Cmd + scroll) to zoom in/out
+                    </div>
+                    
+                    <script>
+                        // Handle keyboard events
+                        document.addEventListener('keydown', function(e) {
+                            if (e.key === 'Escape') {
+                                window.close();
+                            }
+                        });
+                        
+                        // Handle image click for zoom hint
+                        document.querySelector('img').addEventListener('click', function() {
+                            this.style.cursor = this.style.cursor === 'zoom-out' ? 'zoom-in' : 'zoom-out';
+                        });
+                    </script>
+                </body>
+                </html>
+            `);
+            
+            newWindow.document.close();
+            logger.info('Image opened in new window', { imageSrc: currentImageSrc, projectName });
+        } else {
+            // Fallback if popup is blocked
+            alert('Please allow popups for this site to view images in a new window.');
+            logger.warn('Popup blocked, could not open image in new window');
         }
     }
 

@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return [
             {
                 id: 'modern-warehouse',
-                name: 'modern-warehouse',
+                name: 'Modern Warehouse',
                 images: [
                     'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-1-.jpg',
                     'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-3-.jpg',
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'homeowner-haven',
-                name: 'homeowner-haven',
+                name: 'Homeowner Haven',
                 images: [
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven-1-.jpg',
                     'images/Portfolio/Renovation+Addition/homeowner-haven/homeowner-haven (2).jpg',
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'selwyn-park-cottage',
-                name: 'selwyn-park-cottage',
+                name: 'Selwyn Park Cottage',
                 images: [
                     'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage (1).jpg',
                     'images/Portfolio/Renovation+Addition/selwyn-park-cottage/selwyn-park-cottage (2).jpg',
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'split-level-makeover',
-                name: 'split-level-makeover',
+                name: 'Split Level Makeover',
                 images: [
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-1-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-2-.jpg',
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'ranch-renovation',
-                name: 'ranch-renovation',
+                name: 'Ranch Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-1-.jpg',
                     'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation (2).JPG',
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'mid-century-modern-addition',
-                name: 'mid-century-modern-addition + Renovation',
+                name: 'Mid-Century Modern Addition + Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-1-.jpg',
                     'images/Portfolio/Renovation+Addition/mid-century-modern-addition/mid-century-modern-addition-renovation-2-.jpg',
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'contemporary-french',
-                name: 'contemporary-french',
+                name: 'Contemporary French',
                 images: [
                     'images/Portfolio/New Construction/contemporary-french/contemporaryfrench (1).png',
                     'images/Portfolio/New Construction/contemporary-french/contemporaryfrench (2).png',
@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'french-country',
-                name: 'french-country',
+                name: 'French Country',
                 images: [
                     'images/Portfolio/New Construction/french-country/french-country (2).jpg',
                     'images/Portfolio/New Construction/french-country/french-country (3).jpg',
@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'low-country-cabin',
-                name: 'low-country-cabin',
+                name: 'Low Country Cabin',
                 images: [
                     'images/Portfolio/New Construction/low-country-cabin/lowcountrycabin-1-.jpg',
                     'images/Portfolio/New Construction/low-country-cabin/lowcountrycabin-2-.jpg',
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'melchor-residence',
-                name: 'melchor-residence',
+                name: 'Melchor Residence',
                 images: [
                     'images/Portfolio/New Construction/melchor-residence/melchor-residence-1-.jpg',
                     'images/Portfolio/New Construction/melchor-residence/melchor-residence-2-.jpg',
@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'sabik',
-                name: 'Sabik',
+                name: 'Modern Craftsman',
                 images: [
                     'images/Portfolio/New Construction/Sabik/sabik-1-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-3-.jpg',
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'shingle-style',
-                name: 'shingle-style',
+                name: 'Shingle Style',
                 images: [
                     'images/Portfolio/New Construction/shingle-style/Vermont.02.jpg'
                 ],
@@ -370,7 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'dilworth-renovation',
-                name: 'dilworth-renovation',
+                name: 'Dilworth Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-1-.jpg',
                     'images/Portfolio/Renovation+Addition/dilworth-renovation/dilworthrenovation-2-.jpg',
@@ -391,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'heavy-timber-pool-house',
-                name: 'heavy-timber-pool-house',
+                name: 'Heavy Timber Pool House',
                 images: [
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0503.JPG',
@@ -409,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'lake-house-renovation',
-                name: 'lake-house-renovation',
+                name: 'Lake House Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/lake-house-renovation/DSC_3069.JPG',
                     'images/Portfolio/Renovation+Addition/lake-house-renovation/DSC_3088.JPG',
@@ -458,7 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'myers-park-renovation',
-                name: 'myers-park-renovation',
+                name: 'Myers Park Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/myers-park-renovation/Front_After.jpg',
                     'images/Portfolio/Renovation+Addition/myers-park-renovation/Kitchen_After.jpg',
@@ -469,7 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'early-classical-facade-renovation',
-                name: 'early-classical-facade-renovation',
+                name: 'Early Classical Facade Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/early-classical-facade-renovation/dsc_1370-rev.jpg',
                     'images/Portfolio/Renovation+Addition/early-classical-facade-renovation/DSC_2724.JPG',
@@ -480,7 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'laurel-conversion',
-                name: 'laurel-conversion',
+                name: 'Laurel Conversion',
                 images: [
                     'images/Portfolio/Renovation+Addition/laurel-conversion/DSC_3127.jpg'
                 ],
@@ -489,7 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'montibello-backyard-getaway',
-                name: 'montibello-backyard-getaway',
+                name: 'Montibello Backyard Getaway',
                 images: [
                     'images/Portfolio/Renovation+Addition/montibello-backyard-getaway/DSC_1371.jpg'
                 ],
@@ -498,7 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'pelham-woods-renovation',
-                name: 'pelham-woods-renovation',
+                name: 'Pelham Woods Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/pelham-woods-renovation/pelham-woods-renovation-hero-.jpg'
                 ],
@@ -507,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'colonial-revival',
-                name: 'colonial-revival',
+                name: 'Colonial Revival',
                 images: [
                     'images/Portfolio/Renovation+Addition/colonial-revival/FrontFacade.jpg'
                 ],
@@ -516,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'cotswold-outdoor-entertainment',
-                name: 'cotswold-outdoor-entertainment',
+                name: 'Cotswold Outdoor Entertainment',
                 images: [
                     'images/Portfolio/Renovation+Addition/cotswold-outdoor-entertainment/4116-faulkner-1.jpg'
                 ],
@@ -525,7 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 'federal-makeover',
-                name: 'federal-makeover',
+                name: 'Federal Makeover',
                 images: [
                     'images/Portfolio/Renovation+Addition/federal-makeover/DSC_0006.jpg'
                 ],
@@ -549,6 +549,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- Filtering Logic ----
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectGrid = document.querySelector('#projectGrid');
+
+    // Format project type for display
+    const formatProjectType = (type) => {
+        switch(type) {
+            case 'new-construction':
+                return 'New Construction';
+            case 'renovation-addition':
+                return 'Renovation + Addition';
+            default:
+                return type;
+        }
+    };
 
     // Filter projects by type
     const filterProjects = (type) => {
@@ -593,7 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="project-info">
                 <h3>${project.displayName || project.name}</h3>
-                <p class="project-type">${project.type}</p>
+                <p class="project-type">${formatProjectType(project.type)}</p>
             </div>
         `;
         
@@ -610,6 +622,78 @@ document.addEventListener('DOMContentLoaded', () => {
             filterProjects(filterType);
         });
     });
+
+    // ---- Search Functionality ----
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        let currentFilter = 'all';
+        let currentSearchTerm = '';
+
+        // Function to perform search and filter
+        const performSearchAndFilter = () => {
+            let filteredProjects = projects;
+
+            // Apply type filter
+            if (currentFilter !== 'all') {
+                filteredProjects = filteredProjects.filter(project => project.type === currentFilter);
+            }
+
+            // Apply search filter
+            if (currentSearchTerm.trim()) {
+                const searchTerm = currentSearchTerm.toLowerCase().trim();
+                filteredProjects = filteredProjects.filter(project => {
+                    const projectName = (project.displayName || project.name).toLowerCase();
+                    const projectType = formatProjectType(project.type).toLowerCase();
+                    const projectDescription = (project.description || '').toLowerCase();
+                    
+                    return projectName.includes(searchTerm) || 
+                           projectType.includes(searchTerm) || 
+                           projectDescription.includes(searchTerm);
+                });
+            }
+
+            displayProjects(filteredProjects);
+        };
+
+        // Search input event listener
+        searchInput.addEventListener('input', (e) => {
+            currentSearchTerm = e.target.value;
+            performSearchAndFilter();
+        });
+
+        // Create new filter function that works with search
+        const filterProjectsWithSearch = (type) => {
+            currentFilter = type;
+            performSearchAndFilter();
+            
+            // Update active filter button
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-pressed', 'false');
+            });
+            const activeButton = document.querySelector(`[data-filter="${type}"]`);
+            if (activeButton) {
+                activeButton.classList.add('active');
+                activeButton.setAttribute('aria-pressed', 'true');
+            }
+        };
+
+        // Update filter button event listeners to use the new function
+        filterButtons.forEach(button => {
+            button.removeEventListener('click', () => {
+                const filterType = button.getAttribute('data-filter');
+                filterProjects(filterType);
+            });
+            button.addEventListener('click', () => {
+                const filterType = button.getAttribute('data-filter');
+                filterProjectsWithSearch(filterType);
+            });
+        });
+
+        console.log('✅ Search functionality initialized');
+    } else {
+        console.warn('⚠️ Search input not found - search functionality disabled');
+    }
 
     // Initialize with all projects
     filterProjects('all');

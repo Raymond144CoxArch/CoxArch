@@ -755,23 +755,82 @@ body.portfolio-page .see-more-work-container {
     
     .modal-header {
         padding: 1rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
+        padding-top: 4rem;
+        position: relative;
+        z-index: 10;
+        /* Remove close button from flex layout completely */
+        display: block;
+        /* Remove all flex properties */
+        flex-direction: unset;
+        align-items: unset;
+        justify-content: unset;
+        gap: unset;
+        /* Hide the close button in the header */
+        overflow: hidden;
+    }
+    
+    /* Hide the close button in the header and position it independently */
+    .modal-header .modal-close-btn {
+        position: absolute !important;
+        top: -1000px !important;
+        left: -1000px !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+    
+    .modal-title-section {
+        display: block;
+        width: 100%;
     }
     
     .modal-title {
         font-size: 1.25rem;
+        width: 100%;
+        margin-right: 0;
+        padding-right: 4rem;
+        text-align: left;
+        display: block;
     }
     
     .modal-project-type {
         font-size: 0.8rem;
+        width: 100%;
+        margin-right: 0;
+        padding-right: 4rem;
+        text-align: left;
+        display: block;
     }
     
-    .modal-close-btn {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
+    /* Force the close button to be positioned absolutely relative to modal container */
+    .modal-container .modal-close-btn {
+        position: absolute !important;
+        top: 0.5rem !important;
+        right: 0.5rem !important;
+        z-index: 10000 !important;
+        background: transparent !important;
+        border-radius: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: none !important;
+        font-size: 24px !important;
+        color: #ff6600 !important;
+        border: none !important;
+        cursor: pointer !important;
+        font-weight: bold !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        outline: none !important;
+        /* Remove from flex layout completely */
+        flex: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        /* Force positioning */
+        transform: none !important;
+        left: auto !important;
+        bottom: auto !important;
     }
     
     .modal-content {

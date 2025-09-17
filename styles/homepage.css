@@ -17,6 +17,11 @@
     padding: 0;
 }
 
+/* Prevent horizontal overflow on all elements */
+* {
+    max-width: 100%;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -43,6 +48,20 @@ body {
     background-color: var(--background-color);
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Ensure all elements respect viewport boundaries */
+* {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 /* ===== TYPOGRAPHY HIERARCHY ===== */
@@ -186,8 +205,8 @@ body.homepage .nav-container {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    width: 100vw !important;
-    max-width: 100vw !important;
+    width: 100% !important;
+    max-width: 100% !important;
     height: 80px !important;
     padding: 15px 30px !important;
     margin: 0 !important;
@@ -395,9 +414,10 @@ body.homepage .contact-btn:hover {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
 }
 
 /* Blurred side panels for large screens */
@@ -437,9 +457,11 @@ body.homepage .contact-btn:hover {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 100vw;
+    width: 100%;
+    max-width: 100vw;
     height: 100%;
     z-index: -2;
+    overflow: hidden;
 }
 
 .slide-item {
@@ -452,6 +474,17 @@ body.homepage .contact-btn:hover {
     transition: opacity 1.5s ease-in-out;
 }
 
+/* Mobile swipe feedback */
+@media (max-width: 767px) {
+    .slide-item {
+        transition: opacity 0.3s ease-in-out, transform 0.1s ease-out;
+    }
+    
+    .hero-slideshow.swiping .slide-item {
+        transition: transform 0.1s ease-out;
+    }
+}
+
 .slide-item.active {
     opacity: 1;
 }
@@ -461,7 +494,8 @@ body.homepage .contact-btn:hover {
     height: 100%;
     object-fit: cover;
     filter: brightness(0.9);
-    min-width: 100vw;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .hero-content {
@@ -519,6 +553,16 @@ body.homepage .contact-btn:hover {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        touch-action: pan-y; /* Allow vertical scrolling but handle horizontal swipes */
+    }
+    
+    .hero-slideshow {
+        touch-action: pan-y; /* Allow vertical scrolling but handle horizontal swipes */
+        cursor: grab;
+    }
+    
+    .hero-slideshow:active {
+        cursor: grabbing;
     }
     
     .hero-content {
@@ -942,6 +986,7 @@ body.homepage .contact-btn:hover {
     box-shadow: 0 0 10px rgba(255, 121, 0, 0.5);
 }
 
+
 /* what-we-do Section */
 .services-section {
     padding: 8rem 0;
@@ -1142,8 +1187,8 @@ body.homepage .contact-btn:hover {
 /* Mobile optimization for continuous gallery */
 @media (max-width: 768px) {
     .continuous-gallery-viewport {
-        width: 100vw;
-        margin-left: calc(-50vw + 50%);
+        width: 100%;
+        margin-left: 0;
         padding: clamp(10px, 3vw, 15px) 0;
     }
     
@@ -1433,8 +1478,8 @@ body.homepage .contact-btn:hover {
     margin: 3rem 0;
     overflow: visible;
     position: relative;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
+    width: 100%;
+    margin-left: 0;
     padding: 1rem 0;
 }
 

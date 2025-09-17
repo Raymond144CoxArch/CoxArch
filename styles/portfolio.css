@@ -106,14 +106,16 @@
 
 .search-bar {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .search-bar input {
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid var(--border-color);
-    padding: 0.5rem 0;
-    color: var(--text-color);
+    border-bottom: 2px solid #ff6600;
+    padding: 0.5rem 2rem 0.5rem 0;
+    color: #666;
     font-family: 'Inter', sans-serif;
     transition: all 0.3s ease;
     font-weight: 300;
@@ -124,11 +126,12 @@
 
 .search-bar input:focus {
     outline: none;
-    border-bottom-color: var(--accent-color);
+    border-bottom-color: #ff6600;
+    color: #333;
 }
 
 .search-bar input::placeholder {
-    color: var(--secondary-color);
+    color: #999;
     font-weight: 300;
 }
 
@@ -137,8 +140,9 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--secondary-color);
-    font-size: 0.8rem;
+    color: #ff6600;
+    font-size: 0.9rem;
+    pointer-events: none;
 }
 
 /* Project Grid */
@@ -239,6 +243,16 @@
     
     .search-bar input {
         width: 150px;
+        border-bottom: 2px solid #ff6600;
+        color: #666;
+    }
+    
+    .search-bar input:focus {
+        color: #333;
+    }
+    
+    .search-bar i {
+        color: #ff6600;
     }
 }
 
