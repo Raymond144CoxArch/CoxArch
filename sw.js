@@ -5,10 +5,9 @@ const CACHE_NAME = 'cox-architecture-v1.0.0';
 const STATIC_CACHE = 'cox-static-v1.0.0';
 const IMAGE_CACHE = 'cox-images-v1.0.0';
 
-// Files to cache immediately
+// Files to cache immediately (removed redundant /homepage.html since / redirects to it)
 const STATIC_FILES = [
   '/',
-  '/homepage.html',
   '/styles/common.css',
   '/styles/homepage.css',
   '/scripts/homepage.js',
@@ -19,11 +18,11 @@ const STATIC_FILES = [
 
 // Install event - cache static files
 self.addEventListener('install', event => {
-  console.log('Service Worker installing...');
+  // console.log('Service Worker installing...');
   event.waitUntil(
     caches.open(STATIC_CACHE)
       .then(cache => {
-        console.log('Caching static files');
+        // console.log('Caching static files');
         return cache.addAll(STATIC_FILES);
       })
       .then(() => self.skipWaiting())
@@ -32,14 +31,14 @@ self.addEventListener('install', event => {
 
 // Activate event - clean up old caches
 self.addEventListener('activate', event => {
-  console.log('Service Worker activating...');
+  // console.log('Service Worker activating...');
   event.waitUntil(
     caches.keys()
       .then(cacheNames => {
         return Promise.all(
           cacheNames.map(cacheName => {
             if (cacheName !== STATIC_CACHE && cacheName !== IMAGE_CACHE) {
-              console.log('Deleting old cache:', cacheName);
+              // console.log('Deleting old cache:', cacheName);
               return caches.delete(cacheName);
             }
           })
@@ -83,7 +82,7 @@ async function handleImageRequest(request) {
     }
     return networkResponse;
   } catch (error) {
-    console.log('Image fetch failed:', error);
+    // console.log('Image fetch failed:', error);
     return new Response('Image not available', { status: 404 });
   }
 }
@@ -104,7 +103,7 @@ async function handleStaticRequest(request) {
     }
     return networkResponse;
   } catch (error) {
-    console.log('Static file fetch failed:', error);
+    // console.log('Static file fetch failed:', error);
     return new Response('Resource not available', { status: 404 });
   }
 }
@@ -119,7 +118,7 @@ async function handlePageRequest(request) {
     }
     return networkResponse;
   } catch (error) {
-    console.log('Page fetch failed, trying cache:', error);
+    // console.log('Page fetch failed, trying cache:', error);
     const cache = await caches.open(STATIC_CACHE);
     const cachedResponse = await cache.match(request);
     

@@ -35,7 +35,7 @@ class PerformanceMonitor {
                 const entries = list.getEntries();
                 const lastEntry = entries[entries.length - 1];
                 this.metrics.lcp = lastEntry.startTime;
-                console.log('LCP:', lastEntry.startTime + 'ms');
+                // console.log('LCP:', lastEntry.startTime + 'ms');
             });
             observer.observe({ entryTypes: ['largest-contentful-paint'] });
         }
@@ -47,7 +47,7 @@ class PerformanceMonitor {
                 const entries = list.getEntries();
                 entries.forEach((entry) => {
                     this.metrics.fid = entry.processingStart - entry.startTime;
-                    console.log('FID:', this.metrics.fid + 'ms');
+                    // console.log('FID:', this.metrics.fid + 'ms');
                 });
             });
             observer.observe({ entryTypes: ['first-input'] });
@@ -64,7 +64,7 @@ class PerformanceMonitor {
                     }
                 }
                 this.metrics.cls = clsValue;
-                console.log('CLS:', clsValue);
+                // console.log('CLS:', clsValue);
             });
             observer.observe({ entryTypes: ['layout-shift'] });
         }
@@ -77,7 +77,7 @@ class PerformanceMonitor {
                 entries.forEach((entry) => {
                     if (entry.name === 'first-contentful-paint') {
                         this.metrics.fcp = entry.startTime;
-                        console.log('FCP:', entry.startTime + 'ms');
+                        // console.log('FCP:', entry.startTime + 'ms');
                     }
                 });
             });
@@ -90,7 +90,7 @@ class PerformanceMonitor {
         window.addEventListener('load', () => {
             setTimeout(() => {
                 this.metrics.tti = performance.now();
-                console.log('TTI (approx):', this.metrics.tti + 'ms');
+                // console.log('TTI (approx):', this.metrics.tti + 'ms');
             }, 0);
         });
     }
@@ -109,7 +109,7 @@ class PerformanceMonitor {
                     loadedImages++;
                     if (loadedImages === totalImages) {
                         this.metrics.allImagesLoaded = performance.now() - startTime;
-                        console.log('All images loaded in:', this.metrics.allImagesLoaded + 'ms');
+                        // console.log('All images loaded in:', this.metrics.allImagesLoaded + 'ms');
                     }
                 });
             }
@@ -117,7 +117,7 @@ class PerformanceMonitor {
 
         if (loadedImages === totalImages) {
             this.metrics.allImagesLoaded = performance.now() - startTime;
-            console.log('All images loaded in:', this.metrics.allImagesLoaded + 'ms');
+            // console.log('All images loaded in:', this.metrics.allImagesLoaded + 'ms');
         }
     }
 
@@ -132,7 +132,7 @@ class PerformanceMonitor {
                 loadedScripts++;
                 if (loadedScripts === totalScripts) {
                     this.metrics.allScriptsLoaded = performance.now() - startTime;
-                    console.log('All scripts loaded in:', this.metrics.allScriptsLoaded + 'ms');
+                    // console.log('All scripts loaded in:', this.metrics.allScriptsLoaded + 'ms');
                 }
             });
         });
@@ -143,15 +143,15 @@ class PerformanceMonitor {
     }
 
     reportMetrics() {
-        console.group('🚀 Performance Metrics');
-        console.log('LCP (Largest Contentful Paint):', this.metrics.lcp ? this.metrics.lcp + 'ms' : 'Not measured');
-        console.log('FCP (First Contentful Paint):', this.metrics.fcp ? this.metrics.fcp + 'ms' : 'Not measured');
-        console.log('FID (First Input Delay):', this.metrics.fid ? this.metrics.fid + 'ms' : 'Not measured');
-        console.log('CLS (Cumulative Layout Shift):', this.metrics.cls ? this.metrics.cls : 'Not measured');
-        console.log('TTI (Time to Interactive):', this.metrics.tti ? this.metrics.tti + 'ms' : 'Not measured');
-        console.log('All Images Loaded:', this.metrics.allImagesLoaded ? this.metrics.allImagesLoaded + 'ms' : 'Not measured');
-        console.log('All Scripts Loaded:', this.metrics.allScriptsLoaded ? this.metrics.allScriptsLoaded + 'ms' : 'Not measured');
-        console.groupEnd();
+        // console.group('🚀 Performance Metrics');
+        // console.log('LCP (Largest Contentful Paint):', this.metrics.lcp ? this.metrics.lcp + 'ms' : 'Not measured');
+        // console.log('FCP (First Contentful Paint):', this.metrics.fcp ? this.metrics.fcp + 'ms' : 'Not measured');
+        // console.log('FID (First Input Delay):', this.metrics.fid ? this.metrics.fid + 'ms' : 'Not measured');
+        // console.log('CLS (Cumulative Layout Shift):', this.metrics.cls ? this.metrics.cls : 'Not measured');
+        // console.log('TTI (Time to Interactive):', this.metrics.tti ? this.metrics.tti + 'ms' : 'Not measured');
+        // console.log('All Images Loaded:', this.metrics.allImagesLoaded ? this.metrics.allImagesLoaded + 'ms' : 'Not measured');
+        // console.log('All Scripts Loaded:', this.metrics.allScriptsLoaded ? this.metrics.allScriptsLoaded + 'ms' : 'Not measured');
+        // console.groupEnd();
     }
 }
 

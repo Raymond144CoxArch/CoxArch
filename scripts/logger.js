@@ -42,7 +42,7 @@ class Logger {
         // Create notification container if needed
         this.setupNotificationContainer();
         
-        console.log(`🔧 Logger initialized - Environment: ${this.isDevelopment ? 'Development' : 'Production'}, Level: ${this.logLevel}`);
+        // console.log(`🔧 Logger initialized - Environment: ${this.isDevelopment ? 'Development' : 'Production'}, Level: ${this.logLevel}`);
     }
 
     /**

@@ -651,3 +651,12 @@ body:not(.homepage) .p-1 { padding: 0.5rem; }
 body:not(.homepage) .p-2 { padding: 1rem; }
 body:not(.homepage) .p-3 { padding: 1.5rem; }
 body:not(.homepage) .p-4 { padding: 2rem; }
+
+/* ===== SEO HIDDEN CLASS ===== */
+.seo-hidden {
+    display: none !important;
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
