@@ -34,16 +34,18 @@
   <link rel="preload" href="styles/portfolio.css" as="style" />
   <link rel="stylesheet" href="styles/portfolio.css" />
   
-  <link rel="preload" href="styles/gallery-modal.css" as="style" />
-  <link rel="stylesheet" href="styles/gallery-modal.css" />
+  <!-- Load modal and lazy loading CSS asynchronously for better mobile performance -->
+  <link rel="preload" href="styles/gallery-modal.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="styles/gallery-modal.css" /></noscript>
   
-  <link rel="preload" href="styles/lazy-loading.css" as="style" />
-  <link rel="stylesheet" href="styles/lazy-loading.css" />
+  <link rel="preload" href="styles/lazy-loading.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="styles/lazy-loading.css" /></noscript>
   
   <link rel="preload" href="images/Logos/CoxLogoText_black.png" as="image" />
   
   <!-- Preload critical JavaScript -->
   <link rel="preload" href="scripts/homepage.js" as="script" />
+  <!-- Load gallery modal script asynchronously for better mobile performance -->
   <link rel="preload" href="scripts/gallery-modal.js" as="script" />
   
   <!-- DNS prefetch for external resources -->

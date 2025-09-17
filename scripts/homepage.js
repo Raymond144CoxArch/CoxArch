@@ -374,6 +374,19 @@
 
   const getDefaultImages = () => {
     // Load only the most critical images initially for faster page load
+    // On mobile, load even fewer images for better performance
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      // Load only 3 images on mobile for faster initial load
+      return [
+        'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
+        'images/Portfolio/New Construction/Woodland/woodland-hero-.jpg',
+        'images/HeroProjects/hero-19.jpg'
+      ];
+    }
+    
+    // Desktop gets all images
     return [
       'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
       'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
@@ -386,6 +399,18 @@
   
   const getAdditionalImages = () => {
     // Load additional images after initial page load
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      // On mobile, load additional slideshow images that weren't loaded initially
+      return [
+        'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
+        'images/Portfolio/Renovation+Addition/myers-park-renovation/2.jpg',
+        'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg'
+      ];
+    }
+    
+    // Desktop gets all additional images
     return [
       'images/Portfolio/Renovation+Addition/homeowner-haven/hero.png',
       'images/Portfolio/Renovation+Addition/lake-house-renovation/DSC_3069.JPG',
@@ -419,7 +444,16 @@
       imgElement.src = imageSrc;
       imgElement.alt = `Hero slide ${index + 1}`;
       imgElement.className = 'slide-image';
-      imgElement.loading = 'eager';
+      
+      // Optimize loading strategy based on device
+      const isMobile = window.innerWidth <= 768;
+      imgElement.loading = index === 0 ? 'eager' : 'lazy'; // Only first image is eager
+      imgElement.fetchpriority = index === 0 ? 'high' : 'low'; // Only first image gets high priority
+      
+      // Add mobile-specific optimizations
+      if (isMobile) {
+        imgElement.decoding = 'async'; // Async decoding for better mobile performance
+      }
       
       // Add error handling for this specific image
       imgElement.onerror = function() {
@@ -484,14 +518,62 @@
   const loadAdditionalSlideshowImages = async () => {
     logger.info('Loading additional slideshow images');
     const additionalImages = getAdditionalImages();
+    const isMobile = window.innerWidth <= 768;
     
     // Preload additional images
     additionalImages.forEach(imageSrc => {
       const img = new Image();
       img.src = imageSrc;
+      
+      // On mobile, add these images to the slideshow once loaded
+      if (isMobile) {
+        img.onload = function() {
+          addImageToSlideshow(imageSrc);
+        };
+      }
     });
     
     logger.info('Additional images preloaded');
+  };
+  
+  // Function to add images to slideshow dynamically (for mobile)
+  const addImageToSlideshow = (imageSrc) => {
+    if (!slideshowContainer) return;
+    
+    const slideItem = document.createElement('div');
+    slideItem.className = 'slide-item';
+    
+    const imgElement = document.createElement('img');
+    imgElement.src = imageSrc;
+    imgElement.alt = `Hero slide ${slides.length + 1}`;
+    imgElement.className = 'slide-image';
+    imgElement.loading = 'lazy';
+    imgElement.decoding = 'async';
+    
+    slideItem.appendChild(imgElement);
+    slideshowContainer.appendChild(slideItem);
+    
+    // Update slides reference and recreate dots
+    slides = document.querySelectorAll('.slide-item');
+    
+    // Recreate dots to include new slide
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('slideshow-dot');
+        if (index === currentSlide) {dot.classList.add('active');}
+        
+        const dotClickHandler = () => {
+          currentSlide = index;
+          showSlide(currentSlide);
+        };
+        eventManager.addListener(dot, 'click', dotClickHandler);
+        dotsContainer.appendChild(dot);
+      });
+    }
+    
+    logger.info(`Added image to slideshow: ${imageSrc}`);
   };
 
   // Initialize slideshow
@@ -501,10 +583,13 @@
       logger.error('Error initializing slideshow', error);
     });
     
-    // Load additional images after initial render
+    // Load additional images after initial render - faster on mobile
+    const isMobile = window.innerWidth <= 768;
+    const delay = isMobile ? 1000 : 2000; // Load additional images sooner on mobile
+    
     setTimeout(() => {
       loadAdditionalSlideshowImages();
-    }, 2000);
+    }, delay);
     
     // Add a small delay to ensure DOM is fully ready
     setTimeout(() => {
