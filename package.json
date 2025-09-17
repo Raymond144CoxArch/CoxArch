@@ -4,8 +4,6 @@
   "description": "Professional website for Cox Architecture & Design - Charlotte residential architecture firm",
   "main": "homepage.html",
   "scripts": {
-    "start": "http-server -p 8000 -o",
-    "dev": "http-server -p 3000 -o",
     "test": "echo \"No tests specified\" && exit 0",
     "lint": "echo \"No linting configured\" && exit 0"
   },
@@ -29,9 +27,6 @@
   "homepage": "https://www.coxarchitecture.com",
   "engines": {
     "node": ">=12.0.0"
-  },
-  "devDependencies": {
-    "http-server": "^14.1.1"
   },
   "browserslist": [
     "> 1%",
