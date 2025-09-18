@@ -2,10 +2,15 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=homepage.html">
-  <script>window.location.replace('homepage.html');</script>
+  <title>Cox Architecture & Design - Loading...</title>
 </head>
 <body>
-  <p>Redirecting to homepage...</p>
+  <p>Loading Cox Architecture & Design...</p>
+  <script>
+    // Fallback redirect if Vercel rewrite doesn't work
+    setTimeout(() => {
+      window.location.replace('homepage.html');
+    }, 1000);
+  </script>
 </body>
 </html>
