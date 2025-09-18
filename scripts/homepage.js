@@ -318,9 +318,16 @@ const initializeTestimonialsSwipe = () => {
     const handleTouchStart = (e) => {
         console.log('Touch start detected, isMobile:', isMobile);
         if (!isMobile) return;
-        console.log('Starting touch drag...');
-        isDragging = true;
+        
         startX = e.touches[0].clientX;
+        const startY = e.touches[0].clientY;
+        
+        // Store initial touch position for direction detection
+        e.touchStartX = startX;
+        e.touchStartY = startY;
+        
+        // Don't start dragging immediately - wait for movement to determine direction
+        isDragging = false;
         currentX = startX;
         
         // Get current transform value
@@ -336,16 +343,39 @@ const initializeTestimonialsSwipe = () => {
     };
     
     const handleTouchMove = (e) => {
-        if (!isMobile || !isDragging) return;
+        if (!isMobile) return;
         
-        console.log('Touch move detected');
-        e.preventDefault();
-        currentX = e.touches[0].clientX;
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
         const deltaX = currentX - startX;
-        currentTransform = initialTransform + deltaX;
+        const deltaY = currentY - e.touchStartY;
         
-        // Apply transform with momentum
-        conveyorTrack.style.transform = `translateX(${currentTransform}px)`;
+        // If we're not dragging yet, determine if this is a horizontal swipe
+        if (!isDragging) {
+            const absDeltaX = Math.abs(deltaX);
+            const absDeltaY = Math.abs(deltaY);
+            
+            // Only start dragging if horizontal movement is greater than vertical
+            if (absDeltaX > 10 && absDeltaX > absDeltaY) {
+                console.log('Starting horizontal swipe drag...');
+                isDragging = true;
+                e.preventDefault(); // Prevent scrolling for horizontal swipes
+            } else if (absDeltaY > 10) {
+                // This is a vertical swipe, don't interfere with page scrolling
+                console.log('Vertical swipe detected, allowing page scroll');
+                return;
+            }
+        }
+        
+        // Only handle horizontal dragging
+        if (isDragging) {
+            console.log('Touch move detected - horizontal drag');
+            e.preventDefault(); // Prevent scrolling during horizontal drag
+            currentTransform = initialTransform + deltaX;
+            
+            // Apply transform with momentum
+            conveyorTrack.style.transform = `translateX(${currentTransform}px)`;
+        }
     };
     
     const handleTouchEnd = (e) => {
