@@ -241,10 +241,21 @@ const initializeSwipe = () => {
 // ===== TESTIMONIALS SWIPE FUNCTIONALITY =====
 const initializeTestimonialsSwipe = () => {
     try {
+        console.log('Initializing testimonials swipe...');
         const testimonialsConveyor = document.querySelector('.testimonials-conveyor');
         const conveyorTrack = document.querySelector('.conveyor-track');
         
-        if (!testimonialsConveyor || !conveyorTrack) return;
+        console.log('Testimonials elements found:', {
+            conveyor: !!testimonialsConveyor,
+            track: !!conveyorTrack,
+            windowWidth: window.innerWidth,
+            isMobile: window.innerWidth <= 768
+        });
+        
+        if (!testimonialsConveyor || !conveyorTrack) {
+            console.log('Testimonials elements not found, exiting');
+            return;
+        }
     
     let isMobile = window.innerWidth <= 768;
     let isDragging = false;
@@ -259,8 +270,10 @@ const initializeTestimonialsSwipe = () => {
     const setupMobileSwipe = () => {
         try {
             isMobile = window.innerWidth <= 768;
+            console.log('Setting up mobile swipe, isMobile:', isMobile, 'width:', window.innerWidth);
             
             if (isMobile) {
+                console.log('Setting up mobile touch events...');
                 // Stop auto-scroll animation on mobile
                 if (conveyorTrack && conveyorTrack.style) {
                     conveyorTrack.style.animationPlayState = 'paused';
@@ -277,6 +290,8 @@ const initializeTestimonialsSwipe = () => {
             testimonialsConveyor.addEventListener('mousemove', handleMouseMove);
             testimonialsConveyor.addEventListener('mouseup', handleMouseUp);
             testimonialsConveyor.addEventListener('mouseleave', handleMouseUp);
+            
+            console.log('Mobile touch events added successfully');
         } else {
             // Resume auto-scroll animation on desktop
             conveyorTrack.style.animationPlayState = 'running';
@@ -301,7 +316,9 @@ const initializeTestimonialsSwipe = () => {
     
     // Touch event handlers
     const handleTouchStart = (e) => {
+        console.log('Touch start detected, isMobile:', isMobile);
         if (!isMobile) return;
+        console.log('Starting touch drag...');
         isDragging = true;
         startX = e.touches[0].clientX;
         currentX = startX;
@@ -321,6 +338,7 @@ const initializeTestimonialsSwipe = () => {
     const handleTouchMove = (e) => {
         if (!isMobile || !isDragging) return;
         
+        console.log('Touch move detected');
         e.preventDefault();
         currentX = e.touches[0].clientX;
         const deltaX = currentX - startX;

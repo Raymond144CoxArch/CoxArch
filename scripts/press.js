@@ -68,10 +68,21 @@ document.addEventListener('DOMContentLoaded', () => {
 // ===== TESTIMONIALS SWIPE FUNCTIONALITY =====
 const initializeTestimonialsSwipe = () => {
     try {
+        console.log('Press page: Initializing testimonials swipe...');
         const testimonialsConveyor = document.querySelector('.testimonials-conveyor');
         const conveyorTrack = document.querySelector('.conveyor-track');
         
-        if (!testimonialsConveyor || !conveyorTrack) return;
+        console.log('Press page: Testimonials elements found:', {
+            conveyor: !!testimonialsConveyor,
+            track: !!conveyorTrack,
+            windowWidth: window.innerWidth,
+            isMobile: window.innerWidth <= 768
+        });
+        
+        if (!testimonialsConveyor || !conveyorTrack) {
+            console.log('Press page: Testimonials elements not found, exiting');
+            return;
+        }
     
     let isMobile = window.innerWidth <= 768;
     let isDragging = false;
