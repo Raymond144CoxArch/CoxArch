@@ -1,38 +1,38 @@
 {
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ourwork",
+      "destination": "/portfolio.html"
+    },
+    {
+      "source": "/studio",
+      "destination": "/studio.html"
+    },
+    {
+      "source": "/press",
+      "destination": "/press.html"
+    },
+    {
+      "source": "/careers",
+      "destination": "/careers.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/404",
+      "destination": "/404.html"
+    }
+  ],
   "redirects": [
     {
       "source": "/homepage.html",
       "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/portfolio.html",
-      "destination": "/ourwork",
-      "permanent": true
-    },
-    {
-      "source": "/studio.html",
-      "destination": "/studio",
-      "permanent": true
-    },
-    {
-      "source": "/press.html",
-      "destination": "/press",
-      "permanent": true
-    },
-    {
-      "source": "/careers.html",
-      "destination": "/careers",
-      "permanent": true
-    },
-    {
-      "source": "/contact.html",
-      "destination": "/contact",
-      "permanent": true
-    },
-    {
-      "source": "/404.html",
-      "destination": "/404",
       "permanent": true
     }
   ]
