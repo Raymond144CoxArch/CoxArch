@@ -119,7 +119,7 @@
    - Install the extension
 
 2. **Start Development Server**
-   - Right-click on `homepage.html`
+   - Right-click on `index.html`
    - Select "Open with Live Server"
    - Browser will open automatically
 

@@ -66,20 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // Auto-redirect common misspellings or old URLs
   const currentPath = window.location.pathname.toLowerCase();
   const redirectMap = {
-    '/home': '/homepage.html',
-    '/index': '/homepage.html',
-    '/index.html': '/homepage.html',
-    '/portfolio': '/portfolio.html',
-    '/gallery': '/portfolio.html',
-    '/projects': '/portfolio.html',
-    '/about': '/studio.html',
-    '/team': '/studio.html',
-    '/contact': '/contact.html',
-    '/get-in-touch': '/contact.html',
-    '/news': '/press.html',
-    '/media': '/press.html',
-    '/jobs': '/careers.html',
-    '/work': '/careers.html'
+    '/home': '/',
+    '/index': '/',
+    '/index.html': '/',
+    '/portfolio': '/ourwork',
+    '/gallery': '/ourwork',
+    '/projects': '/ourwork',
+    '/about': '/studio',
+    '/team': '/studio',
+    '/contact': '/contact',
+    '/get-in-touch': '/contact',
+    '/news': '/press',
+    '/media': '/press',
+    '/jobs': '/careers',
+    '/work': '/careers'
   };
 
   // Check if current path should be redirected
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (document.referrer && document.referrer !== window.location.href) {
         window.history.back();
       } else {
-        window.location.href = '/homepage.html';
+        window.location.href = '/';
       }
     }
     
@@ -165,12 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchResults = document.getElementById('searchResults');
 
     const availablePages = [
-      { name: 'Home', url: 'homepage.html', description: 'Main homepage' },
-      { name: 'Portfolio', url: 'portfolio.html', description: 'Our work and projects' },
-      { name: 'Studio', url: 'studio.html', description: 'About our team' },
-      { name: 'Press', url: 'press.html', description: 'News and media' },
-      { name: 'Careers', url: 'careers.html', description: 'Job opportunities' },
-      { name: 'Contact', url: 'contact.html', description: 'Get in touch' }
+      { name: 'Home', url: '/', description: 'Main homepage' },
+      { name: 'Portfolio', url: '/ourwork', description: 'Our work and projects' },
+      { name: 'Studio', url: '/studio', description: 'About our team' },
+      { name: 'Press', url: '/press', description: 'News and media' },
+      { name: 'Careers', url: '/careers', description: 'Job opportunities' },
+      { name: 'Contact', url: '/contact', description: 'Get in touch' }
     ];
 
     function performSearch(query) {

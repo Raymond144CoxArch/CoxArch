@@ -2,7 +2,7 @@
   "name": "cox-architecture-website",
   "version": "1.0.0",
   "description": "Professional website for Cox Architecture & Design - Charlotte residential architecture firm",
-  "main": "homepage.html",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"No tests specified\" && exit 0",
     "lint": "echo \"No linting configured\" && exit 0"
