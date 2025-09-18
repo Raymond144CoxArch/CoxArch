@@ -475,7 +475,12 @@ const initializeTestimonialsSwipe = () => {
     
     // Initialize on load and resize
     setupMobileSwipe();
-    window.addEventListener('resize', setupMobileSwipe);
+    
+    // Only add resize listener once
+    if (!window.testimonialsResizeListenerAdded) {
+        window.addEventListener('resize', setupMobileSwipe);
+        window.testimonialsResizeListenerAdded = true;
+    }
     
     // Additional initialization check
     setTimeout(() => {
