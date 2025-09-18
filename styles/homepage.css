@@ -1513,7 +1513,7 @@ body.homepage .contact-btn:hover {
 /* Conveyor Belt Testimonials */
 .testimonials-conveyor {
     margin: 3rem 0;
-    overflow: visible;
+    overflow: hidden; /* Hide overflow for swipe functionality */
     position: relative;
     width: 100%;
     margin-left: 0;
@@ -1525,10 +1525,13 @@ body.homepage .contact-btn:hover {
     animation: slideLeft 60s linear infinite;
     gap: 2rem;
     will-change: transform;
+    width: fit-content; /* Ensures the track is wide enough to contain all cards */
+    white-space: nowrap; /* Prevents cards from wrapping to a new line */
 }
 
 .testimonial-item {
     flex: 0 0 400px;
+    flex-shrink: 0; /* Prevents cards from shrinking */
     background: white;
     border-radius: 0;
     border: 1px solid var(--border-color);
@@ -1673,10 +1676,13 @@ body.homepage .contact-btn:hover {
         animation-duration: 45s;
         transition: transform 0.3s ease-out; /* Smooth transitions for swipe */
         will-change: transform;
+        width: fit-content; /* Ensures the track is wide enough to contain all cards */
+        white-space: nowrap; /* Prevents cards from wrapping to a new line */
     }
     
     .testimonial-item {
         flex: 0 0 300px;
+        flex-shrink: 0; /* Prevents cards from shrinking */
         padding: 1rem 1.25rem;
         touch-action: pan-x; /* Allow horizontal panning */
     }
@@ -1710,6 +1716,8 @@ body.homepage .contact-btn:hover {
     .conveyor-track {
         gap: 1rem;
         animation-duration: 40s;
+        width: fit-content; /* Ensures the track is wide enough to contain all cards */
+        white-space: nowrap; /* Prevents cards from wrapping to a new line */
     }
     
     .testimonials-conveyor {
@@ -1718,6 +1726,7 @@ body.homepage .contact-btn:hover {
     
     .testimonial-item {
         flex: 0 0 280px;
+        flex-shrink: 0; /* Prevents cards from shrinking */
         padding: 0.875rem 1rem;
     }
     

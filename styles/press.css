@@ -638,11 +638,14 @@
   display: flex;
   gap: 2rem;
   animation: scrollTestimonials 30s linear infinite;
-  width: max-content;
+  width: fit-content; /* Ensures the track is wide enough to contain all cards */
+  white-space: nowrap; /* Prevents cards from wrapping to a new line */
+  will-change: transform; /* Performance optimization for the swipe animation */
 }
 
 .testimonial-item {
   flex: 0 0 350px;
+  flex-shrink: 0; /* Prevents cards from shrinking */
   background: white;
   padding: 2rem;
   border-radius: 0;
@@ -902,10 +905,13 @@
   
   .conveyor-track {
     gap: 1.5rem;
+    width: fit-content; /* Ensures the track is wide enough to contain all cards */
+    white-space: nowrap; /* Prevents cards from wrapping to a new line */
   }
   
   .testimonial-item {
     flex: 0 0 300px;
+    flex-shrink: 0; /* Prevents cards from shrinking */
     padding: 1.5rem;
   }
 }
@@ -976,10 +982,13 @@
   
   .conveyor-track {
     gap: 1rem;
+    width: fit-content; /* Ensures the track is wide enough to contain all cards */
+    white-space: nowrap; /* Prevents cards from wrapping to a new line */
   }
   
   .testimonial-item {
     flex: 0 0 280px;
+    flex-shrink: 0; /* Prevents cards from shrinking */
     padding: 1.25rem;
   }
 }
