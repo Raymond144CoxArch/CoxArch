@@ -279,19 +279,19 @@ const initializeTestimonialsSwipe = () => {
                     conveyorTrack.style.animationPlayState = 'paused';
                 }
                 isAutoScrolling = false;
-            
-            // Add touch event listeners
-            testimonialsConveyor.addEventListener('touchstart', handleTouchStart, { passive: false });
-            testimonialsConveyor.addEventListener('touchmove', handleTouchMove, { passive: false });
-            testimonialsConveyor.addEventListener('touchend', handleTouchEnd, { passive: false });
-            
-            // Add mouse events for desktop testing
-            testimonialsConveyor.addEventListener('mousedown', handleMouseDown);
-            testimonialsConveyor.addEventListener('mousemove', handleMouseMove);
-            testimonialsConveyor.addEventListener('mouseup', handleMouseUp);
-            testimonialsConveyor.addEventListener('mouseleave', handleMouseUp);
-            
-            console.log('Mobile touch events added successfully');
+                
+                // Add touch event listeners
+                testimonialsConveyor.addEventListener('touchstart', handleTouchStart, { passive: false });
+                testimonialsConveyor.addEventListener('touchmove', handleTouchMove, { passive: false });
+                testimonialsConveyor.addEventListener('touchend', handleTouchEnd, { passive: false });
+                
+                // Add mouse events for desktop testing
+                testimonialsConveyor.addEventListener('mousedown', handleMouseDown);
+                testimonialsConveyor.addEventListener('mousemove', handleMouseMove);
+                testimonialsConveyor.addEventListener('mouseup', handleMouseUp);
+                testimonialsConveyor.addEventListener('mouseleave', handleMouseUp);
+                
+                console.log('Mobile touch events added successfully');
         } else {
             // Resume auto-scroll animation on desktop
             conveyorTrack.style.animationPlayState = 'running';
@@ -473,9 +473,19 @@ const initializeTestimonialsSwipe = () => {
         animationId = requestAnimationFrame(animate);
     };
     
-        // Initialize on load and resize
-        setupMobileSwipe();
-        window.addEventListener('resize', setupMobileSwipe);
+    // Initialize on load and resize
+    setupMobileSwipe();
+    window.addEventListener('resize', setupMobileSwipe);
+    
+    // Additional initialization check
+    setTimeout(() => {
+        console.log('Delayed testimonials check:', {
+            conveyor: !!testimonialsConveyor,
+            track: !!conveyorTrack,
+            conveyorStyle: testimonialsConveyor ? window.getComputedStyle(testimonialsConveyor).display : 'not found',
+            trackStyle: conveyorTrack ? window.getComputedStyle(conveyorTrack).display : 'not found'
+        });
+    }, 1000);
     } catch (error) {
         console.error('Error initializing testimonials swipe:', error);
         if (window.logger) {

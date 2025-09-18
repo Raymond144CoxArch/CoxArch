@@ -1659,6 +1659,9 @@ body.homepage .contact-btn:hover {
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
+        z-index: 10; /* Ensure testimonials are above other elements */
+        touch-action: pan-x; /* Allow horizontal panning */
+        -webkit-touch-callout: none; /* Disable callout on iOS */
     }
     
     .testimonials-conveyor:active {
