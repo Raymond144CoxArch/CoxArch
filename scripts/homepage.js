@@ -1002,7 +1002,18 @@ const startContinuousAnimation = () => {
                // Ensure featured project images are loaded
                setTimeout(() => {
                    const featuredProjectImages = document.querySelectorAll('.featured-project img');
-                   featuredProjectImages.forEach(img => {
+                   console.log('Found featured project images:', featuredProjectImages.length);
+                   featuredProjectImages.forEach((img, index) => {
+                       console.log(`Image ${index + 1}:`, {
+                           src: img.src,
+                           complete: img.complete,
+                           naturalWidth: img.naturalWidth,
+                           naturalHeight: img.naturalHeight,
+                           offsetWidth: img.offsetWidth,
+                           offsetHeight: img.offsetHeight
+                       });
+                       
+                       // Force load the image if it's not complete
                        if (img.src && !img.complete) {
                            console.log('Loading featured project image:', img.src);
                            img.addEventListener('load', () => {
@@ -1011,7 +1022,19 @@ const startContinuousAnimation = () => {
                            img.addEventListener('error', (e) => {
                                console.error('Featured project image failed to load:', img.src, e);
                            });
+                           
+                           // Force reload the image
+                           const originalSrc = img.src;
+                           img.src = '';
+                           img.src = originalSrc;
+                       } else if (img.complete) {
+                           console.log('Featured project image already loaded:', img.src);
                        }
+                       
+                       // Ensure the image is visible
+                       img.style.display = 'block';
+                       img.style.visibility = 'visible';
+                       img.style.opacity = '1';
                    });
                }, 100);
 

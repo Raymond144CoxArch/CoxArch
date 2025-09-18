@@ -1168,10 +1168,23 @@ body.homepage .contact-btn:hover {
     object-fit: cover;
     object-position: center;
     transition: transform 0.3s ease;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .featured-project:hover .project-image img {
     transform: scale(1.05);
+}
+
+/* Ensure featured project images are always visible */
+.featured-project .project-image img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
 }
 
 .project-info {
