@@ -68,224 +68,88 @@ document.addEventListener('DOMContentLoaded', () => {
 // ===== TESTIMONIALS SWIPE FUNCTIONALITY =====
 const initializeTestimonialsSwipe = () => {
     try {
-        console.log('Press page: Initializing testimonials swipe...');
-        const testimonialsConveyor = document.querySelector('.testimonials-conveyor');
-        const conveyorTrack = document.querySelector('.conveyor-track');
-        
-        console.log('Press page: Testimonials elements found:', {
-            conveyor: !!testimonialsConveyor,
-            track: !!conveyorTrack,
-            windowWidth: window.innerWidth,
-            isMobile: window.innerWidth <= 768
-        });
-        
-        if (!testimonialsConveyor || !conveyorTrack) {
-            console.log('Press page: Testimonials elements not found, exiting');
+        const testimonialsSection = document.querySelector('.testimonials-section');
+        if (!testimonialsSection) {
+            console.log('Testimonials section not found, skipping swipe initialization.');
             return;
         }
-    
-    let isMobile = window.innerWidth <= 768;
-    let isDragging = false;
-    let startX = 0;
-    let currentX = 0;
-    let initialTransform = 0;
-    let currentTransform = 0;
-    let animationId = null;
-    let isAutoScrolling = true;
-    
-    // Check if mobile and setup swipe functionality
-    const setupMobileSwipe = () => {
-        isMobile = window.innerWidth <= 768;
-        
-        if (isMobile) {
-            // Stop auto-scroll animation on mobile
-            conveyorTrack.style.animationPlayState = 'paused';
-            isAutoScrolling = false;
-            
-            // Add touch event listeners
-            testimonialsConveyor.addEventListener('touchstart', handleTouchStart, { passive: false });
-            testimonialsConveyor.addEventListener('touchmove', handleTouchMove, { passive: false });
-            testimonialsConveyor.addEventListener('touchend', handleTouchEnd, { passive: false });
-            
-            // Add mouse events for desktop testing
-            testimonialsConveyor.addEventListener('mousedown', handleMouseDown);
-            testimonialsConveyor.addEventListener('mousemove', handleMouseMove);
-            testimonialsConveyor.addEventListener('mouseup', handleMouseUp);
-            testimonialsConveyor.addEventListener('mouseleave', handleMouseUp);
-        } else {
-            // Resume auto-scroll animation on desktop
-            conveyorTrack.style.animationPlayState = 'running';
-            isAutoScrolling = true;
-            
-            // Remove event listeners
-            testimonialsConveyor.removeEventListener('touchstart', handleTouchStart);
-            testimonialsConveyor.removeEventListener('touchmove', handleTouchMove);
-            testimonialsConveyor.removeEventListener('touchend', handleTouchEnd);
-            testimonialsConveyor.removeEventListener('mousedown', handleMouseDown);
-            testimonialsConveyor.removeEventListener('mousemove', handleMouseMove);
-            testimonialsConveyor.removeEventListener('mouseup', handleMouseUp);
-            testimonialsConveyor.removeEventListener('mouseleave', handleMouseUp);
+
+        const conveyorTrack = testimonialsSection.querySelector('.conveyor-track');
+        if (!conveyorTrack) {
+            console.error('Testimonials conveyor track not found.');
+            return;
         }
-    };
-    
-    // Touch event handlers
-    const handleTouchStart = (e) => {
-        if (!isMobile) return;
-        
-        startX = e.touches[0].clientX;
-        const startY = e.touches[0].clientY;
-        
-        // Store initial touch position for direction detection
-        e.touchStartX = startX;
-        e.touchStartY = startY;
-        
-        // Don't start dragging immediately - wait for movement to determine direction
-        isDragging = false;
-        currentX = startX;
-        
-        // Get current transform value
-        const transform = conveyorTrack.style.transform;
-        const match = transform ? transform.match(/-?\d+\.?\d*/) : null;
-        initialTransform = match ? parseFloat(match[0]) : 0;
-        currentTransform = initialTransform;
-        
-        // Stop any ongoing animation
-        if (animationId) {
-            cancelAnimationFrame(animationId);
+
+        const cards = testimonialsSection.querySelectorAll('.testimonial-item');
+        if (cards.length === 0) {
+            console.log('No testimonial cards found.');
+            return;
         }
-    };
-    
-    const handleTouchMove = (e) => {
-        if (!isMobile) return;
-        
-        const currentX = e.touches[0].clientX;
-        const currentY = e.touches[0].clientY;
-        const deltaX = currentX - startX;
-        const deltaY = currentY - e.touchStartY;
-        
-        // If we're not dragging yet, determine if this is a horizontal swipe
-        if (!isDragging) {
-            const absDeltaX = Math.abs(deltaX);
-            const absDeltaY = Math.abs(deltaY);
-            
-            // Only start dragging if horizontal movement is greater than vertical
-            if (absDeltaX > 10 && absDeltaX > absDeltaY) {
-                console.log('Press page: Starting horizontal swipe drag...');
-                isDragging = true;
-                e.preventDefault(); // Prevent scrolling for horizontal swipes
-            } else if (absDeltaY > 10) {
-                // This is a vertical swipe, don't interfere with page scrolling
-                console.log('Press page: Vertical swipe detected, allowing page scroll');
-                return;
-            }
-        }
-        
-        // Only handle horizontal dragging
-        if (isDragging) {
-            console.log('Press page: Touch move detected - horizontal drag');
-            e.preventDefault(); // Prevent scrolling during horizontal drag
-            currentTransform = initialTransform + deltaX;
-            
-            // Apply transform with momentum
-            conveyorTrack.style.transform = `translateX(${currentTransform}px)`;
-        }
-    };
-    
-    const handleTouchEnd = (e) => {
-        if (!isMobile || !isDragging) return;
-        
-        isDragging = false;
-        const deltaX = currentX - startX;
-        const velocity = Math.abs(deltaX) / 100; // Simple velocity calculation
-        
-        // Determine if swipe was significant enough
-        if (Math.abs(deltaX) > 50 || velocity > 0.5) {
-            // Calculate how many testimonials to move
-            const testimonialWidth = 300; // Mobile testimonial width + gap
-            const moveAmount = Math.round(deltaX / testimonialWidth);
-            
-            // Apply smooth transition to new position
-            const targetTransform = currentTransform - (moveAmount * testimonialWidth);
-            animateToPosition(targetTransform);
-        } else {
-            // Snap back to current position
-            animateToPosition(initialTransform);
-        }
-    };
-    
-    // Mouse event handlers (for desktop testing)
-    const handleMouseDown = (e) => {
-        if (!isMobile) return;
-        isDragging = true;
-        startX = e.clientX;
-        currentX = startX;
-        
-        const transform = conveyorTrack.style.transform;
-        const match = transform ? transform.match(/-?\d+\.?\d*/) : null;
-        initialTransform = match ? parseFloat(match[0]) : 0;
-        currentTransform = initialTransform;
-        
-        if (animationId) {
-            cancelAnimationFrame(animationId);
-        }
-    };
-    
-    const handleMouseMove = (e) => {
-        if (!isMobile || !isDragging) return;
-        
-        e.preventDefault();
-        currentX = e.clientX;
-        const deltaX = currentX - startX;
-        currentTransform = initialTransform + deltaX;
-        
-        conveyorTrack.style.transform = `translateX(${currentTransform}px)`;
-    };
-    
-    const handleMouseUp = (e) => {
-        if (!isMobile || !isDragging) return;
-        
-        isDragging = false;
-        const deltaX = currentX - startX;
-        const velocity = Math.abs(deltaX) / 100;
-        
-        if (Math.abs(deltaX) > 50 || velocity > 0.5) {
-            const testimonialWidth = 300;
-            const moveAmount = Math.round(deltaX / testimonialWidth);
-            const targetTransform = currentTransform - (moveAmount * testimonialWidth);
-            animateToPosition(targetTransform);
-        } else {
-            animateToPosition(initialTransform);
-        }
-    };
-    
-    // Smooth animation to target position
-    const animateToPosition = (targetTransform) => {
-        const startTransform = currentTransform;
-        const distance = targetTransform - startTransform;
-        const duration = 300; // 300ms animation
-        const startTime = performance.now();
-        
-        const animate = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            // Easing function (ease-out)
-            const easeOut = 1 - Math.pow(1 - progress, 3);
-            
-            const currentPosition = startTransform + (distance * easeOut);
-            conveyorTrack.style.transform = `translateX(${currentPosition}px)`;
-            
-            if (progress < 1) {
-                animationId = requestAnimationFrame(animate);
+
+        let isDragging = false;
+        let startX = 0;
+        let startScrollLeft = 0;
+        let currentTransform = 0;
+        let animationId = null;
+
+        const setupMobileSwipe = () => {
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+                // Bug Fix: Calculate total width of all cards
+                let totalWidth = 0;
+                cards.forEach(card => {
+                    totalWidth += card.offsetWidth;
+                });
+                // Add margins
+                const cardMargin = parseFloat(window.getComputedStyle(cards[0]).marginRight);
+                totalWidth += (cards.length - 1) * cardMargin;
+
+                conveyorTrack.style.width = `${totalWidth}px`;
+
+                // Add event listeners
+                conveyorTrack.addEventListener('mousedown', startDrag);
+                conveyorTrack.addEventListener('touchstart', startDrag);
+                window.addEventListener('mouseup', endDrag);
+                window.addEventListener('touchend', endDrag);
+                window.addEventListener('mousemove', doDrag);
+                window.addEventListener('touchmove', doDrag);
             } else {
-                currentTransform = targetTransform;
-                animationId = null;
+                conveyorTrack.style.width = ''; // Reset width for desktop
+                // Remove listeners for desktop
+                conveyorTrack.removeEventListener('mousedown', startDrag);
+                conveyorTrack.removeEventListener('touchstart', startDrag);
+                window.removeEventListener('mouseup', endDrag);
+                window.removeEventListener('touchend', endDrag);
+                window.removeEventListener('mousemove', doDrag);
+                window.removeEventListener('touchmove', doDrag);
             }
         };
-        
-        animationId = requestAnimationFrame(animate);
-    };
-    
+
+        const startDrag = (e) => {
+            isDragging = true;
+            startX = e.pageX || e.touches[0].pageX;
+            startScrollLeft = conveyorTrack.scrollLeft;
+            // Stop any existing animation
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+            conveyorTrack.style.cursor = 'grabbing';
+        };
+
+        const doDrag = (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX || e.touches[0].pageX;
+            const walk = (x - startX) * 2; // Adjust sensitivity
+            conveyorTrack.scrollLeft = startScrollLeft - walk;
+        };
+
+        const endDrag = () => {
+            isDragging = false;
+            conveyorTrack.style.cursor = 'grab';
+        };
+
         // Initialize on load and resize
         setupMobileSwipe();
         
