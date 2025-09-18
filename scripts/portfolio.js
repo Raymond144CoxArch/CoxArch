@@ -202,10 +202,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Ranch Renovation',
                 images: [
                     'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-1-.jpg',
-                    'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation (2).JPG',
+                    'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-2-.jpg',
                     'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-3-.jpg',
-                    'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation (4).JPG',
-                    'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation (5).JPG',
+                    'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-4-.jpg',
+                    'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-5-.jpg',
                     'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-6-.jpg',
                     'images/Portfolio/Renovation+Addition/ranch-renovation/ranch-renovation-7-.jpg'
                 ],

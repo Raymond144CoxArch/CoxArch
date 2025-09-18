@@ -634,9 +634,19 @@ class GalleryModal {
     }
 
     showModal() {
+        // Store current scroll position
+        this.scrollPosition = window.scrollY;
+        
+        // Prevent body scroll and maintain position
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${this.scrollPosition}px`;
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+        
         this.modal.classList.add(this.config.modalActiveClassName);
         document.documentElement.classList.add(this.config.noScrollClassName);
         document.body.classList.add('modal-open');
+        
         setTimeout(() => {
             this.elements.closeBtn.focus();
         }, this.config.transitionDuration);
@@ -646,6 +656,16 @@ class GalleryModal {
         this.modal.classList.remove(this.config.modalActiveClassName);
         document.documentElement.classList.remove(this.config.noScrollClassName);
         document.body.classList.remove('modal-open');
+        
+        // Restore scroll position
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        
+        if (this.scrollPosition !== undefined) {
+            window.scrollTo(0, this.scrollPosition);
+        }
         this.toggleFullscreen(false); // Ensure fullscreen is off
         if (this.lastFocusedElement) {
             this.lastFocusedElement.focus();
@@ -969,6 +989,10 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             e.stopPropagation(); // Prevent page jump
             
+            // Store current scroll position before opening modal
+            const currentScrollY = window.scrollY;
+            document.body.style.top = `-${currentScrollY}px`;
+            
             // Additional logging for debugging
             if (window.logger) {
                 window.logger.info('Project card clicked', { 
@@ -997,6 +1021,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (featuredProject && !featuredProject.hasAttribute('data-project-id')) {
             e.preventDefault();
             e.stopPropagation(); // Prevent page jump
+            
+            // Store current scroll position before opening modal
+            const currentScrollY = window.scrollY;
+            document.body.style.top = `-${currentScrollY}px`;
             
             const projectTitle = featuredProject.querySelector('h3')?.textContent?.trim();
             if (projectTitle && galleryModal.isDataAvailable()) {
