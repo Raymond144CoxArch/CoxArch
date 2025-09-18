@@ -1,4 +1,34 @@
 {
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/homepage.html"
+    },
+    {
+      "source": "/ourwork",
+      "destination": "/portfolio.html"
+    },
+    {
+      "source": "/studio",
+      "destination": "/studio.html"
+    },
+    {
+      "source": "/press",
+      "destination": "/press.html"
+    },
+    {
+      "source": "/careers",
+      "destination": "/careers.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/404",
+      "destination": "/404.html"
+    }
+  ],
   "redirects": [
     {
       "source": "/homepage.html",
