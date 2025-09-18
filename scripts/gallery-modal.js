@@ -636,6 +636,7 @@ class GalleryModal {
     showModal() {
         this.modal.classList.add(this.config.modalActiveClassName);
         document.documentElement.classList.add(this.config.noScrollClassName);
+        document.body.classList.add('modal-open');
         setTimeout(() => {
             this.elements.closeBtn.focus();
         }, this.config.transitionDuration);
@@ -644,6 +645,7 @@ class GalleryModal {
     closeModal() {
         this.modal.classList.remove(this.config.modalActiveClassName);
         document.documentElement.classList.remove(this.config.noScrollClassName);
+        document.body.classList.remove('modal-open');
         this.toggleFullscreen(false); // Ensure fullscreen is off
         if (this.lastFocusedElement) {
             this.lastFocusedElement.focus();

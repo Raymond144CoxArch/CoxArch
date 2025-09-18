@@ -19,6 +19,19 @@ button:focus-within {
 /* Body scroll lock when modal is open */
 html.no-scroll {
     overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* Prevent body scrolling when modal is open */
+body.modal-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
 }
 
 /* Modal Overlay - Fixed for mobile browser UI */
@@ -749,12 +762,19 @@ body.portfolio-page .see-more-work-container {
 }
 
 @media (max-width: 768px) {
-    /* Mobile: Enhanced viewport handling */
+    /* Mobile: Fixed viewport handling to prevent top cutoff */
     .project-modal {
         height: 100vh;
         height: 100dvh; /* Use dynamic viewport height */
         /* Handle iOS Safari and other mobile browsers */
         height: calc(var(--vh, 1vh) * 100);
+        /* Prevent scrolling on the modal itself */
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
     
     .modal-container {
@@ -766,22 +786,32 @@ body.portfolio-page .see-more-work-container {
         max-height: none;
         margin: 0;
         border-radius: 0;
-        /* Enhanced safe area handling */
-        padding-top: max(env(safe-area-inset-top, 0px), 20px);
-        padding-bottom: max(env(safe-area-inset-bottom, 0px), 20px);
+        /* Enhanced safe area handling - ensure top is never cut off */
+        padding-top: max(env(safe-area-inset-top, 0px), 0px);
+        padding-bottom: max(env(safe-area-inset-bottom, 0px), 0px);
         padding-left: env(safe-area-inset-left, 0px);
         padding-right: env(safe-area-inset-right, 0px);
         box-sizing: border-box;
         overflow: hidden;
+        /* Ensure container fills the entire viewport */
+        position: relative;
+        display: flex;
+        flex-direction: column;
     }
     
     .main-image-column {
         padding-left: 0.75rem;
         padding-right: 0.75rem;
-        max-height: calc(100vh - 140px);
-        max-height: calc(100dvh - 140px);
-        max-height: calc((var(--vh, 1vh) * 100) - 140px);
+        /* Calculate height based on available space after header */
+        height: calc(100vh - 120px);
+        height: calc(100dvh - 120px);
+        height: calc((var(--vh, 1vh) * 100) - 120px);
         overflow-y: auto;
+        /* Prevent horizontal scrolling */
+        overflow-x: hidden;
+        /* Ensure proper scrolling behavior */
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
     }
     
     .main-image-container {
@@ -794,9 +824,12 @@ body.portfolio-page .see-more-work-container {
         top: 0 !important;
         background-color: #fff !important;
         border-bottom: 1px solid #e5e5e5 !important;
-        /* Safe area padding for mobile */
-        padding-top: calc(1rem + max(env(safe-area-inset-top, 0px) - 20px, 0px)) !important;
+        /* Safe area padding for mobile - ensure header is never cut off */
+        padding-top: max(1rem, env(safe-area-inset-top, 0px) + 0.5rem) !important;
         min-height: 100px; /* Increased for mobile */
+        /* Ensure header stays at the top */
+        z-index: 1000 !important;
+        flex-shrink: 0;
     }
     
     .modal-title-section {
@@ -1045,18 +1078,29 @@ body.fullscreen-active {
     /* Ensure header stays above all content */
     transform: translateZ(0) !important;
     will-change: transform !important;
+    /* Additional mobile fixes */
+    flex-shrink: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 /* Ensure modal container respects mobile browser UI on all devices */
 .project-modal .modal-container {
     /* Enhanced safe area handling */
-    padding-top: max(env(safe-area-inset-top, 0px), 20px) !important;
-    padding-bottom: max(env(safe-area-inset-bottom, 0px), 20px) !important;
+    padding-top: max(env(safe-area-inset-top, 0px), 0px) !important;
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 0px) !important;
     /* Prevent content from being hidden */
-    margin-top: max(env(safe-area-inset-top, 0px), 20px) !important;
-    margin-bottom: max(env(safe-area-inset-bottom, 0px), 20px) !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
     /* Ensure proper box sizing */
     box-sizing: border-box !important;
     /* Prevent overflow issues */
     overflow: hidden !important;
+    /* Ensure container fills the entire viewport */
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    height: calc(var(--vh, 1vh) * 100) !important;
 }
