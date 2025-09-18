@@ -1,16 +1,534 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Cox Architecture & Design - Loading...</title>
-</head>
-<body>
-  <p>Loading Cox Architecture & Design...</p>
-  <script>
-    // Redirect to homepage
-    setTimeout(() => {
-      window.location.replace('/');
-    }, 1000);
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover, interactive-widget=resizes-visual" />
+  <title>Residential Architect Charlotte NC | Cox Architecture & Design</title>
+  <meta name="description" content="Custom new-construction homes, additions, and renovation design in Charlotte. Residential architecture tailored to your lifestyle." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://coxarchitecture.com/" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://coxarchitecture.com/" />
+  <meta property="og:title" content="Residential Architect Charlotte NC | Cox Architecture & Design" />
+  <meta property="og:description" content="Custom new-construction homes, additions, and renovation design in Charlotte. Residential architecture tailored to your lifestyle." />
+  <meta property="og:image" content="https://coxarchitecture.com/images/Logos/CoxLogoText.png" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://coxarchitecture.com/" />
+  <meta property="twitter:title" content="Residential Architect Charlotte NC | Cox Architecture & Design" />
+  <meta property="twitter:description" content="Custom new-construction homes, additions, and renovation design in Charlotte." />
+  <meta property="twitter:image" content="https://coxarchitecture.com/images/Logos/CoxLogoText.png" />
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous" />
+  
+  <link rel="stylesheet" href="styles/common.css" />
+  
+  <link rel="preload" href="styles/homepage.css" as="style" />
+  <link rel="stylesheet" href="styles/homepage.css" />
+  
+  <link rel="preload" href="styles/portfolio.css" as="style" />
+  <link rel="stylesheet" href="styles/portfolio.css" />
+  
+  <!-- Load modal and lazy loading CSS asynchronously for better mobile performance -->
+  <link rel="preload" href="styles/gallery-modal.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="styles/gallery-modal.css" /></noscript>
+  
+  <link rel="preload" href="styles/lazy-loading.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="styles/lazy-loading.css" /></noscript>
+  
+  <link rel="preload" href="images/Logos/CoxLogoText_black.png" as="image" />
+  
+  <!-- Load gallery modal script asynchronously for better mobile performance -->
+  <link rel="preload" href="scripts/gallery-modal.js" as="script" />
+  
+  <!-- DNS prefetch for external resources -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" />
+  <link rel="icon" type="image/png" href="images/Logos/CoxIconLogo.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="images/Logos/CoxIconLogo.png" />
+  
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Cox Architecture & Design",
+    "url": "https://coxarchitecture.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://coxarchitecture.com/search?q={query}",
+      "query-input": "required name=query"
+    }
+  }
   </script>
-</body>
-</html>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Cox Architecture & Design",
+    "url": "https://coxarchitecture.com",
+    "logo": "https://coxarchitecture.com/images/Logos/CoxLogoText.png",
+    "sameAs": [
+      "https://www.facebook.com/coxarchitectureanddesign/",
+      "https://www.instagram.com/coxarchitect/",
+      "https://www.houzz.com/pro/coxarchitecture/cox-architecture-and-design",
+      "https://www.linkedin.com/company/cox-architecture-&-design"
+    ]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Cox Architecture & Design",
+    "image": "https://coxarchitecture.com/images/Logos/CoxLogoText.png",
+    "url": "https://coxarchitecture.com",
+    "telephone": "+1-704-555-1234",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Example Street",
+      "addressLocality": "Charlotte",
+      "addressRegion": "NC",
+      "postalCode": "28202",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 35.2271,
+      "longitude": -80.8431
+    },
+    "areaServed": "Charlotte, NC",
+    "description": "Residential architect in Charlotte NC, new-construction homes, additions, and renovation design."
+  }
+  </script>
+</head>
+<body class="homepage">
+
+  <!-- Header -->
+  <header class="header homepage-header">
+    <div class="nav-container">
+      <!-- Logo -->
+      <a href="/" class="logo-link">
+        <img src="images/Logos/CoxLogoText_black.png" alt="Cox Architecture & Design" class="logo-image" loading="eager" fetchpriority="high" />
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
+        <a href="/ourwork" class="nav-link">Our Work</a>
+        <a href="/studio" class="nav-link">Studio</a>
+        <a href="/press" class="nav-link">Press</a>
+        <a href="/careers" class="nav-link">Careers</a>
+        <a href="/contact" class="contact-btn">Contact</a>
+      </nav>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <!-- Mobile Menu Dropdown -->
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="/ourwork">Our Work</a>
+        <a href="/studio">Studio</a>
+        <a href="/press">Press</a>
+        <a href="/careers">Careers</a>
+        <a href="/contact" class="contact-btn">Contact</a>
+      </div>
+    </div>
+  </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-slideshow">
+        <!-- Slides will be dynamically populated by JavaScript -->
+        <!-- Default slides will be loaded if no custom slides are set -->
+      </div>
+      <!-- Left Side Social Media Icons -->
+      <div class="hero-social-vertical">
+        <a href="https://www.facebook.com/coxarchitectureanddesign/" target="_blank" rel="noopener" aria-label="Follow us on Facebook">
+          <img src="images/Logos/facebook.png" alt="Facebook" />
+        </a>
+        <a href="https://www.instagram.com/coxarchitect/" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
+          <img src="images/Logos/instagram.png" alt="Instagram" />
+        </a>
+        <a href="https://www.houzz.com/pro/coxarchitecture/cox-architecture-and-design" target="_blank" rel="noopener" aria-label="View our work on Houzz">
+          <img src="images/Logos/houzz.png" alt="Houzz" />
+        </a>
+        <a href="https://www.linkedin.com/company/cox-architecture-&-design" target="_blank" rel="noopener" aria-label="Connect with us on LinkedIn">
+          <img src="images/Logos/linkedin.png" alt="LinkedIn" />
+        </a>
+      </div>
+      <div class="hero-content">
+        <div class="glass-box desktop-glass-box">
+          <p class="glass-text">
+            <b>Cox Architecture & Design</b> delivers exceptional residential architecture with a focus on thoughtful design and personalized service.
+          </p>
+          <a href="/ourwork" class="glass-button">
+            <span>See Our Work</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="slideshow-nav-container">
+        <div class="slideshow-dots glass-bubble"></div>
+      </div>
+    </section>
+
+
+  <main>
+    <!-- Mobile Glass Box Section -->
+    <section class="mobile-glass-section">
+      <div class="container">
+        <div class="glass-box mobile-glass-box">
+          <p class="glass-text">
+            <b>Cox Architecture & Design</b> delivers exceptional residential architecture with a focus on thoughtful design and personalized service.
+          </p>
+          <a href="/ourwork" class="glass-button">
+            <span>See Our Work</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- what-we-do Section -->
+    <section id="services" class="services-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>what-we-do</h2>
+          <p>Our expertise spans a variety of project types, ensuring we can bring your vision to life.</p>
+        </div>
+        <div class="service-cards-container">
+          <div class="service-card">
+            <img src="images/what-we-do/newconstruction.png" alt="new-construction" class="service-image" width="300" height="200" loading="lazy" />
+            <div class="service-info">
+              <h4>new-construction</h4>
+              <p>We create custom homes that reflect your personal style and function seamlessly for daily living.</p>
+            </div>
+          </div>
+          <div class="service-card">
+            <img src="images/Portfolio/Renovation+Addition/homeowner-haven/hero.png" alt="Addition" class="service-image" width="300" height="200" loading="lazy" />
+            <div class="service-info">
+              <h4>Addition</h4>
+              <p>We design home additions that integrate beautifully with your existing space and enhance your lifestyle.</p>
+            </div>
+          </div>
+          <div class="service-card">
+            <img src="images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-10-.jpg" alt="Renovation" class="service-image" width="300" height="200" loading="lazy" />
+            <div class="service-info">
+              <h4>Renovation</h4>
+              <p>We reimagine your space through thoughtful renovations that balance beauty and function.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section class="featured-projects-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>FEATURED PROJECTS</h2>
+          <p>Explore our latest work showcasing exceptional design and craftsmanship.</p>
+        </div>
+        <div class="featured-projects-grid">
+          <a href="#" class="featured-project" data-project-id="williams-lake-house">
+            <div class="project-image">
+              <img src="images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg" alt="Lake House" width="400" height="300" loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+            </div>
+            <div class="project-info">
+              <h3>Lake House</h3>
+              <p class="project-type">New Construction</p>
+              <p class="project-description">Luxury lakefront residence with contemporary design and natural materials.</p>
+            </div>
+          </a>
+          <a href="#" class="featured-project" data-project-id="split-level-makeover">
+            <div class="project-image">
+              <img src="images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg" alt="Split Level Makeover" width="400" height="300" loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+            </div>
+            <div class="project-info">
+              <h3>Split Level Makeover</h3>
+              <p class="project-type">Renovation + Addition</p>
+              <p class="project-description">Complete split-level home transformation with modern open concept design.</p>
+            </div>
+          </a>
+          <a href="#" class="featured-project" data-project-id="heavy-timber-pool-house">
+            <div class="project-image">
+              <img src="images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png" alt="Heavy Timber Pool House" width="400" height="300" loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+            </div>
+            <div class="project-info">
+              <h3>Heavy Timber Pool House</h3>
+              <p class="project-type">Renovation + Addition</p>
+              <p class="project-description">Custom heavy-timber-pool-house addition with rustic elegance and modern amenities.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Continuous Convertible Portfolio Gallery -->
+        <div class="continuous-gallery-section">
+          <div class="continuous-gallery-viewport">
+            <div class="continuous-gallery-track" id="featuredContinuousGallery"></div>
+          </div>
+        </div>
+        <div class="featured-projects-cta">
+          <a href="/ourwork" class="glass-button">
+            <span>View All Projects</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>WHAT OUR CLIENTS SAY</h2>
+        </div>
+        
+        <!-- Conveyor Belt Testimonials -->
+        <div class="testimonials-conveyor">
+          <div class="conveyor-track">
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>"Craig did an amazing job designing and overseeing the complete renovation of my home. Not only did he have innovative ideas he also oversaw the execution of those ideas with the contractor. He is an excellent communicator and I would use him again in the future if the opportunity should arise!"</p>
+                <div class="testimonial-author">— Kory</div>
+              </div>
+            </div>
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>"We hired Craig to do a complete renovation of our foreclosed 75 year duplex that we converted to a SFH. He was extraordinarily helpful throughout the design process and was helpful in weighing our wish list with our budget. Cannot review him and the team highly enough!"</p>
+                <div class="testimonial-author">— Brian</div>
+              </div>
+            </div>
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>"We had an excellent experience working with Craig and would highly recommend him to anyone looking for an architect, especially for a renovation. We are still constantly stopped by neighbors who comment on how much they appreciate what Craig did to keep the overall appearance of our house the same."</p>
+                <div class="testimonial-author">— Lindsey</div>
+              </div>
+            </div>
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>"Craig was the architect for our house and we are fortunate to have had his expertise & attention to detail in this project. His vision and ability to make the most of the space have us enjoying every second we spend in our new home. Along with ours, we have seen a couple of his other projects in-person and each of them is spectacular."</p>
+                <div class="testimonial-author">— Scott</div>
+              </div>
+            </div>
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>"Exceptional renovation and complete modernization of 1968 vintage lake cottage! Cox Architecture brought the 50 year old structure fully up to date, while maintaining and enhancing the original character and design elements. Can't say enough good things about the finished product and also of the superb team from Cox Architecture."</p>
+                <div class="testimonial-author">— Charles</div>
+              </div>
+            </div>
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>"Craig and his team did an incredible job in designing a major renovation/remodeling project for our recently purchased older home (ranch + basement). Tremendous attention to detail, budgetary considerations, patience as we worked through multiple design iterations, and wise counsel throughout the project were invaluable. We have and continue to highly recommend their services. Well worth the relatively small upfront investment - I could not imagine ever tackling a project like this without their help!"</p>
+                <div class="testimonial-author">— Paul</div>
+              </div>
+            </div>
+            <!-- Duplicate testimonials for seamless loop -->
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>"Craig did an amazing job designing and overseeing the complete renovation of my home. Not only did he have innovative ideas he also oversaw the execution of those ideas with the contractor. He is an excellent communicator and I would use him again in the future if the opportunity should arise!"</p>
+                <div class="testimonial-author">— Kory</div>
+              </div>
+            </div>
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>"We hired Craig to do a complete renovation of our foreclosed 75 year duplex that we converted to a SFH. He was extraordinarily helpful throughout the design process and was helpful in weighing our wish list with our budget. Cannot review him and the team highly enough!"</p>
+                <div class="testimonial-author">— Brian</div>
+              </div>
+            </div>
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>"We had an excellent experience working with Craig and would highly recommend him to anyone looking for an architect, especially for a renovation. We are still constantly stopped by neighbors who comment on how much they appreciate what Craig did to keep the overall appearance of our house the same."</p>
+                <div class="testimonial-author">— Lindsey</div>
+              </div>
+            </div>
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>"Craig was the architect for our house and we are fortunate to have had his expertise & attention to detail in this project. His vision and ability to make the most of the space have us enjoying every second we spend in our new home. Along with ours, we have seen a couple of his other projects in-person and each of them is spectacular."</p>
+                <div class="testimonial-author">— Scott</div>
+              </div>
+            </div>
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>"Exceptional renovation and complete modernization of 1968 vintage lake cottage! Cox Architecture brought the 50 year old structure fully up to date, while maintaining and enhancing the original character and design elements. Can't say enough good things about the finished product and also of the superb team from Cox Architecture."</p>
+                <div class="testimonial-author">— Charles</div>
+              </div>
+            </div>
+            <div class="testimonial-item">
+              <div class="testimonial-content">
+                <p>"Craig and his team did an incredible job in designing a major renovation/remodeling project for our recently purchased older home (ranch + basement). Tremendous attention to detail, budgetary considerations, patience as we worked through multiple design iterations, and wise counsel throughout the project were invaluable. We have and continue to highly recommend their services. Well worth the relatively small upfront investment - I could not imagine ever tackling a project like this without their help!"</p>
+                <div class="testimonial-author">— Paul</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Review Platform Links -->
+        <div class="review-platforms">
+          <div class="review-divider">
+            <span>Read more reviews from our satisfied clients on Google and Houzz</span>
+          </div>
+          <div class="review-links">
+            <a href="https://www.google.com/search?sca_esv=e7bf22627bcd1c5c&sxsrf=AE3TifNpULwI-jofvZSRW2rzJM-PFYm27Q:1757430650816&si=AMgyJEvkVjFQtirYNBhM3ZJIRTaSJ6PxY6y1_6WZHGInbzDnMf1-KlVqD6PEaSe0JJFFH6OGJfPRCn7wRupvFP0aVBuMqcQLqRbp7XLZwqIeuL54x4_M5aZ_F0G91RUR9yTC3fdEnvZx7BbamTTRvQd8INOzQZXyLg%3D%3D&q=Cox+Architecture+and+Design+Reviews&sa=X&ved=2ahUKEwj586Kt-8uPAxUR78kDHS_LNI0Q0bkNegQINhAE&biw=1920&bih=911&dpr=1" target="_blank" rel="noopener noreferrer" class="review-link google">
+              <div class="review-logo">
+                <img src="images/Logos/Google-Review-Logo.png" alt="Google Reviews" class="google-logo-img" loading="lazy" width="120" height="40">
+              </div>
+            </a>
+            <a href="https://www.houzz.com/pro/coxarchitecture/cox-architecture-and-design" target="_blank" rel="noopener noreferrer" class="review-link houzz">
+              <div class="review-logo">
+                <img src="images/Logos/houzz-logo.webp" alt="Houzz Logo" class="houzz-logo-img" loading="lazy" width="120" height="40">
+              </div>
+            </a>
+          </div>
+         </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="contact-cta" class="cta-section">
+      <div class="container">
+        <div class="cta-glass-box">
+          <h3 class="cta-title">Let's get started today</h3>
+          <a href="/contact" class="glass-button">
+            <span>Contact Us</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Old project dropdown and fullscreen overlay removed - now using gallery modal -->
+
+  <!-- Gallery Modal -->
+  <div id="projectModal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+    <div class="modal-backdrop"></div>
+    <div class="modal-container">
+      <!-- Modal Header -->
+      <header class="modal-header">
+        <div class="modal-title-section">
+          <h2 id="modalTitle" class="modal-title"></h2>
+          <p id="modalDescription" class="modal-project-type"></p>
+        </div>
+        <button class="modal-close-btn" aria-label="Close project gallery">
+          <span class="close-x">×</span>
+        </button>
+      </header>
+
+      <!-- Modal Content -->
+      <div class="modal-content">
+        <!-- Main Image Column -->
+        <div class="main-image-column">
+          <div class="main-image-container">
+            <img id="mainImage" src="" alt="" class="main-image">
+            <button class="nav-arrow nav-prev" aria-label="Previous image">
+              <span class="arrow-left">‹</span>
+            </button>
+            <button class="nav-arrow nav-next" aria-label="Next image">
+              <span class="arrow-right">›</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Thumbnails Column -->
+        <div class="thumbnails-column">
+          <div class="thumbnails-container" id="thumbnailsContainer" role="region" aria-label="Project image thumbnails">
+            <!-- Thumbnails will be populated by JavaScript -->
+          </div>
+          <!-- See More Work Button (Homepage Only) -->
+          <div class="see-more-work-container">
+            <a href="/ourwork" class="see-more-work-btn">See More Work</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-main-content">
+        <div class="footer-section footer-logo-section">
+          <a href="/" class="footer-logo-link">
+            <img src="images/Logos/CoxLogoText.png" alt="Cox Architecture & Design" class="footer-logo" />
+          </a>
+          <p class="footer-address">
+            1310 S Tryon St UNIT 111<br />
+            Charlotte, NC 28203
+          </p>
+        </div>
+
+        <div class="footer-section footer-links-section">
+          <h4>Quick Links</h4>
+          <nav class="footer-nav">
+            <a href="/">Home</a>
+            <a href="/ourwork">Our Work</a>
+            <a href="/studio">Studio</a>
+            <a href="/press">Press</a>
+            <a href="/careers">Careers</a>
+            <a href="/contact">Contact</a>
+          </nav>
+        </div>
+
+        <div class="footer-section footer-social-section">
+          <h4>Follow Us</h4>
+          <div class="footer-social-icons">
+            <a href="https://www.facebook.com/coxarchitectureanddesign/" target="_blank" rel="noopener" aria-label="Follow us on Facebook">
+              <img src="images/Logos/facebook.png" alt="Facebook" />
+            </a>
+            <a href="https://www.instagram.com/coxarchitect/" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
+              <img src="images/Logos/instagram.png" alt="Instagram" />
+            </a>
+            <a href="https://www.houzz.com/pro/coxarchitecture/cox-architecture-and-design" target="_blank" rel="noopener" aria-label="View our work on Houzz">
+              <img src="images/Logos/houzz.png" alt="Houzz" />
+            </a>
+            <a href="https://www.linkedin.com/company/cox-architecture-&-design" target="_blank" rel="noopener" aria-label="Connect with us on LinkedIn">
+              <img src="images/Logos/linkedin.png" alt="LinkedIn" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>Cox Architecture & Design LLC</p>
+      </div>
+    </div>
+  </footer>
+
+     <!-- Critical scripts loaded with defer for better performance -->
+     <script src="scripts/logger.js"></script>
+     <script src="scripts/gallery-modal.js"></script>
+     <script src="scripts/lazy-loading.js"></script>
+     <script src="scripts/homepage.js?v=9" defer></script>
+   
+   <!-- BEGIN: Combined Hidden SEO Block for Cox Architecture -->
+   <div class="seo-hidden">
+     Cox Architecture & Design is a Charlotte-based residential architecture firm specializing in custom homes, home additions, renovations, and design-forward planning. We serve homeowners throughout the Charlotte, NC region who are looking to elevate their homes with thoughtful, well-crafted design. Whether you're building a new house, planning a kitchen or bath remodel, or expanding with a porch, garage, or second story addition — we're here to design spaces that fit your life.
+
+     Keywords: Charlotte architect, residential architect Charlotte NC, best architect in Charlotte, top residential design Charlotte, Charlotte home designer, Charlotte house plans, Charlotte NC home design firm, Charlotte renovation architect, addition designer Charlotte, home remodel planning Charlotte, floor plan designer Charlotte, Charlotte architectural design studio, Charlotte custom home architect, Charlotte NC home drawings, architect for additions Charlotte, home plans Charlotte NC, custom floor plans Charlotte, someone to design my home Charlotte, who can draw house plans Charlotte, design my home renovation, home designer near me, design my house addition Charlotte, draw my house remodel Charlotte, house planner Charlotte NC, Charlotte architectural drawings, Charlotte permit-ready house plans, Charlotte NC architecture and design, custom porch design Charlotte, design my backyard addition, Charlotte home expansion architect, garage apartment designer Charlotte, ADU designer Charlotte NC, small addition architect Charlotte, home design consultant Charlotte, new home design near Charlotte NC, modern home floor plans Charlotte, residential drafting service Charlotte
+
+     Architectural Styles: modern farmhouse Charlotte, transitional architecture Charlotte, craftsman home architect Charlotte, contemporary home designer Charlotte, colonial home design Charlotte NC, coastal house design Charlotte, French country home plans Charlotte, Tudor revival architect Charlotte, minimalist residential design Charlotte, traditional Southern architecture, ranch-style home designer Charlotte, custom two-story homes Charlotte, gabled roof architecture Charlotte, low-country porch design Charlotte, indoor-outdoor home design Charlotte
+
+     Neighborhoods & Regions: Myers Park architect Charlotte, SouthPark home designer, Dilworth home additions, Elizabeth architect Charlotte NC, Eastover residential architect, NoDa architect (North Davidson), Plaza Midwood renovation designer, South End modern architect Charlotte, Wesley Heights architect, Cotswold home designer Charlotte, Chantilly architect Charlotte, Sedgefield home designer, Madison Park architectural services, Barclay Downs architect Charlotte, Foxcroft residential architect, Montford architect Charlotte NC, Villa Heights home designer, Belmont Charlotte renovation architect, Wilmore architect Charlotte NC, Commonwealth Charlotte NC architect, Uptown Charlotte home design, Historic Fourth Ward Charlotte architect, Windsor Park renovations, Sherwood Forest architect Charlotte, Ashley Park additions, Enderly Park architect, Oakhurst home renovation architect, Sunset Road designer, Hidden Valley architect, Clanton Park Charlotte, Charlotte greenway home design
+
+     Regional Areas Served: Lake Norman architect, Davidson NC custom home design, Cornelius renovation architect, Huntersville residential architect, Mooresville home design, Matthews NC architect, Mint Hill additions architect, Ballantyne luxury home designer, Weddington architect Charlotte metro, Waxhaw home designer Charlotte region, Indian Trail home architect, Harrisburg NC residential design, Fort Mill SC architect, Tega Cay home renovations, Rock Hill SC home designer, Pineville architect Charlotte, South Charlotte custom homes
+
+     Cox Architecture & Design is your trusted architectural partner across the entire Charlotte region. From SouthPark to South End, Myers Park to Matthews, our work reflects the character of each neighborhood while delivering custom solutions that blend form, function, and local style.
+   </div>
+   <!-- END: Combined Hidden SEO Block -->
+
+ </body>
+ </html>
+
