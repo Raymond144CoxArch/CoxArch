@@ -19,11 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
         img.addEventListener('load', function(e) {
             if (window.logger && window.logger.info) {
                 window.logger.info('Image loaded successfully', { src: e.target.src });
-            }
+                }
+            });
         });
     });
-});
-
+    
 // ===== HOMEPAGE SLIDESHOW =====
 let slideshowContainer;
 let dotsContainer;
@@ -31,6 +31,12 @@ let currentSlide = 0;
 let slides = [];
 let slideInterval;
 let isSwiping = false;
+
+// ===== FEATURED PROJECTS AND CONTINUOUS GALLERY =====
+let continuousGalleryTrack;
+let galleryItems = [];
+let galleryAnimationId;
+let isGalleryPaused = false;
 
 // Make these functions globally accessible
 window.showSlide = (index) => {
@@ -70,7 +76,7 @@ const stopAutoSlide = () => {
 };
 
 // Load slideshow images
-const getDefaultImages = () => {
+  const getDefaultImages = () => {
     const isMobile = window.innerWidth <= 768;
     return isMobile ? [
         'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
@@ -87,9 +93,9 @@ const getDefaultImages = () => {
         'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
         'images/HeroProjects/hero-19.jpg'
     ];
-};
+  };
 
-const initializeSlideshow = async () => {
+  const initializeSlideshow = async () => {
     if (!slideshowContainer) {
         return;
     }
@@ -201,13 +207,13 @@ const initializeTestimonialsSwipe = () => {
             // console.log('No testimonial cards found.');
             return;
         }
-        
-        let isDragging = false;
-        let startX = 0;
+    
+    let isDragging = false;
+    let startX = 0;
         let startScrollLeft = 0;
-        let animationId = null;
-        let isAutoScrolling = true;
-
+    let animationId = null;
+    let isAutoScrolling = true;
+    
         // Check if screen is mobile (width <= 768px)
         const isMobile = () => window.innerWidth <= 768;
 
@@ -311,8 +317,8 @@ const initializeTestimonialsSwipe = () => {
 
         const endDrag = () => {
             if (!isDragging) return;
-            
-            isDragging = false;
+        
+        isDragging = false;
             testimonialsTrack.style.cursor = 'grab';
             testimonialsTrack.style.scrollBehavior = 'smooth';
         };
@@ -350,8 +356,8 @@ const initializeTestimonialsSwipe = () => {
                 testimonialsSection.removeEventListener('mouseleave', handleMouseLeave);
                 
                 // Stop current animation
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
+        if (animationId) {
+            cancelAnimationFrame(animationId);
                     animationId = null;
                 }
                 
@@ -386,7 +392,7 @@ const initializeTestimonialsSwipe = () => {
                     testimonialsTrack.scrollLeft = 0;
                     break;
                 case 'End':
-                    e.preventDefault();
+        e.preventDefault();
                     testimonialsTrack.scrollLeft = testimonialsTrack.scrollWidth;
                     break;
             }
@@ -407,76 +413,613 @@ const initializeTestimonialsSwipe = () => {
     }
 };
 
-// Wait for DOM to be ready
-document.addEventListener('DOMContentLoaded', () => {
+// ===== CONTINUOUS GALLERY FUNCTIONALITY =====
+const initializeContinuousGallery = () => {
     try {
-        // ===== MOBILE MENU TOGGLE =====
+        continuousGalleryTrack = document.getElementById('featuredContinuousGallery');
+        if (!continuousGalleryTrack) {
+            console.log('Continuous gallery track not found, skipping initialization.');
+            return;
+        }
+
+        // Full project data for the continuous gallery (matching portfolio structure)
+        const projects = [
+            {
+                id: 'williams-lake-house',
+                name: 'Lake House',
+                displayName: 'Lake House',
+                images: [
+                    'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-1-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-9-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-18-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-19-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-20-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-21-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-22-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-23-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-24-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-25-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-26-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-27-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-28-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-29-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-30-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-31-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-32-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-33-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-34-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-35-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-36-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-37-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-38-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-39-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-40-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-41-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-42-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-43-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-44-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-45-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-46-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-47-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-48-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-49-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-50-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-51-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-52-.jpg',
+                    'images/Portfolio/New Construction/lake-house/lakehouse-53-.jpg'
+                ],
+                hero_image: 'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
+                type: 'new-construction',
+                description: 'Lakeside residence designed to maximize water views and outdoor living.',
+                location: 'Charlotte, NC',
+                year: '2023'
+            },
+            {
+                id: 'split-level-makeover',
+                name: 'Split Level Makeover',
+                displayName: 'Split Level Makeover',
+                images: [
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-1-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-2-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-3-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-4-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-5-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-6-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-7-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-8-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-9-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-10-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-11-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-12-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-13-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-14-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-15-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-16-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-17-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-18-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-19-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-20-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-21-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-22-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-23-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-24-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-25-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-26-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-27-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-28-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-29-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-30-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-31-.jpg',
+                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-32-.jpg'
+                ],
+                hero_image: 'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg',
+                type: 'renovation-addition',
+                description: 'Complete split-level home transformation with modern design elements.',
+                location: 'Charlotte, NC',
+                year: '2023'
+            },
+            {
+                id: 'heavy-timber-pool-house',
+                name: 'Heavy Timber Pool House',
+                displayName: 'Heavy Timber Pool House',
+                images: [
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0503.JPG',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0506.JPG',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0523.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0524.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0525.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0526.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0527.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0528.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0529.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0530.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0531.jpg'
+                ],
+                hero_image: 'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
+                type: 'renovation-addition',
+                description: 'Custom heavy-timber-pool-house addition with rustic elegance and modern amenities.',
+                location: 'Charlotte, NC',
+                year: '2023'
+            },
+            {
+                id: 'woodland',
+                name: 'Woodland',
+                displayName: 'Woodland',
+                images: [
+                    'images/Portfolio/New Construction/Woodland/woodland-hero-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-1-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-3-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-4-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-5-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-6-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-7-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-8-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-9-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-10-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-11-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-12-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-13-.jpg',
+                    'images/Portfolio/New Construction/Woodland/woodland-14-.jpg'
+                ],
+                hero_image: 'images/Portfolio/New Construction/Woodland/woodland-hero-.jpg',
+                type: 'new-construction',
+                description: 'Natural woodland setting home with organic design elements and forest integration.',
+                location: 'Charlotte, NC',
+                year: '2023'
+            },
+            {
+                id: 'sabik',
+                name: 'Modern Craftsman',
+                displayName: 'Modern Craftsman',
+                images: [
+                    'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-1-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-2-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-3-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-4-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-5-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-6-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-7-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-8-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-9-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-10-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-11-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-12-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-13-.jpg'
+                ],
+                hero_image: 'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
+                type: 'new-construction',
+                description: 'Modern craftsman home with clean lines and natural materials.',
+                location: 'Charlotte, NC',
+                year: '2023'
+            },
+            {
+                id: 'modern-warehouse',
+                name: 'Modern Warehouse',
+                displayName: 'Modern Warehouse',
+                images: [
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-1-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-1-.jpeg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-3-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-4-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-5-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-6-.jpg',
+                    'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-7-.jpg'
+                ],
+                hero_image: 'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
+                type: 'new-construction',
+                description: 'Industrial-inspired modern home featuring open spaces and contemporary design.',
+                location: 'Charlotte, NC',
+                year: '2023'
+            }
+        ];
+
+        // Create gallery items (duplicate for seamless loop)
+        const allProjects = [...projects, ...projects, ...projects]; // Triple for smooth continuous scroll
+        
+        allProjects.forEach((project, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'continuous-gallery-item';
+            galleryItem.setAttribute('data-project-id', project.id);
+            galleryItem.innerHTML = `
+                <img src="${project.hero_image}" alt="${project.name}" class="continuous-gallery-image" loading="lazy" />
+                <div class="continuous-gallery-overlay">
+                    <div class="continuous-gallery-title">${project.name}</div>
+                </div>
+            `;
+            
+            // Add click handler for gallery modal
+            galleryItem.addEventListener('click', async (e) => {
+                e.preventDefault();
+                if (window.galleryModal && window.galleryModal.isDataAvailable()) {
+                    try {
+                        await window.galleryModal.openProject(project.id);
+                    } catch (error) {
+                        console.error('Failed to open project:', error);
+                        if (window.logger) {
+                            window.logger.error('Failed to open project from continuous gallery', { error: error.message, projectId: project.id });
+                        }
+                    }
+                }
+            });
+            
+            continuousGalleryTrack.appendChild(galleryItem);
+            galleryItems.push(galleryItem);
+        });
+
+        // Start continuous animation
+        startContinuousAnimation();
+
+        // Pause animation on hover
+        continuousGalleryTrack.addEventListener('mouseenter', () => {
+            isGalleryPaused = true;
+        });
+
+        continuousGalleryTrack.addEventListener('mouseleave', () => {
+            isGalleryPaused = false;
+            startContinuousAnimation();
+        });
+
+               console.log('Continuous gallery initialized successfully');
+               
+           } catch (error) {
+               console.error('Error initializing continuous gallery:', error);
+               if (window.logger) {
+                   window.logger.error('Continuous gallery initialization failed', { error: error.message });
+               }
+           }
+       };
+
+       // ===== GALLERY MODAL SETUP FOR HOMEPAGE =====
+       const initializeHomepageGalleryModal = () => {
+           try {
+               if (window.galleryModal && window.galleryModal.isReady()) {
+                   console.log('Setting up gallery modal for homepage');
+                   
+                   // Get the same project data used in continuous gallery
+                   const projects = [
+                       {
+                           id: 'williams-lake-house',
+                           name: 'Lake House',
+                           displayName: 'Lake House',
+                           images: [
+                               'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-1-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-9-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-18-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-19-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-20-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-21-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-22-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-23-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-24-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-25-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-26-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-27-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-28-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-29-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-30-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-31-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-32-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-33-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-34-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-35-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-36-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-37-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-38-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-39-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-40-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-41-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-42-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-43-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-44-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-45-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-46-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-47-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-48-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-49-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-50-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-51-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-52-.jpg',
+                               'images/Portfolio/New Construction/lake-house/lakehouse-53-.jpg'
+                           ],
+                           hero_image: 'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
+                           type: 'new-construction',
+                           description: 'Lakeside residence designed to maximize water views and outdoor living.',
+                           location: 'Charlotte, NC',
+                           year: '2023'
+                       },
+                       {
+                           id: 'split-level-makeover',
+                           name: 'Split Level Makeover',
+                           displayName: 'Split Level Makeover',
+                           images: [
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-1-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-2-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-3-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-4-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-5-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-6-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-7-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-8-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-9-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-10-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-11-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-12-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-13-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-14-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-15-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-16-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-17-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-18-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-19-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-20-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-21-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-22-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-23-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-24-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-25-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-26-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-27-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-28-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-29-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-30-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-31-.jpg',
+                               'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-32-.jpg'
+                           ],
+                           hero_image: 'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg',
+                           type: 'renovation-addition',
+                           description: 'Complete split-level home transformation with modern design elements.',
+                           location: 'Charlotte, NC',
+                           year: '2023'
+                       },
+                       {
+                           id: 'heavy-timber-pool-house',
+                           name: 'Heavy Timber Pool House',
+                           displayName: 'Heavy Timber Pool House',
+                           images: [
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0503.JPG',
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0506.JPG',
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0523.jpg',
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0524.jpg',
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0525.jpg',
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0526.jpg',
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0527.jpg',
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0528.jpg',
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0529.jpg',
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0530.jpg',
+                               'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0531.jpg'
+                           ],
+                           hero_image: 'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
+                           type: 'renovation-addition',
+                           description: 'Custom heavy-timber-pool-house addition with rustic elegance and modern amenities.',
+                           location: 'Charlotte, NC',
+                           year: '2023'
+                       },
+                       {
+                           id: 'woodland',
+                           name: 'Woodland',
+                           displayName: 'Woodland',
+                           images: [
+                               'images/Portfolio/New Construction/Woodland/woodland-hero-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-1-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-3-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-4-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-5-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-6-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-7-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-8-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-9-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-10-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-11-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-12-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-13-.jpg',
+                               'images/Portfolio/New Construction/Woodland/woodland-14-.jpg'
+                           ],
+                           hero_image: 'images/Portfolio/New Construction/Woodland/woodland-hero-.jpg',
+                           type: 'new-construction',
+                           description: 'Natural woodland setting home with organic design elements and forest integration.',
+                           location: 'Charlotte, NC',
+                           year: '2023'
+                       },
+                       {
+                           id: 'sabik',
+                           name: 'Modern Craftsman',
+                           displayName: 'Modern Craftsman',
+                           images: [
+                               'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-1-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-2-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-3-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-4-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-5-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-6-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-7-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-8-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-9-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-10-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-11-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-12-.jpg',
+                               'images/Portfolio/New Construction/Sabik/sabik-13-.jpg'
+                           ],
+                           hero_image: 'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
+                           type: 'new-construction',
+                           description: 'Modern craftsman home with clean lines and natural materials.',
+                           location: 'Charlotte, NC',
+                           year: '2023'
+                       },
+                       {
+                           id: 'modern-warehouse',
+                           name: 'Modern Warehouse',
+                           displayName: 'Modern Warehouse',
+                           images: [
+                               'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
+                               'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-1-.jpg',
+                               'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-1-.jpeg',
+                               'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-3-.jpg',
+                               'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-4-.jpg',
+                               'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-5-.jpg',
+                               'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-6-.jpg',
+                               'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-7-.jpg'
+                           ],
+                           hero_image: 'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
+                           type: 'new-construction',
+                           description: 'Industrial-inspired modern home featuring open spaces and contemporary design.',
+                           location: 'Charlotte, NC',
+                           year: '2023'
+                       }
+                   ];
+                   
+                   // Convert array to object keyed by project IDs
+                   const projectsObject = projects.reduce((obj, project) => {
+                       obj[project.id] = project;
+                       return obj;
+                   }, {});
+                   
+                   // Set project data in gallery modal
+                   window.galleryModal.setProjectsData(projectsObject);
+                   console.log('Gallery modal project data set for homepage');
+                   
+               } else {
+                   console.log('Gallery modal not ready yet, retrying in 100ms...');
+                   setTimeout(initializeHomepageGalleryModal, 100);
+               }
+           } catch (error) {
+               console.error('Error initializing homepage gallery modal:', error);
+               if (window.logger) {
+                   window.logger.error('Homepage gallery modal initialization failed', { error: error.message });
+               }
+           }
+       };
+
+const startContinuousAnimation = () => {
+    if (galleryAnimationId) {
+        cancelAnimationFrame(galleryAnimationId);
+    }
+    
+    let position = 0;
+    const speed = 0.5; // pixels per frame
+    
+    const animate = () => {
+        if (!isGalleryPaused && continuousGalleryTrack) {
+            position -= speed;
+            
+            // Reset position when we've scrolled through one set of projects
+            const projectWidth = 300; // Approximate width of each project
+            const projectsPerSet = 6; // Number of projects in one set
+            if (Math.abs(position) >= projectWidth * projectsPerSet) {
+                position = 0;
+            }
+            
+            continuousGalleryTrack.style.transform = `translateX(${position}px)`;
+            galleryAnimationId = requestAnimationFrame(animate);
+        }
+    };
+    
+    animate();
+};
+
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', () => {
+    try {
+    // ===== MOBILE MENU TOGGLE =====
         const mobileMenu = document.querySelector('.mobile-menu');
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         
         if (mobileMenu && mobileMenuBtn) {
-            // Function to update button icon
-            function updateButtonIcon(isOpen) {
-                if (isOpen) {
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
-                } else {
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            }
-
-            // Function to toggle menu
-            function toggleMenu() {
-                const isActive = mobileMenu.classList.contains('active');
-                
-                if (isActive) {
-                    mobileMenu.classList.remove('active');
-                    updateButtonIcon(false);
-                } else {
-                    mobileMenu.classList.add('active');
-                    updateButtonIcon(true);
-                }
-            }
-
-            // Add click event to hamburger button
-            mobileMenuBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                toggleMenu();
-            });
-
-            // Close menu when clicking on menu links
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.remove('active');
-                    updateButtonIcon(false);
-                });
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                    if (mobileMenu.classList.contains('active')) {
-                        mobileMenu.classList.remove('active');
-                        updateButtonIcon(false);
-                    }
-                }
-            });
+      // Function to update button icon
+      function updateButtonIcon(isOpen) {
+        if (isOpen) {
+          mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         }
+      }
+
+      // Function to toggle menu
+      function toggleMenu() {
+        const isActive = mobileMenu.classList.contains('active');
+        
+        if (isActive) {
+          mobileMenu.classList.remove('active');
+          updateButtonIcon(false);
+        } else {
+          mobileMenu.classList.add('active');
+          updateButtonIcon(true);
+        }
+      }
+
+      // Add click event to hamburger button
+      mobileMenuBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      // Close menu when clicking on menu links
+      const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+      mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.remove('active');
+          updateButtonIcon(false);
+        });
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+          if (mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            updateButtonIcon(false);
+          }
+        }
+      });
+    }
 
         // Initialize slideshow and swipe functionality
-        slideshowContainer = document.querySelector('.hero-slideshow');
-        dotsContainer = document.querySelector('.slideshow-dots');
-        
+    slideshowContainer = document.querySelector('.hero-slideshow');
+    dotsContainer = document.querySelector('.slideshow-dots');
+    
         if (slideshowContainer) {
-            initializeSlideshow();
-            initializeSwipe();
-        }
-
+        initializeSlideshow();
+        initializeSwipe();
+    }
+    
         // Initialize testimonials functionality
         setTimeout(() => {
             initializeTestimonialsSwipe();
         }, 100);
+
+               // Initialize continuous gallery functionality
+               setTimeout(() => {
+                   initializeContinuousGallery();
+               }, 200);
+
+               // Initialize homepage gallery modal
+               setTimeout(() => {
+                   initializeHomepageGalleryModal();
+               }, 300);
+
+               // Add debugging for gallery modal
+               setTimeout(() => {
+                   if (window.galleryModal) {
+                       console.log('Gallery Modal Status:', {
+                           isReady: window.galleryModal.isReady(),
+                           hasData: window.galleryModal.isDataAvailable(),
+                           projectCount: window.galleryModal.projectsData ? Object.keys(window.galleryModal.projectsData).length : 0
+                       });
+                   } else {
+                       console.error('Gallery Modal not found on window object');
+                   }
+               }, 500);
 
     } catch (error) {
         console.error('Error in homepage initialization:', error);

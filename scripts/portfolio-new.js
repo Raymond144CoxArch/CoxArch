@@ -939,7 +939,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         card.innerHTML = `
             <div class="project-image">
-                <img data-lazy-src="${project.hero_image}" alt="${project.name}" class="lazy-loading" />
+                <img src="${project.hero_image}" alt="${project.name}" loading="lazy" />
             </div>
             <div class="project-info">
                 <h3>${project.displayName || project.name}</h3>
@@ -1078,38 +1078,57 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ---- Gallery Modal Integration ----
-    // Ensure the gallery modal is properly initialized for portfolio project cards
-    if (window.galleryModal) {
-        logger.info('Gallery modal found, setting up portfolio integration');
-        
-        // Get project data and set it in the modal
-        const projectsData = getDefaultProjects();
-        if (projectsData) {
-            // Convert the array of projects to an object keyed by their IDs
-            const projectsObject = projectsData.reduce((obj, project) => {
-                obj[project.id] = project;
-                return obj;
-            }, {});
-            window.galleryModal.setProjectsData(projectsObject);
-            logger.success('Project data set in gallery modal for portfolio');
-        } else {
-            logger.warn('No project data found. Gallery modal cannot be initialized.');
-        }
-        
-        // Add event listeners to project cards to open the modal
-        const portfolioProjectCards = document.querySelectorAll('.project-card[data-project-id]');
-        portfolioProjectCards.forEach(card => {
-            // Remove any existing event listeners to avoid duplicates
-            card.removeEventListener('click', handlePortfolioProjectCardClick);
+    // Wait for gallery modal to be ready before setting up portfolio integration
+    const initializeGalleryModal = () => {
+        if (window.galleryModal && window.galleryModal.isReady()) {
+            logger.info('Gallery modal found and ready, setting up portfolio integration');
             
-            // Add new event listener
-            card.addEventListener('click', handlePortfolioProjectCardClick);
-        });
-        
-        logger.info(`Added click listeners to ${portfolioProjectCards.length} portfolio project cards`);
-    } else {
-        logger.error('Gallery modal not available - project cards will not work');
-    }
+            // Get project data and set it in the modal
+            const projectsData = getDefaultProjects();
+            if (projectsData) {
+                // Convert the array of projects to an object keyed by their IDs
+                const projectsObject = projectsData.reduce((obj, project) => {
+                    obj[project.id] = project;
+                    return obj;
+                }, {});
+                window.galleryModal.setProjectsData(projectsObject);
+                logger.success('Project data set in gallery modal for portfolio');
+            } else {
+                logger.warn('No project data found. Gallery modal cannot be initialized.');
+            }
+            
+            // Add event listeners to project cards to open the modal
+            const portfolioProjectCards = document.querySelectorAll('.project-card[data-project-id]');
+            portfolioProjectCards.forEach(card => {
+                // Remove any existing event listeners to avoid duplicates
+                card.removeEventListener('click', handlePortfolioProjectCardClick);
+                
+                // Add new event listener
+                card.addEventListener('click', handlePortfolioProjectCardClick);
+            });
+            
+            logger.info(`Added click listeners to ${portfolioProjectCards.length} portfolio project cards`);
+        } else {
+            logger.warn('Gallery modal not ready yet, retrying in 100ms...');
+            setTimeout(initializeGalleryModal, 100);
+        }
+    };
+    
+    // Start the initialization process
+    setTimeout(initializeGalleryModal, 100);
+
+    // Add debugging for gallery modal
+    setTimeout(() => {
+        if (window.galleryModal) {
+            console.log('Portfolio Gallery Modal Status:', {
+                isReady: window.galleryModal.isReady(),
+                hasData: window.galleryModal.isDataAvailable(),
+                projectCount: window.galleryModal.projectsData ? Object.keys(window.galleryModal.projectsData).length : 0
+            });
+        } else {
+            console.error('Gallery Modal not found on window object');
+        }
+    }, 500);
     
     // Portfolio project card click handler function
     function handlePortfolioProjectCardClick(e) {
@@ -1117,11 +1136,40 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
         
         const projectId = this.getAttribute('data-project-id');
-        logger.info('Portfolio project card clicked', { projectId, modalReady: window.galleryModal?.isReady() });
+        const modalReady = window.galleryModal?.isReady();
+        const hasData = window.galleryModal?.isDataAvailable();
+        
+        logger.info('Portfolio project card clicked', { 
+            projectId, 
+            modalReady, 
+            hasData,
+            hasGalleryModal: !!window.galleryModal,
+            projectExists: projectId && window.galleryModal?.projectsData?.[projectId] ? true : false
+        });
         
         if (projectId && window.galleryModal) {
+            if (!modalReady) {
+                logger.error('Gallery modal is not ready');
+                return;
+            }
+            
+            if (!hasData) {
+                logger.error('Gallery modal has no project data');
+                return;
+            }
+            
+            if (!window.galleryModal.projectsData[projectId]) {
+                logger.error('Project not found in gallery modal data', { 
+                    projectId, 
+                    availableProjects: Object.keys(window.galleryModal.projectsData || {})
+                });
+                return;
+            }
+            
             try {
+                logger.info('Attempting to open project', { projectId });
                 window.galleryModal.openProject(projectId);
+                logger.success('Project opened successfully', { projectId });
             } catch (error) {
                 logger.error('Failed to open project from portfolio card', error, { projectId });
             }

@@ -969,6 +969,15 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             e.stopPropagation(); // Prevent page jump
             
+            // Additional logging for debugging
+            if (window.logger) {
+                window.logger.info('Project card clicked', { 
+                    projectId: projectCard.getAttribute('data-project-id'),
+                    element: projectCard.tagName,
+                    className: projectCard.className
+                });
+            }
+            
             const projectId = projectCard.getAttribute('data-project-id');
             
             logger.info('Project card clicked', { projectId, modalReady: galleryModal.isReady() });
