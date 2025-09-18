@@ -1,6 +1,99 @@
 // Gallery Modal System
 // Handles project gallery modal with keyboard navigation, accessibility, and touch support
 
+// Mobile viewport height fix for gallery modal
+// This handles the dynamic viewport height changes in mobile browsers
+(function() {
+    'use strict';
+    
+    // Function to set the viewport height CSS custom property
+    function setViewportHeight() {
+        // Get the actual viewport height
+        const vh = window.innerHeight * 0.01;
+        // Set the CSS custom property
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        
+        // Optional: Log for debugging
+        if (window.logger) {
+            window.logger.info('Viewport height updated', { vh: vh, innerHeight: window.innerHeight });
+        }
+    }
+    
+    // Set the initial viewport height
+    setViewportHeight();
+    
+    // Update viewport height on resize (handles orientation changes and address bar show/hide)
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        // Debounce the resize events to avoid excessive calculations
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(setViewportHeight, 100);
+    });
+    
+    // Handle orientation change specifically for mobile devices
+    window.addEventListener('orientationchange', function() {
+        // Small delay to allow the browser to complete the orientation change
+        setTimeout(setViewportHeight, 250);
+    });
+    
+    // Handle visual viewport changes (for browsers that support it)
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(setViewportHeight, 50);
+        });
+    }
+    
+    // Additional handling for iOS Safari and other mobile browsers
+    // that change viewport height when scrolling
+    let lastHeight = window.innerHeight;
+    window.addEventListener('scroll', function() {
+        const currentHeight = window.innerHeight;
+        if (Math.abs(currentHeight - lastHeight) > 50) { // Significant height change
+            setViewportHeight();
+            lastHeight = currentHeight;
+        }
+    }, { passive: true });
+    
+    // Force recalculation when modal is opened/closed
+    // This will work with your existing modal system
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const target = mutation.target;
+                if (target.classList && (
+                    target.classList.contains('project-modal') || 
+                    target.classList.contains('no-scroll')
+                )) {
+                    // Modal state changed, recalculate viewport
+                    setTimeout(setViewportHeight, 100);
+                }
+            }
+        });
+    });
+    
+    // Observe changes to body class (for no-scroll) and modal elements
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    
+    // Also observe the modal container if it exists
+    document.addEventListener('DOMContentLoaded', function() {
+        const modalContainer = document.querySelector('.project-modal');
+        if (modalContainer) {
+            observer.observe(modalContainer, { attributes: true, attributeFilter: ['class'] });
+        }
+    });
+    
+    // Cleanup function (if you need to remove listeners)
+    window.cleanupViewportFix = function() {
+        observer.disconnect();
+        window.removeEventListener('resize', setViewportHeight);
+        window.removeEventListener('orientationchange', setViewportHeight);
+        if (window.visualViewport) {
+            window.visualViewport.removeEventListener('resize', setViewportHeight);
+        }
+    };
+})();
+
 class GalleryModal {
     constructor(config = {}) {
         // Centralized configuration for easy customization

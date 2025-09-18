@@ -1,7 +1,68 @@
-// Use the existing global logger - CACHE BUST v2
-const logger = window.logger;
+// Homepage JavaScript - CACHE BUST v7
+// Logger is available globally from logger.js
 
-  // Format project type for display
+// Debug: Check if logger exists
+console.log('Homepage.js loaded, logger available:', typeof window.logger);
+
+// The logger object is available globally from logger.js
+// Use window.logger directly in your code.
+
+// Image loading error handler
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle image loading errors gracefully
+    const images = document.querySelectorAll('img');
+    images.forEach(function(img) {
+        img.addEventListener('error', function(e) {
+            console.warn('Image failed to load:', e.target.src);
+            if (window.logger) {
+                window.logger.warn('Image failed to load', { src: e.target.src, alt: e.target.alt });
+            }
+            // Don't prevent default - let the browser handle the broken image
+        });
+        
+        img.addEventListener('load', function(e) {
+            // Optional: Log successful image loads for debugging
+            if (window.logger && window.logger.info) {
+                window.logger.info('Image loaded successfully', { src: e.target.src });
+            }
+        });
+    });
+    
+    // Also handle dynamically created images (like in slideshow)
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+                if (node.nodeType === 1) { // Element node
+                    if (node.tagName === 'IMG') {
+                        setupImageErrorHandling(node);
+                    } else if (node.querySelectorAll) {
+                        const newImages = node.querySelectorAll('img');
+                        newImages.forEach(setupImageErrorHandling);
+                    }
+                }
+            });
+        });
+    });
+    
+    observer.observe(document.body, { childList: true, subtree: true });
+    
+    function setupImageErrorHandling(img) {
+        img.addEventListener('error', function(e) {
+            console.warn('Dynamically created image failed to load:', e.target.src);
+            if (window.logger) {
+                window.logger.warn('Dynamically created image failed to load', { src: e.target.src, alt: e.target.alt });
+            }
+        });
+        
+        img.addEventListener('load', function(e) {
+            if (window.logger && window.logger.info) {
+                window.logger.info('Dynamically created image loaded successfully', { src: e.target.src });
+            }
+        });
+    }
+});
+
+// Format project type for display
   const formatProjectType = (type) => {
     switch (type) {
       case 'new-construction':
@@ -103,6 +164,22 @@ const stopAutoSlide = () => {
         imgElement.loading = 'lazy';
         imgElement.decoding = 'async';
         
+        // Add error handling for slideshow images
+        imgElement.addEventListener('error', function(e) {
+            console.warn('Slideshow image failed to load:', e.target.src);
+            if (window.logger) {
+                window.logger.warn('Slideshow image failed to load', { src: e.target.src, alt: e.target.alt });
+            }
+            // Hide the slide if image fails to load
+            slideItem.style.display = 'none';
+        });
+        
+        imgElement.addEventListener('load', function(e) {
+            if (window.logger && window.logger.info) {
+                window.logger.info('Slideshow image loaded successfully', { src: e.target.src });
+            }
+        });
+        
         slideItem.appendChild(imgElement);
       slideshowContainer.appendChild(slideItem);
     });
@@ -161,13 +238,213 @@ const initializeSwipe = () => {
     });
   };
 
+// ===== TESTIMONIALS SWIPE FUNCTIONALITY =====
+const initializeTestimonialsSwipe = () => {
+    try {
+        const testimonialsConveyor = document.querySelector('.testimonials-conveyor');
+        const conveyorTrack = document.querySelector('.conveyor-track');
+        
+        if (!testimonialsConveyor || !conveyorTrack) return;
+    
+    let isMobile = window.innerWidth <= 768;
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+    let initialTransform = 0;
+    let currentTransform = 0;
+    let animationId = null;
+    let isAutoScrolling = true;
+    
+    // Check if mobile and setup swipe functionality
+    const setupMobileSwipe = () => {
+        try {
+            isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // Stop auto-scroll animation on mobile
+                if (conveyorTrack && conveyorTrack.style) {
+                    conveyorTrack.style.animationPlayState = 'paused';
+                }
+                isAutoScrolling = false;
+            
+            // Add touch event listeners
+            testimonialsConveyor.addEventListener('touchstart', handleTouchStart, { passive: false });
+            testimonialsConveyor.addEventListener('touchmove', handleTouchMove, { passive: false });
+            testimonialsConveyor.addEventListener('touchend', handleTouchEnd, { passive: false });
+            
+            // Add mouse events for desktop testing
+            testimonialsConveyor.addEventListener('mousedown', handleMouseDown);
+            testimonialsConveyor.addEventListener('mousemove', handleMouseMove);
+            testimonialsConveyor.addEventListener('mouseup', handleMouseUp);
+            testimonialsConveyor.addEventListener('mouseleave', handleMouseUp);
+        } else {
+            // Resume auto-scroll animation on desktop
+            conveyorTrack.style.animationPlayState = 'running';
+            isAutoScrolling = true;
+            
+            // Remove event listeners
+            testimonialsConveyor.removeEventListener('touchstart', handleTouchStart);
+            testimonialsConveyor.removeEventListener('touchmove', handleTouchMove);
+            testimonialsConveyor.removeEventListener('touchend', handleTouchEnd);
+            testimonialsConveyor.removeEventListener('mousedown', handleMouseDown);
+            testimonialsConveyor.removeEventListener('mousemove', handleMouseMove);
+            testimonialsConveyor.removeEventListener('mouseup', handleMouseUp);
+            testimonialsConveyor.removeEventListener('mouseleave', handleMouseUp);
+        }
+        } catch (error) {
+            console.error('Error in setupMobileSwipe:', error);
+            if (window.logger) {
+                window.logger.error('Setup mobile swipe failed', { error: error.message });
+            }
+        }
+    };
+    
+    // Touch event handlers
+    const handleTouchStart = (e) => {
+        if (!isMobile) return;
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        currentX = startX;
+        
+        // Get current transform value
+        const transform = conveyorTrack.style.transform;
+        const match = transform ? transform.match(/-?\d+\.?\d*/) : null;
+        initialTransform = match ? parseFloat(match[0]) : 0;
+        currentTransform = initialTransform;
+        
+        // Stop any ongoing animation
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+        }
+    };
+    
+    const handleTouchMove = (e) => {
+        if (!isMobile || !isDragging) return;
+        
+        e.preventDefault();
+        currentX = e.touches[0].clientX;
+        const deltaX = currentX - startX;
+        currentTransform = initialTransform + deltaX;
+        
+        // Apply transform with momentum
+        conveyorTrack.style.transform = `translateX(${currentTransform}px)`;
+    };
+    
+    const handleTouchEnd = (e) => {
+        if (!isMobile || !isDragging) return;
+        
+        isDragging = false;
+        const deltaX = currentX - startX;
+        const velocity = Math.abs(deltaX) / 100; // Simple velocity calculation
+        
+        // Determine if swipe was significant enough
+        if (Math.abs(deltaX) > 50 || velocity > 0.5) {
+            // Calculate how many testimonials to move
+            const testimonialWidth = 300; // Mobile testimonial width + gap
+            const moveAmount = Math.round(deltaX / testimonialWidth);
+            
+            // Apply smooth transition to new position
+            const targetTransform = currentTransform - (moveAmount * testimonialWidth);
+            animateToPosition(targetTransform);
+        } else {
+            // Snap back to current position
+            animateToPosition(initialTransform);
+        }
+    };
+    
+    // Mouse event handlers (for desktop testing)
+    const handleMouseDown = (e) => {
+        if (!isMobile) return;
+        isDragging = true;
+        startX = e.clientX;
+        currentX = startX;
+        
+        const transform = conveyorTrack.style.transform;
+        const match = transform ? transform.match(/-?\d+\.?\d*/) : null;
+        initialTransform = match ? parseFloat(match[0]) : 0;
+        currentTransform = initialTransform;
+        
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+        }
+    };
+    
+    const handleMouseMove = (e) => {
+        if (!isMobile || !isDragging) return;
+        
+        e.preventDefault();
+        currentX = e.clientX;
+        const deltaX = currentX - startX;
+        currentTransform = initialTransform + deltaX;
+        
+        conveyorTrack.style.transform = `translateX(${currentTransform}px)`;
+    };
+    
+    const handleMouseUp = (e) => {
+        if (!isMobile || !isDragging) return;
+        
+        isDragging = false;
+        const deltaX = currentX - startX;
+        const velocity = Math.abs(deltaX) / 100;
+        
+        if (Math.abs(deltaX) > 50 || velocity > 0.5) {
+            const testimonialWidth = 300;
+            const moveAmount = Math.round(deltaX / testimonialWidth);
+            const targetTransform = currentTransform - (moveAmount * testimonialWidth);
+            animateToPosition(targetTransform);
+        } else {
+            animateToPosition(initialTransform);
+        }
+    };
+    
+    // Smooth animation to target position
+    const animateToPosition = (targetTransform) => {
+        const startTransform = currentTransform;
+        const distance = targetTransform - startTransform;
+        const duration = 300; // 300ms animation
+        const startTime = performance.now();
+        
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function (ease-out)
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            
+            const currentPosition = startTransform + (distance * easeOut);
+            conveyorTrack.style.transform = `translateX(${currentPosition}px)`;
+            
+            if (progress < 1) {
+                animationId = requestAnimationFrame(animate);
+            } else {
+                currentTransform = targetTransform;
+                animationId = null;
+            }
+        };
+        
+        animationId = requestAnimationFrame(animate);
+    };
+    
+        // Initialize on load and resize
+        setupMobileSwipe();
+        window.addEventListener('resize', setupMobileSwipe);
+    } catch (error) {
+        console.error('Error initializing testimonials swipe:', error);
+        if (window.logger) {
+            window.logger.error('Testimonials swipe initialization failed', { error: error.message });
+        }
+    }
+};
+
   // Wait for DOM to be ready
   document.addEventListener('DOMContentLoaded', () => {
+    try {
     // ===== MOBILE MENU TOGGLE =====
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    
-    if (mobileMenu && mobileMenuBtn) {
+    try {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        
+        if (mobileMenu && mobileMenuBtn) {
       // Function to update button icon
       function updateButtonIcon(isOpen) {
         if (isOpen) {
@@ -216,19 +493,44 @@ const initializeSwipe = () => {
         }
       });
     }
+    } catch (error) {
+        console.error('Error initializing mobile menu:', error);
+        if (window.logger) {
+            window.logger.error('Mobile menu initialization failed', { error: error.message });
+        }
+    }
 
     // Initialize slideshow containers after DOM is ready
     slideshowContainer = document.querySelector('.hero-slideshow');
     dotsContainer = document.querySelector('.slideshow-dots');
     
     // Initialize slideshow and swipe functionality
-    initializeSlideshow();
-    initializeSwipe();
+    try {
+        initializeSlideshow();
+        initializeSwipe();
+    } catch (error) {
+        console.error('Error initializing slideshow:', error);
+        if (window.logger) {
+            window.logger.error('Slideshow initialization failed', { error: error.message });
+        }
+    }
+    
+    // Initialize testimonials swipe functionality
+    try {
+        // Delay testimonials initialization to ensure DOM is fully ready
+        setTimeout(() => {
+            initializeTestimonialsSwipe();
+        }, 100);
+    } catch (error) {
+        console.error('Error initializing testimonials swipe:', error);
+        if (window.logger) {
+            window.logger.error('Testimonials swipe failed', { error: error.message });
+        }
+    }
     
     // Check if gallery modal is available and working
     setTimeout(() => {
         if (window.galleryModal) {
-            console.log('✅ Gallery modal is available');
             
             // Set up project data for featured projects
             const projectData = {
@@ -283,19 +585,21 @@ const initializeSwipe = () => {
             };
             
             window.galleryModal.setProjectsData(projectData);
-            console.log('✅ Project data set for gallery modal');
-            console.log('🏊 Heavy Timber Pool House hero image:', projectData['heavy-timber-pool-house'].images[0]);
   } else {
             console.warn('⚠️ Gallery modal not found - featured projects may not work');
         }
         
         // Test featured project click handlers
         const featuredProjects = document.querySelectorAll('.featured-project[data-project-id]');
-        console.log(`📋 Found ${featuredProjects.length} featured projects with data-project-id`);
         
         featuredProjects.forEach((project, index) => {
             const projectId = project.getAttribute('data-project-id');
-            console.log(`📋 Featured project ${index + 1}: ${projectId}`);
         });
     }, 1000);
+    } catch (error) {
+        console.error('Error in homepage initialization:', error);
+        if (window.logger) {
+            window.logger.error('Homepage initialization failed', { error: error.message });
+        }
+    }
 });

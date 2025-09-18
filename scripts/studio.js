@@ -1,11 +1,10 @@
-console.log('=== STUDIO.JS LOADED ===');
+// Studio.js loaded
 
 // Test if we can find buttons immediately
-console.log('Immediate button check:', document.querySelectorAll('.bio-toggle-btn').length);
+// Check buttons immediately
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('=== DOM CONTENT LOADED ===');
-  console.log('Buttons found on DOM ready:', document.querySelectorAll('.bio-toggle-btn').length);
+  // DOM content loaded
   const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
   const mobileMenu = document.querySelector('.mobile-menu');
 
@@ -60,15 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Simple bio toggle for mobile
-  console.log('Setting up bio toggle...');
-  console.log('Current window width:', window.innerWidth);
   
   // Test button visibility
   const buttons = document.querySelectorAll('.bio-toggle-btn');
-  buttons.forEach((btn, i) => {
-    console.log(`Button ${i}:`, btn);
-    console.log(`Button display:`, window.getComputedStyle(btn).display);
-  });
   
   setupBioToggle();
   
@@ -77,67 +70,45 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Debug function - call this in console to test
   window.testBioToggle = function() {
-    console.log('=== TESTING BIO TOGGLE ===');
+    // Testing bio toggle functionality
     const buttons = document.querySelectorAll('.bio-toggle-btn');
-    console.log('Found buttons:', buttons.length);
-    buttons.forEach((btn, i) => {
-      console.log(`Button ${i}:`, btn);
-      console.log(`Button style display:`, window.getComputedStyle(btn).display);
-      console.log(`Button visible:`, btn.offsetWidth > 0 && btn.offsetHeight > 0);
-      console.log(`Button text:`, btn.textContent);
-    });
-    
     const bios = document.querySelectorAll('.member-bio');
-    console.log('Found bios:', bios.length);
-    bios.forEach((bio, i) => {
-      console.log(`Bio ${i}:`, bio);
-      console.log(`Bio classes:`, bio.className);
-      console.log(`Bio style max-height:`, window.getComputedStyle(bio).maxHeight);
-      console.log(`Bio style opacity:`, window.getComputedStyle(bio).opacity);
-      console.log(`Bio style display:`, window.getComputedStyle(bio).display);
-    });
     
     // Try manual toggle
     const firstBio = document.getElementById('craig-bio');
     if (firstBio) {
-      console.log('Testing manual toggle on Craig bio...');
       firstBio.classList.add('expanded');
-      console.log('Added expanded class');
-      console.log('Bio classes after:', firstBio.className);
     }
   };
   
   // Simple test function
   window.simpleTest = function() {
-    console.log('=== SIMPLE TEST ===');
+    // Simple test functionality
     const button = document.querySelector('.bio-toggle-btn');
     const bio = document.getElementById('craig-bio');
     
-    console.log('Button found:', !!button);
-    console.log('Bio found:', !!bio);
-    
-    if (button) {
-      console.log('Button display:', window.getComputedStyle(button).display);
-      console.log('Button clickable:', button.offsetWidth > 0 && button.offsetHeight > 0);
-    }
-    
-    if (bio) {
-      console.log('Bio max-height:', window.getComputedStyle(bio).maxHeight);
-      console.log('Bio opacity:', window.getComputedStyle(bio).opacity);
-    }
+    // Test button and bio elements
+    return {
+      buttonFound: !!button,
+      bioFound: !!bio,
+      buttonDisplay: button ? window.getComputedStyle(button).display : null,
+      buttonClickable: button ? button.offsetWidth > 0 && button.offsetHeight > 0 : false,
+      bioMaxHeight: bio ? window.getComputedStyle(bio).maxHeight : null,
+      bioOpacity: bio ? window.getComputedStyle(bio).opacity : null
+    };
   };
 });
 
 function loadUpdatedBios() {
   const studioBios = JSON.parse(localStorage.getItem('studioBios') || '{}');
 
-  console.log('Loading studio bios:', studioBios);
+  // Loading studio bios
   
   // Clear any localhost image URLs from localStorage
   let needsClearing = false;
   Object.keys(studioBios).forEach(key => {
     if (studioBios[key].image && studioBios[key].image.includes('127.0.0.1')) {
-      console.log('Clearing localhost image URL for', key);
+      // Clearing localhost image URL
       delete studioBios[key].image;
       needsClearing = true;
     }
@@ -145,24 +116,24 @@ function loadUpdatedBios() {
   
   if (needsClearing) {
     localStorage.setItem('studioBios', JSON.stringify(studioBios));
-    console.log('Updated localStorage to remove localhost URLs');
+    // Updated localStorage to remove localhost URLs
   }
 
   // Update Craig Cox bio
   if (studioBios.craig) {
-    console.log('Updating Craig bio:', studioBios.craig);
+    // Updating Craig bio
     updateTeamMemberBio('craig', studioBios.craig);
   }
 
   // Update Raymond Gross bio
   if (studioBios.raymond) {
-    console.log('Updating Raymond bio:', studioBios.raymond);
+    // Updating Raymond bio
     updateTeamMemberBio('raymond', studioBios.raymond);
   }
 
   // Update Gregory Bartley bio
   if (studioBios.greg) {
-    console.log('Updating Gregory bio:', studioBios.greg);
+    // Updating Gregory bio
     updateTeamMemberBio('greg', studioBios.greg);
   }
 }
@@ -171,7 +142,7 @@ function updateTeamMemberBio(userKey, bioData) {
   // let memberSelector, // Unused variable
   let nameSelector, titleSelector, bioSelector, imageSelector;
 
-  console.log(`Updating bio for ${userKey}:`, bioData);
+  // Updating bio for team member
 
   // Map user keys to DOM selectors
   switch (userKey) {
@@ -197,7 +168,7 @@ function updateTeamMemberBio(userKey, bioData) {
       imageSelector = '.team-member:nth-child(2) .team-photo';
       break;
     default:
-      console.log('Unknown user key:', userKey);
+      // Unknown user key
       return;
   }
 
@@ -207,27 +178,22 @@ function updateTeamMemberBio(userKey, bioData) {
   const bioElement = document.querySelector(bioSelector);
   const imageElement = document.querySelector(imageSelector);
 
-  console.log('Found elements:', {
-    name: nameElement,
-    title: titleElement,
-    bio: bioElement,
-    image: imageElement
-  });
+  // Found elements for bio update
 
   if (nameElement && bioData.name) {
     // Ensure Gregory Bartley's name is always "Gregory Bartley" not "Greg Bartley"
     if (userKey === 'greg' && bioData.name === 'Greg Bartley') {
       nameElement.textContent = 'Gregory Bartley';
-      console.log('Updated name to: Gregory Bartley (corrected from Greg Bartley)');
+      // Updated name to: Gregory Bartley (corrected from Greg Bartley)
     } else {
       nameElement.textContent = bioData.name;
-      console.log('Updated name to:', bioData.name);
+      // Updated name
     }
   }
 
   if (titleElement && bioData.title) {
     titleElement.textContent = bioData.title;
-    console.log('Updated title to:', bioData.title);
+    // Updated title
   }
 
   if (bioElement && bioData.bio) {
@@ -255,16 +221,16 @@ function updateTeamMemberBio(userKey, bioData) {
     
     // IMPORTANT: Ensure bio stays hidden after content update
     bioElement.classList.remove('expanded');
-    console.log('Updated bio with paragraphs and ensured it stays hidden:', paragraphs);
+    // Updated bio with paragraphs and ensured it stays hidden
   }
 
   if (imageElement && bioData.image) {
     // Only update image if bioData.image is a valid URL and not a localhost path
     if (bioData.image && bioData.image.startsWith('http') && !bioData.image.includes('127.0.0.1')) {
       imageElement.src = bioData.image;
-      console.log('Updated image to:', bioData.image);
+      // Updated image
     } else {
-      console.log('Skipping image update - invalid or localhost URL:', bioData.image);
+      // Skipping image update - invalid or localhost URL
     }
   }
 }
@@ -272,32 +238,32 @@ function updateTeamMemberBio(userKey, bioData) {
 // Simple bio toggle function
 function setupBioToggle() {
   const buttons = document.querySelectorAll('.bio-toggle-btn');
-  console.log('Found', buttons.length, 'bio toggle buttons');
+  // Found bio toggle buttons
   
   buttons.forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
-      console.log('Button clicked!');
+      // Button clicked
       
       const targetId = this.getAttribute('data-target');
       const bio = document.getElementById(targetId);
       
       if (bio) {
-        console.log('Found bio element:', targetId);
+        // Found bio element
         
         if (bio.classList.contains('expanded')) {
           // Hide bio
           bio.classList.remove('expanded');
           this.classList.remove('expanded');
-          console.log('Bio hidden');
+          // Bio hidden
         } else {
           // Show bio
           bio.classList.add('expanded');
           this.classList.add('expanded');
-          console.log('Bio shown');
+          // Bio shown
         }
       } else {
-        console.error('Bio not found:', targetId);
+        // Bio not found
       }
     });
   });

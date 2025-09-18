@@ -1,0 +1,39 @@
+{
+  "redirects": [
+    {
+      "source": "/homepage.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio.html",
+      "destination": "/ourwork",
+      "permanent": true
+    },
+    {
+      "source": "/studio.html",
+      "destination": "/studio",
+      "permanent": true
+    },
+    {
+      "source": "/press.html",
+      "destination": "/press",
+      "permanent": true
+    },
+    {
+      "source": "/careers.html",
+      "destination": "/careers",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/404.html",
+      "destination": "/404",
+      "permanent": true
+    }
+  ]
+}

@@ -1652,16 +1652,30 @@ body.homepage .contact-btn:hover {
     .testimonials-conveyor {
         margin: 2rem 0;
         padding: 0.75rem 0;
+        overflow: hidden; /* Hide overflow for swipe functionality */
+        position: relative;
+        cursor: grab;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+    
+    .testimonials-conveyor:active {
+        cursor: grabbing;
     }
     
     .conveyor-track {
         gap: 1.5rem;
         animation-duration: 45s;
+        transition: transform 0.3s ease-out; /* Smooth transitions for swipe */
+        will-change: transform;
     }
     
     .testimonial-item {
         flex: 0 0 300px;
         padding: 1rem 1.25rem;
+        touch-action: pan-x; /* Allow horizontal panning */
     }
     
     .testimonial-content p {
