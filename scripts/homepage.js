@@ -1,11 +1,8 @@
-// Homepage JavaScript - CACHE BUST v7
+// Homepage JavaScript - CACHE BUST v9 (Clean Modern Testimonials)
 // Logger is available globally from logger.js
 
 // Debug: Check if logger exists
-console.log('Homepage.js loaded, logger available:', typeof window.logger);
-
-// The logger object is available globally from logger.js
-// Use window.logger directly in your code.
+// console.log('Homepage.js loaded, logger available:', typeof window.logger);
 
 // Image loading error handler
 document.addEventListener('DOMContentLoaded', function() {
@@ -17,66 +14,17 @@ document.addEventListener('DOMContentLoaded', function() {
             if (window.logger) {
                 window.logger.warn('Image failed to load', { src: e.target.src, alt: e.target.alt });
             }
-            // Don't prevent default - let the browser handle the broken image
         });
         
         img.addEventListener('load', function(e) {
-            // Optional: Log successful image loads for debugging
             if (window.logger && window.logger.info) {
                 window.logger.info('Image loaded successfully', { src: e.target.src });
             }
         });
     });
-    
-    // Also handle dynamically created images (like in slideshow)
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            mutation.addedNodes.forEach(function(node) {
-                if (node.nodeType === 1) { // Element node
-                    if (node.tagName === 'IMG') {
-                        setupImageErrorHandling(node);
-                    } else if (node.querySelectorAll) {
-                        const newImages = node.querySelectorAll('img');
-                        newImages.forEach(setupImageErrorHandling);
-                    }
-                }
-            });
-        });
-    });
-    
-    observer.observe(document.body, { childList: true, subtree: true });
-    
-    function setupImageErrorHandling(img) {
-        img.addEventListener('error', function(e) {
-            console.warn('Dynamically created image failed to load:', e.target.src);
-            if (window.logger) {
-                window.logger.warn('Dynamically created image failed to load', { src: e.target.src, alt: e.target.alt });
-            }
-        });
-        
-        img.addEventListener('load', function(e) {
-            if (window.logger && window.logger.info) {
-                window.logger.info('Dynamically created image loaded successfully', { src: e.target.src });
-            }
-        });
-    }
 });
 
-// Format project type for display
-  const formatProjectType = (type) => {
-    switch (type) {
-      case 'new-construction':
-        return 'New Construction';
-      case 'renovation-addition':
-        return 'Renovation + Addition';
-      default:
-        return type;
-    }
-  };
-
-// Global event listener manager instance (removed - not needed)
-
-// ===== HOMEPAGE SLIDESHOW - CONSOLIDATED & CORRECTED =====
+// ===== HOMEPAGE SLIDESHOW =====
 let slideshowContainer;
 let dotsContainer;
 let currentSlide = 0;
@@ -113,7 +61,6 @@ window.previousSlide = () => {
 };
 
 const startAutoSlide = () => {
-    // Clear any existing interval to prevent duplicates
     clearInterval(slideInterval);
     slideInterval = setInterval(window.nextSlide, 5000);
 };
@@ -122,8 +69,8 @@ const stopAutoSlide = () => {
     clearInterval(slideInterval);
 };
 
-// Load slideshow images - simplified for clarity
-  const getDefaultImages = () => {
+// Load slideshow images
+const getDefaultImages = () => {
     const isMobile = window.innerWidth <= 768;
     return isMobile ? [
         'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
@@ -140,9 +87,9 @@ const stopAutoSlide = () => {
         'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
         'images/HeroProjects/hero-19.jpg'
     ];
-  };
+};
 
-  const initializeSlideshow = async () => {
+const initializeSlideshow = async () => {
     if (!slideshowContainer) {
         return;
     }
@@ -164,13 +111,11 @@ const stopAutoSlide = () => {
         imgElement.loading = 'lazy';
         imgElement.decoding = 'async';
         
-        // Add error handling for slideshow images
         imgElement.addEventListener('error', function(e) {
             console.warn('Slideshow image failed to load:', e.target.src);
             if (window.logger) {
                 window.logger.warn('Slideshow image failed to load', { src: e.target.src, alt: e.target.alt });
             }
-            // Hide the slide if image fails to load
             slideItem.style.display = 'none';
         });
         
@@ -197,8 +142,8 @@ const stopAutoSlide = () => {
             dot.addEventListener('click', () => {
           currentSlide = index;
                 window.showSlide(currentSlide);
-                stopAutoSlide(); // Stop auto-advance on manual interaction
-                startAutoSlide(); // Restart after a delay
+                stopAutoSlide();
+                startAutoSlide();
             });
         dotsContainer.appendChild(dot);
       });
@@ -218,7 +163,7 @@ const initializeSwipe = () => {
 
     slideshowContainer.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
-        stopAutoSlide(); // Stop auto-advance while swiping
+        stopAutoSlide();
     }, { passive: true });
 
     slideshowContainer.addEventListener('touchend', (e) => {
@@ -227,438 +172,312 @@ const initializeSwipe = () => {
 
     if (Math.abs(swipeDistance) > swipeThreshold) {
       if (swipeDistance > 0) {
-                // Swiped left
                 window.nextSlide();
       } else {
-                // Swiped right
                 window.previousSlide();
             }
         }
-        startAutoSlide(); // Restart auto-advance after swipe ends
+        startAutoSlide();
     });
   };
 
-// ===== TESTIMONIALS SWIPE FUNCTIONALITY =====
+// ===== TESTIMONIALS FUNCTIONALITY (Clean Modern Design) =====
 const initializeTestimonialsSwipe = () => {
     try {
-        console.log('Initializing testimonials swipe...');
-        const testimonialsConveyor = document.querySelector('.testimonials-conveyor');
-        const conveyorTrack = document.querySelector('.conveyor-track');
-        
-        console.log('Testimonials elements found:', {
-            conveyor: !!testimonialsConveyor,
-            track: !!conveyorTrack,
-            windowWidth: window.innerWidth,
-            isMobile: window.innerWidth <= 768
-        });
-        
-        if (!testimonialsConveyor || !conveyorTrack) {
-            console.log('Testimonials elements not found, exiting');
+        const testimonialsSection = document.querySelector('.testimonials-section');
+        if (!testimonialsSection) {
+            // console.log('Testimonials section not found, skipping initialization.');
             return;
         }
-    
-    let isMobile = window.innerWidth <= 768;
-    let isDragging = false;
-    let startX = 0;
-    let currentX = 0;
-    let initialTransform = 0;
-    let currentTransform = 0;
-    let animationId = null;
-    let isAutoScrolling = true;
-    
-    // Check if mobile and setup swipe functionality
-    const setupMobileSwipe = () => {
-        try {
-            isMobile = window.innerWidth <= 768;
-            console.log('Setting up mobile swipe, isMobile:', isMobile, 'width:', window.innerWidth);
+
+        const testimonialsTrack = testimonialsSection.querySelector('.testimonials-track');
+        if (!testimonialsTrack) {
+            console.error('Testimonials track not found.');
+            return;
+        }
+
+        const cards = testimonialsSection.querySelectorAll('.testimonial-card');
+        if (cards.length === 0) {
+            // console.log('No testimonial cards found.');
+            return;
+        }
+        
+        let isDragging = false;
+        let startX = 0;
+        let startScrollLeft = 0;
+        let animationId = null;
+        let isAutoScrolling = true;
+
+        // Check if screen is mobile (width <= 768px)
+        const isMobile = () => window.innerWidth <= 768;
+
+        // Desktop Auto-Scrolling Functionality
+        const startAutoScroll = () => {
+            if (isMobile() || !isAutoScrolling) return;
             
-            if (isMobile) {
-                console.log('Setting up mobile touch events...');
-                // Stop auto-scroll animation on mobile
-                if (conveyorTrack && conveyorTrack.style) {
-                    conveyorTrack.style.animationPlayState = 'paused';
+            const scrollSpeed = 1; // pixels per frame
+            const animate = () => {
+                if (isAutoScrolling && !isDragging && !isMobile()) {
+                    testimonialsTrack.scrollLeft += scrollSpeed;
+                    
+                    // Reset to beginning when we reach the end
+                    if (testimonialsTrack.scrollLeft >= testimonialsTrack.scrollWidth - testimonialsTrack.clientWidth) {
+                        testimonialsTrack.scrollLeft = 0;
+                    }
                 }
-                isAutoScrolling = false;
-                
-                // Add touch event listeners
-                testimonialsConveyor.addEventListener('touchstart', handleTouchStart, { passive: false });
-                testimonialsConveyor.addEventListener('touchmove', handleTouchMove, { passive: false });
-                testimonialsConveyor.addEventListener('touchend', handleTouchEnd, { passive: false });
-                
-                // Add mouse events for desktop testing
-                testimonialsConveyor.addEventListener('mousedown', handleMouseDown);
-                testimonialsConveyor.addEventListener('mousemove', handleMouseMove);
-                testimonialsConveyor.addEventListener('mouseup', handleMouseUp);
-                testimonialsConveyor.addEventListener('mouseleave', handleMouseUp);
-                
-                console.log('Mobile touch events added successfully');
-        } else {
-            // Resume auto-scroll animation on desktop
-            conveyorTrack.style.animationPlayState = 'running';
-            isAutoScrolling = true;
-            
-            // Remove event listeners
-            testimonialsConveyor.removeEventListener('touchstart', handleTouchStart);
-            testimonialsConveyor.removeEventListener('touchmove', handleTouchMove);
-            testimonialsConveyor.removeEventListener('touchend', handleTouchEnd);
-            testimonialsConveyor.removeEventListener('mousedown', handleMouseDown);
-            testimonialsConveyor.removeEventListener('mousemove', handleMouseMove);
-            testimonialsConveyor.removeEventListener('mouseup', handleMouseUp);
-            testimonialsConveyor.removeEventListener('mouseleave', handleMouseUp);
-        }
-        } catch (error) {
-            console.error('Error in setupMobileSwipe:', error);
-            if (window.logger) {
-                window.logger.error('Setup mobile swipe failed', { error: error.message });
-            }
-        }
-    };
-    
-    // Touch event handlers
-    const handleTouchStart = (e) => {
-        console.log('Touch start detected, isMobile:', isMobile);
-        if (!isMobile) return;
-        
-        startX = e.touches[0].clientX;
-        const startY = e.touches[0].clientY;
-        
-        // Store initial touch position for direction detection
-        e.touchStartX = startX;
-        e.touchStartY = startY;
-        
-        // Don't start dragging immediately - wait for movement to determine direction
-        isDragging = false;
-        currentX = startX;
-        
-        // Get current transform value
-        const transform = conveyorTrack.style.transform;
-        const match = transform ? transform.match(/-?\d+\.?\d*/) : null;
-        initialTransform = match ? parseFloat(match[0]) : 0;
-        currentTransform = initialTransform;
-        
-        // Stop any ongoing animation
-        if (animationId) {
-            cancelAnimationFrame(animationId);
-        }
-    };
-    
-    const handleTouchMove = (e) => {
-        if (!isMobile) return;
-        
-        const currentX = e.touches[0].clientX;
-        const currentY = e.touches[0].clientY;
-        const deltaX = currentX - startX;
-        const deltaY = currentY - e.touchStartY;
-        
-        // If we're not dragging yet, determine if this is a horizontal swipe
-        if (!isDragging) {
-            const absDeltaX = Math.abs(deltaX);
-            const absDeltaY = Math.abs(deltaY);
-            
-            // Only start dragging if horizontal movement is greater than vertical
-            if (absDeltaX > 10 && absDeltaX > absDeltaY) {
-                console.log('Starting horizontal swipe drag...');
-                isDragging = true;
-                e.preventDefault(); // Prevent scrolling for horizontal swipes
-            } else if (absDeltaY > 10) {
-                // This is a vertical swipe, don't interfere with page scrolling
-                console.log('Vertical swipe detected, allowing page scroll');
-                return;
-            }
-        }
-        
-        // Only handle horizontal dragging
-        if (isDragging) {
-            console.log('Touch move detected - horizontal drag');
-            e.preventDefault(); // Prevent scrolling during horizontal drag
-            currentTransform = initialTransform + deltaX;
-            
-            // Apply transform with momentum
-            conveyorTrack.style.transform = `translateX(${currentTransform}px)`;
-        }
-    };
-    
-    const handleTouchEnd = (e) => {
-        if (!isMobile || !isDragging) return;
-        
-        isDragging = false;
-        const deltaX = currentX - startX;
-        const velocity = Math.abs(deltaX) / 100; // Simple velocity calculation
-        
-        // Determine if swipe was significant enough
-        if (Math.abs(deltaX) > 50 || velocity > 0.5) {
-            // Calculate how many testimonials to move
-            const testimonialWidth = 300; // Mobile testimonial width + gap
-            const moveAmount = Math.round(deltaX / testimonialWidth);
-            
-            // Apply smooth transition to new position
-            const targetTransform = currentTransform - (moveAmount * testimonialWidth);
-            animateToPosition(targetTransform);
-        } else {
-            // Snap back to current position
-            animateToPosition(initialTransform);
-        }
-    };
-    
-    // Mouse event handlers (for desktop testing)
-    const handleMouseDown = (e) => {
-        if (!isMobile) return;
-        isDragging = true;
-        startX = e.clientX;
-        currentX = startX;
-        
-        const transform = conveyorTrack.style.transform;
-        const match = transform ? transform.match(/-?\d+\.?\d*/) : null;
-        initialTransform = match ? parseFloat(match[0]) : 0;
-        currentTransform = initialTransform;
-        
-        if (animationId) {
-            cancelAnimationFrame(animationId);
-        }
-    };
-    
-    const handleMouseMove = (e) => {
-        if (!isMobile || !isDragging) return;
-        
-        e.preventDefault();
-        currentX = e.clientX;
-        const deltaX = currentX - startX;
-        currentTransform = initialTransform + deltaX;
-        
-        conveyorTrack.style.transform = `translateX(${currentTransform}px)`;
-    };
-    
-    const handleMouseUp = (e) => {
-        if (!isMobile || !isDragging) return;
-        
-        isDragging = false;
-        const deltaX = currentX - startX;
-        const velocity = Math.abs(deltaX) / 100;
-        
-        if (Math.abs(deltaX) > 50 || velocity > 0.5) {
-            const testimonialWidth = 300;
-            const moveAmount = Math.round(deltaX / testimonialWidth);
-            const targetTransform = currentTransform - (moveAmount * testimonialWidth);
-            animateToPosition(targetTransform);
-        } else {
-            animateToPosition(initialTransform);
-        }
-    };
-    
-    // Smooth animation to target position
-    const animateToPosition = (targetTransform) => {
-        const startTransform = currentTransform;
-        const distance = targetTransform - startTransform;
-        const duration = 300; // 300ms animation
-        const startTime = performance.now();
-        
-        const animate = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            // Easing function (ease-out)
-            const easeOut = 1 - Math.pow(1 - progress, 3);
-            
-            const currentPosition = startTransform + (distance * easeOut);
-            conveyorTrack.style.transform = `translateX(${currentPosition}px)`;
-            
-            if (progress < 1) {
                 animationId = requestAnimationFrame(animate);
+            };
+            animate();
+        };
+
+        // Mobile Swipe Functionality
+        const setupMobileSwipe = () => {
+            if (isMobile()) {
+                // Stop auto-scroll on mobile
+                isAutoScrolling = false;
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+
+                // Calculate total width needed for all cards
+                let totalWidth = 0;
+                cards.forEach(card => {
+                    totalWidth += card.offsetWidth;
+                });
+                
+                // Add gaps between cards
+                const gap = parseFloat(window.getComputedStyle(testimonialsTrack).gap) || 30;
+                totalWidth += (cards.length - 1) * gap;
+                
+                // Add padding for better UX
+                totalWidth += 32; // 16px padding on each side
+
+                // Set the track width to accommodate all cards
+                testimonialsTrack.style.width = `${totalWidth}px`;
+                testimonialsTrack.style.overflowX = 'scroll';
+                testimonialsTrack.style.scrollBehavior = 'auto';
+
+                // Add event listeners for mobile swipe
+                testimonialsTrack.addEventListener('mousedown', startDrag);
+                testimonialsTrack.addEventListener('touchstart', startDrag, { passive: false });
+                window.addEventListener('mouseup', endDrag);
+                window.addEventListener('touchend', endDrag);
+                window.addEventListener('mousemove', doDrag);
+                window.addEventListener('touchmove', doDrag, { passive: false });
+
+                // Add visual feedback
+                testimonialsTrack.style.cursor = 'grab';
             } else {
-                currentTransform = targetTransform;
-                animationId = null;
+                // Desktop setup
+                isAutoScrolling = true;
+                testimonialsTrack.style.width = '';
+                testimonialsTrack.style.overflowX = 'visible';
+                testimonialsTrack.style.cursor = 'default';
+                
+                // Remove event listeners for desktop
+                testimonialsTrack.removeEventListener('mousedown', startDrag);
+                testimonialsTrack.removeEventListener('touchstart', startDrag);
+                window.removeEventListener('mouseup', endDrag);
+                window.removeEventListener('touchend', endDrag);
+                window.removeEventListener('mousemove', doDrag);
+                window.removeEventListener('touchmove', doDrag);
+
+                // Start auto-scroll for desktop
+                startAutoScroll();
             }
         };
+
+        const startDrag = (e) => {
+            if (!isMobile()) return;
+            
+            isDragging = true;
+            startX = e.pageX || e.touches[0].pageX;
+            startScrollLeft = testimonialsTrack.scrollLeft;
+            
+            // Visual feedback
+            testimonialsTrack.style.cursor = 'grabbing';
+            testimonialsTrack.style.scrollBehavior = 'auto';
+        };
+
+        const doDrag = (e) => {
+            if (!isDragging || !isMobile()) return;
+            
+            e.preventDefault();
+            const x = e.pageX || e.touches[0].pageX;
+            const walk = (x - startX) * 2; // Adjust sensitivity
+            testimonialsTrack.scrollLeft = startScrollLeft - walk;
+        };
+
+        const endDrag = () => {
+            if (!isDragging) return;
+            
+            isDragging = false;
+            testimonialsTrack.style.cursor = 'grab';
+            testimonialsTrack.style.scrollBehavior = 'smooth';
+        };
+
+        // Pause auto-scroll on hover (desktop only)
+        const handleMouseEnter = () => {
+            if (!isMobile()) {
+                isAutoScrolling = false;
+            }
+        };
+
+        const handleMouseLeave = () => {
+            if (!isMobile()) {
+                isAutoScrolling = true;
+                startAutoScroll();
+            }
+        };
+
+        // Initialize functionality
+        setupMobileSwipe();
         
-        animationId = requestAnimationFrame(animate);
-    };
-    
-    // Initialize on load and resize
-    setupMobileSwipe();
-    
-    // Only add resize listener once
-    if (!window.testimonialsResizeListenerAdded) {
-        window.addEventListener('resize', setupMobileSwipe);
-        window.testimonialsResizeListenerAdded = true;
-    }
-    
-    // Additional initialization check
-    setTimeout(() => {
-        console.log('Delayed testimonials check:', {
-            conveyor: !!testimonialsConveyor,
-            track: !!conveyorTrack,
-            conveyorStyle: testimonialsConveyor ? window.getComputedStyle(testimonialsConveyor).display : 'not found',
-            trackStyle: conveyorTrack ? window.getComputedStyle(conveyorTrack).display : 'not found'
+        // Add hover listeners for desktop
+        if (!isMobile()) {
+            testimonialsSection.addEventListener('mouseenter', handleMouseEnter);
+            testimonialsSection.addEventListener('mouseleave', handleMouseLeave);
+        }
+        
+        // Handle window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                // Remove old event listeners
+                testimonialsSection.removeEventListener('mouseenter', handleMouseEnter);
+                testimonialsSection.removeEventListener('mouseleave', handleMouseLeave);
+                
+                // Stop current animation
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+                
+                // Reinitialize
+                setupMobileSwipe();
+                
+                // Re-add hover listeners if desktop
+                if (!isMobile()) {
+                    testimonialsSection.addEventListener('mouseenter', handleMouseEnter);
+                    testimonialsSection.addEventListener('mouseleave', handleMouseLeave);
+                }
+            }, 100); // Debounce resize events
         });
-    }, 1000);
+
+        // Add keyboard navigation support
+        testimonialsTrack.addEventListener('keydown', (e) => {
+            if (!isMobile()) return;
+            
+            const scrollAmount = 300; // Pixels to scroll per key press
+            
+            switch (e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    testimonialsTrack.scrollLeft -= scrollAmount;
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    testimonialsTrack.scrollLeft += scrollAmount;
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    testimonialsTrack.scrollLeft = 0;
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    testimonialsTrack.scrollLeft = testimonialsTrack.scrollWidth;
+                    break;
+            }
+        });
+
+        // Make track focusable for keyboard navigation
+        testimonialsTrack.setAttribute('tabindex', '0');
+        testimonialsTrack.setAttribute('role', 'region');
+        testimonialsTrack.setAttribute('aria-label', 'Testimonials carousel');
+
+        // console.log('Clean modern testimonials functionality initialized successfully');
+        
     } catch (error) {
-        console.error('Error initializing testimonials swipe:', error);
+        console.error('Error initializing testimonials:', error);
         if (window.logger) {
-            window.logger.error('Testimonials swipe initialization failed', { error: error.message });
+            window.logger.error('Testimonials initialization failed', { error: error.message });
         }
     }
 };
 
-  // Wait for DOM to be ready
-  document.addEventListener('DOMContentLoaded', () => {
+// Wait for DOM to be ready
+document.addEventListener('DOMContentLoaded', () => {
     try {
-    // ===== MOBILE MENU TOGGLE =====
-    try {
+        // ===== MOBILE MENU TOGGLE =====
         const mobileMenu = document.querySelector('.mobile-menu');
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         
         if (mobileMenu && mobileMenuBtn) {
-      // Function to update button icon
-      function updateButtonIcon(isOpen) {
-        if (isOpen) {
-          mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
-        } else {
-          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-        }
-      }
+            // Function to update button icon
+            function updateButtonIcon(isOpen) {
+                if (isOpen) {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
 
-      // Function to toggle menu
-      function toggleMenu() {
-        const isActive = mobileMenu.classList.contains('active');
+            // Function to toggle menu
+            function toggleMenu() {
+                const isActive = mobileMenu.classList.contains('active');
+                
+                if (isActive) {
+                    mobileMenu.classList.remove('active');
+                    updateButtonIcon(false);
+                } else {
+                    mobileMenu.classList.add('active');
+                    updateButtonIcon(true);
+                }
+            }
+
+            // Add click event to hamburger button
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMenu();
+            });
+
+            // Close menu when clicking on menu links
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    updateButtonIcon(false);
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        updateButtonIcon(false);
+                    }
+                }
+            });
+        }
+
+        // Initialize slideshow and swipe functionality
+        slideshowContainer = document.querySelector('.hero-slideshow');
+        dotsContainer = document.querySelector('.slideshow-dots');
         
-        if (isActive) {
-          mobileMenu.classList.remove('active');
-          updateButtonIcon(false);
-        } else {
-          mobileMenu.classList.add('active');
-          updateButtonIcon(true);
+        if (slideshowContainer) {
+            initializeSlideshow();
+            initializeSwipe();
         }
-      }
 
-      // Add click event to hamburger button
-      mobileMenuBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleMenu();
-      });
-
-      // Close menu when clicking on menu links
-      const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-      mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          mobileMenu.classList.remove('active');
-          updateButtonIcon(false);
-        });
-      });
-
-      // Close menu when clicking outside
-      document.addEventListener('click', function(e) {
-        if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-          if (mobileMenu.classList.contains('active')) {
-            mobileMenu.classList.remove('active');
-            updateButtonIcon(false);
-          }
-        }
-      });
-    }
-    } catch (error) {
-        console.error('Error initializing mobile menu:', error);
-        if (window.logger) {
-            window.logger.error('Mobile menu initialization failed', { error: error.message });
-        }
-    }
-
-    // Initialize slideshow containers after DOM is ready
-    slideshowContainer = document.querySelector('.hero-slideshow');
-    dotsContainer = document.querySelector('.slideshow-dots');
-    
-    // Initialize slideshow and swipe functionality
-    try {
-        initializeSlideshow();
-        initializeSwipe();
-    } catch (error) {
-        console.error('Error initializing slideshow:', error);
-        if (window.logger) {
-            window.logger.error('Slideshow initialization failed', { error: error.message });
-        }
-    }
-    
-    // Initialize testimonials swipe functionality
-    try {
-        // Delay testimonials initialization to ensure DOM is fully ready
+        // Initialize testimonials functionality
         setTimeout(() => {
             initializeTestimonialsSwipe();
         }, 100);
-    } catch (error) {
-        console.error('Error initializing testimonials swipe:', error);
-        if (window.logger) {
-            window.logger.error('Testimonials swipe failed', { error: error.message });
-        }
-    }
-    
-    // Check if gallery modal is available and working
-    setTimeout(() => {
-        if (window.galleryModal) {
-            
-            // Set up project data for featured projects
-            const projectData = {
-                'williams-lake-house': {
-          name: 'Lake House',
-          type: 'New Construction',
-          images: [
-            'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
-                        'images/Portfolio/New Construction/lake-house/lakehouse-1-.jpg',
-                        'images/Portfolio/New Construction/lake-house/lakehouse-9-.jpg',
-                        'images/Portfolio/New Construction/lake-house/lakehouse-18-.jpg',
-            'images/Portfolio/New Construction/lake-house/lakehouse-19-.jpg',
-                        'images/Portfolio/New Construction/lake-house/lakehouse-20-.jpg',
-                        'images/Portfolio/New Construction/lake-house/lakehouse-21-.jpg',
-                        'images/Portfolio/New Construction/lake-house/lakehouse-22-.jpg',
-                        'images/Portfolio/New Construction/lake-house/lakehouse-23-.jpg',
-                        'images/Portfolio/New Construction/lake-house/lakehouse-24-.jpg'
-                    ]
-                },
-                'split-level-makeover': {
-                    name: 'Split Level Makeover',
-                    type: 'Renovation + Addition',
-          images: [
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-hero-.jpg',
-                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-1-.jpg',
-                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-2-.jpg',
-                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-3-.jpg',
-                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-4-.jpg',
-                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-5-.jpg',
-                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-6-.jpg',
-            'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-7-.jpg',
-                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-8-.jpg',
-                        'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-10-.jpg'
-                    ]
-                },
-                'heavy-timber-pool-house': {
-                    name: 'Heavy Timber Pool House',
-                    type: 'Renovation + Addition',
-          images: [
-            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
-            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/heavy-timber_01.jpg',
-            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0503.JPG',
-            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0506.JPG',
-            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0523.jpg',
-            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0526.jpg',
-            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0527.jpg',
-            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0528.jpg',
-            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0529.JPG',
-            'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0531.jpg'
-                    ]
-                }
-            };
-            
-            window.galleryModal.setProjectsData(projectData);
-  } else {
-            console.warn('⚠️ Gallery modal not found - featured projects may not work');
-        }
-        
-        // Test featured project click handlers
-        const featuredProjects = document.querySelectorAll('.featured-project[data-project-id]');
-        
-        featuredProjects.forEach((project, index) => {
-            const projectId = project.getAttribute('data-project-id');
-        });
-    }, 1000);
+
     } catch (error) {
         console.error('Error in homepage initialization:', error);
         if (window.logger) {

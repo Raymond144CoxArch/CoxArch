@@ -1,0 +1,403 @@
+/* Modern Clean Testimonials CSS - BULLETPROOF STYLES */
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+
+/* CRITICAL: Override any conflicting styles from other CSS files */
+html body .testimonials-section .testimonial-card,
+html body .testimonials-section .testimonial-item {
+  background: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  padding: 2rem !important;
+  margin: 0 !important;
+  width: 90vw !important;
+  max-width: 350px !important;
+  min-height: 250px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+}
+
+.testimonials-section {
+  padding: 6rem 0;
+  background-color: #f7f7f7;
+  overflow: hidden;
+}
+
+.testimonials-container {
+  overflow: hidden;
+  padding: 0 1rem;
+}
+
+.testimonials-track {
+  display: flex;
+  width: fit-content;
+  gap: 30px;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  will-change: transform;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 1rem 0 2rem 0;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.testimonials-track::-webkit-scrollbar {
+  display: none;
+}
+
+.testimonials-track:active {
+  cursor: grabbing;
+}
+
+/* Clean Modern Testimonial Card */
+.testimonials-section .testimonial-card {
+  flex-shrink: 0 !important;
+  width: 90vw !important;
+  max-width: 350px !important;
+  min-height: 250px !important;
+  padding: 2rem !important;
+  background-color: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.testimonial-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* BULLETPROOF: Testimonial text styles - OVERRIDES ALL OTHER CSS */
+html body .testimonials-section .testimonial-card .testimonial-content p,
+html body .testimonials-section .testimonial-item .testimonial-content p,
+html body .testimonials-section p {
+  font-family: 'Kalam', cursive !important;
+  font-size: 1.1rem !important;
+  line-height: 1.6 !important;
+  color: #333 !important;
+  margin-bottom: 1.5rem !important;
+  text-align: left !important;
+  flex-grow: 1 !important;
+  font-weight: 400 !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: none !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  font-style: normal !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+/* BULLETPROOF: Author name styles - OVERRIDES ALL OTHER CSS */
+html body .testimonials-section .testimonial-card .testimonial-author,
+html body .testimonials-section .testimonial-item .testimonial-author,
+html body .testimonials-section .testimonial-author {
+  font-family: 'Permanent Marker', cursive !important;
+  font-weight: normal !important;
+  font-size: 1.1rem !important;
+  margin-top: auto !important;
+  color: var(--accent-color) !important;
+  text-align: right !important;
+  font-style: italic !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  max-width: 100% !important;
+  text-decoration: none !important;
+}
+
+/* BULLETPROOF: Quotation marks - OVERRIDES ALL OTHER CSS */
+html body .testimonials-section .quote-mark,
+html body .testimonials-section .testimonial-card .quote-mark,
+html body .testimonials-section .testimonial-item .quote-mark {
+  font-family: 'Permanent Marker', cursive !important;
+  font-weight: normal !important;
+  color: #333 !important;
+  font-size: 1.2em !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  font-style: normal !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+/* Desktop Auto-Scrolling Layout */
+@media (min-width: 769px) {
+  .testimonials-section {
+    padding: 5rem 0;
+  }
+  
+  .testimonials-container {
+    padding: 0 2rem;
+  }
+  
+  .testimonials-track {
+    display: flex;
+    width: fit-content;
+    gap: 2rem;
+    white-space: nowrap;
+    overflow: visible;
+    cursor: default;
+    padding: 0;
+    animation: scrollTestimonials 30s linear infinite;
+  }
+  
+  .testimonials-track:hover {
+    animation-play-state: paused;
+  }
+  
+  .testimonials-section .testimonial-card {
+    flex: 0 0 400px !important;
+    width: 400px !important;
+    max-width: none !important;
+    min-height: 180px !important;
+    padding: 1.5rem 2rem !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+  
+  body .testimonials-section .testimonial-card .testimonial-content p {
+    font-family: 'Kalam', cursive !important;
+    font-size: 1.1rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1rem !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    font-weight: 400 !important;
+  }
+  
+  body .testimonials-section .testimonial-card .testimonial-author {
+    font-size: 1.1rem !important;
+    font-family: 'Permanent Marker', cursive !important;
+    font-weight: normal !important;
+    color: var(--accent-color) !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Auto-scroll animation */
+@keyframes scrollTestimonials {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Large Desktop Adjustments */
+@media (min-width: 1024px) {
+  .testimonials-container {
+    padding: 0 4rem;
+  }
+  
+  .testimonial-card {
+    flex: 0 0 420px;
+    width: 420px;
+    min-height: 200px;
+    padding: 2rem 2.5rem;
+  }
+  
+  body .testimonials-section .testimonial-card .testimonial-content p {
+    font-family: 'Kalam', cursive !important;
+    font-size: 1.2rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1.2rem !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    font-weight: 400 !important;
+  }
+  
+  body .testimonials-section .testimonial-card .testimonial-author {
+    font-size: 1.2rem !important;
+    font-family: 'Permanent Marker', cursive !important;
+    font-weight: normal !important;
+    color: var(--accent-color) !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 480px) {
+  .testimonials-section {
+    padding: 4rem 0;
+  }
+  
+  .testimonials-container {
+    padding: 0 0.5rem;
+  }
+  
+  .testimonial-card {
+    width: 85vw;
+    max-width: 320px;
+    min-height: 220px;
+    padding: 1.5rem;
+  }
+  
+  body .testimonials-section .testimonial-card .testimonial-content p {
+    font-family: 'Kalam', cursive !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    font-weight: 400 !important;
+  }
+  
+  body .testimonials-section .testimonial-card .testimonial-author {
+    font-size: 1rem !important;
+    font-family: 'Permanent Marker', cursive !important;
+    font-weight: normal !important;
+    color: var(--accent-color) !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-track {
+    animation: none;
+  }
+  
+  .testimonial-card {
+    transition: none;
+  }
+  
+  .testimonial-card:hover {
+    transform: none;
+  }
+}
+
+/* Focus states for keyboard navigation */
+.testimonials-track:focus-within {
+  outline: 2px solid var(--accent-color, #ff7900);
+  outline-offset: 2px;
+}
+
+/* ===== FINAL OVERRIDE - THESE STYLES CANNOT BE OVERRIDDEN ===== */
+/* This section ensures our testimonial styles are permanent and cannot be changed by any other CSS */
+
+html body .testimonials-section * {
+  box-sizing: border-box !important;
+}
+
+/* Force testimonial cards to use our exact styling */
+html body .testimonials-section .testimonial-card,
+html body .testimonials-section .testimonial-item {
+  background: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  padding: 2rem !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+}
+
+/* Force all testimonial text to use Kalam font */
+html body .testimonials-section p:not(.quote-mark) {
+  font-family: 'Kalam', cursive !important;
+  color: #333 !important;
+  font-weight: 400 !important;
+  hyphens: none !important;
+  white-space: normal !important;
+  overflow: visible !important;
+}
+
+/* Force all author names to use Permanent Marker font in orange */
+html body .testimonials-section .testimonial-author {
+  font-family: 'Permanent Marker', cursive !important;
+  color: var(--accent-color) !important;
+  font-weight: normal !important;
+  text-align: right !important;
+  font-style: italic !important;
+}
+
+/* Force quotation marks to use Permanent Marker font in dark gray */
+html body .testimonials-section .quote-mark {
+  font-family: 'Permanent Marker', cursive !important;
+  color: #333 !important;
+  font-weight: normal !important;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .testimonial-card {
+    border: 2px solid #000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .testimonial-content p {
+    color: #000;
+  }
+  
+  .testimonial-author {
+    color: #000 !important;
+    font-family: 'Permanent Marker', cursive !important;
+    font-weight: normal !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+  }
+}

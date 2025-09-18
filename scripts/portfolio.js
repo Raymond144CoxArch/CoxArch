@@ -542,7 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
         projects = getDefaultProjects();
         // Expose projects globally for gallery modal
         window.portfolioProjects = projects;
-        console.log('✅ Loaded projects from file system:', projects.length);
+        // console.log('✅ Loaded projects from file system:', projects.length);
     };
 
     // Initialize projects
@@ -576,7 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Display projects in grid
     const displayProjects = (projectsToShow) => {
-        console.log('Displaying projects:', projectsToShow.length);
+        // console.log('Displaying projects:', projectsToShow.length);
         if (!projectGrid) {
             console.error('Project grid not found!');
             return;
@@ -589,7 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
             projectGrid.appendChild(projectCard);
         });
         
-        console.log('Projects displayed in grid');
+        // console.log('Projects displayed in grid');
     };
 
     // Create project card element
@@ -692,7 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        console.log('✅ Search functionality initialized');
+        // console.log('✅ Search functionality initialized');
     } else {
         console.warn('⚠️ Search input not found - search functionality disabled');
     }
@@ -700,5 +700,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize with all projects
     filterProjects('all');
     
-    console.log('✅ Portfolio page initialized');
+    // console.log('✅ Portfolio page initialized');
 });

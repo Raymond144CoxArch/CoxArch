@@ -1636,7 +1636,7 @@ body.homepage .contact-btn:hover {
 
 .google-logo-img,
 .houzz-logo-img {
-    max-width: 120px;
+    max-width: 160px;
     height: auto;
     transition: all 0.3s ease;
 }
@@ -1708,7 +1708,7 @@ body.homepage .contact-btn:hover {
     
     .google-logo-img,
     .houzz-logo-img {
-        max-width: 100px;
+        max-width: 140px;
     }
 }
 
@@ -1745,7 +1745,7 @@ body.homepage .contact-btn:hover {
     
     .google-logo-img,
     .houzz-logo-img {
-        max-width: 80px;
+        max-width: 120px;
     }
 }
 

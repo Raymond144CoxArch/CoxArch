@@ -65,103 +65,228 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// ===== TESTIMONIALS SWIPE FUNCTIONALITY =====
+// ===== TESTIMONIALS FUNCTIONALITY (Clean Modern Design) =====
 const initializeTestimonialsSwipe = () => {
     try {
         const testimonialsSection = document.querySelector('.testimonials-section');
         if (!testimonialsSection) {
-            console.log('Testimonials section not found, skipping swipe initialization.');
+            // console.log('Testimonials section not found, skipping initialization.');
             return;
         }
 
-        const conveyorTrack = testimonialsSection.querySelector('.conveyor-track');
-        if (!conveyorTrack) {
-            console.error('Testimonials conveyor track not found.');
+        const testimonialsTrack = testimonialsSection.querySelector('.testimonials-track');
+        if (!testimonialsTrack) {
+            console.error('Testimonials track not found.');
             return;
         }
 
-        const cards = testimonialsSection.querySelectorAll('.testimonial-item');
+        const cards = testimonialsSection.querySelectorAll('.testimonial-card');
         if (cards.length === 0) {
-            console.log('No testimonial cards found.');
+            // console.log('No testimonial cards found.');
             return;
         }
-
-        let isDragging = false;
-        let startX = 0;
+    
+    let isDragging = false;
+    let startX = 0;
         let startScrollLeft = 0;
-        let currentTransform = 0;
-        let animationId = null;
+    let animationId = null;
+    let isAutoScrolling = true;
+    
+        // Check if screen is mobile (width <= 768px)
+        const isMobile = () => window.innerWidth <= 768;
 
+        // Desktop Auto-Scrolling Functionality
+        const startAutoScroll = () => {
+            if (isMobile() || !isAutoScrolling) return;
+            
+            const scrollSpeed = 1; // pixels per frame
+            const animate = () => {
+                if (isAutoScrolling && !isDragging && !isMobile()) {
+                    testimonialsTrack.scrollLeft += scrollSpeed;
+                    
+                    // Reset to beginning when we reach the end
+                    if (testimonialsTrack.scrollLeft >= testimonialsTrack.scrollWidth - testimonialsTrack.clientWidth) {
+                        testimonialsTrack.scrollLeft = 0;
+                    }
+                }
+                animationId = requestAnimationFrame(animate);
+            };
+            animate();
+        };
+
+        // Mobile Swipe Functionality
         const setupMobileSwipe = () => {
-            const isMobile = window.innerWidth <= 768;
-            if (isMobile) {
-                // Bug Fix: Calculate total width of all cards
+            if (isMobile()) {
+                // Stop auto-scroll on mobile
+                isAutoScrolling = false;
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+
+                // Calculate total width needed for all cards
                 let totalWidth = 0;
                 cards.forEach(card => {
                     totalWidth += card.offsetWidth;
                 });
-                // Add margins
-                const cardMargin = parseFloat(window.getComputedStyle(cards[0]).marginRight);
-                totalWidth += (cards.length - 1) * cardMargin;
+                
+                // Add gaps between cards
+                const gap = parseFloat(window.getComputedStyle(testimonialsTrack).gap) || 30;
+                totalWidth += (cards.length - 1) * gap;
+                
+                // Add padding for better UX
+                totalWidth += 32; // 16px padding on each side
 
-                conveyorTrack.style.width = `${totalWidth}px`;
+                // Set the track width to accommodate all cards
+                testimonialsTrack.style.width = `${totalWidth}px`;
+                testimonialsTrack.style.overflowX = 'scroll';
+                testimonialsTrack.style.scrollBehavior = 'auto';
 
-                // Add event listeners
-                conveyorTrack.addEventListener('mousedown', startDrag);
-                conveyorTrack.addEventListener('touchstart', startDrag);
+                // Add event listeners for mobile swipe
+                testimonialsTrack.addEventListener('mousedown', startDrag);
+                testimonialsTrack.addEventListener('touchstart', startDrag, { passive: false });
                 window.addEventListener('mouseup', endDrag);
                 window.addEventListener('touchend', endDrag);
                 window.addEventListener('mousemove', doDrag);
-                window.addEventListener('touchmove', doDrag);
+                window.addEventListener('touchmove', doDrag, { passive: false });
+
+                // Add visual feedback
+                testimonialsTrack.style.cursor = 'grab';
             } else {
-                conveyorTrack.style.width = ''; // Reset width for desktop
-                // Remove listeners for desktop
-                conveyorTrack.removeEventListener('mousedown', startDrag);
-                conveyorTrack.removeEventListener('touchstart', startDrag);
+                // Desktop setup
+                isAutoScrolling = true;
+                testimonialsTrack.style.width = '';
+                testimonialsTrack.style.overflowX = 'visible';
+                testimonialsTrack.style.cursor = 'default';
+                
+                // Remove event listeners for desktop
+                testimonialsTrack.removeEventListener('mousedown', startDrag);
+                testimonialsTrack.removeEventListener('touchstart', startDrag);
                 window.removeEventListener('mouseup', endDrag);
                 window.removeEventListener('touchend', endDrag);
                 window.removeEventListener('mousemove', doDrag);
                 window.removeEventListener('touchmove', doDrag);
+
+                // Start auto-scroll for desktop
+                startAutoScroll();
             }
         };
 
         const startDrag = (e) => {
-            isDragging = true;
+            if (!isMobile()) return;
+            
+                isDragging = true;
             startX = e.pageX || e.touches[0].pageX;
-            startScrollLeft = conveyorTrack.scrollLeft;
-            // Stop any existing animation
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-            }
-            conveyorTrack.style.cursor = 'grabbing';
+            startScrollLeft = testimonialsTrack.scrollLeft;
+            
+            // Visual feedback
+            testimonialsTrack.style.cursor = 'grabbing';
+            testimonialsTrack.style.scrollBehavior = 'auto';
         };
 
         const doDrag = (e) => {
-            if (!isDragging) return;
+            if (!isDragging || !isMobile()) return;
+            
             e.preventDefault();
             const x = e.pageX || e.touches[0].pageX;
             const walk = (x - startX) * 2; // Adjust sensitivity
-            conveyorTrack.scrollLeft = startScrollLeft - walk;
+            testimonialsTrack.scrollLeft = startScrollLeft - walk;
         };
 
         const endDrag = () => {
+            if (!isDragging) return;
+            
             isDragging = false;
-            conveyorTrack.style.cursor = 'grab';
+            testimonialsTrack.style.cursor = 'grab';
+            testimonialsTrack.style.scrollBehavior = 'smooth';
         };
 
-        // Initialize on load and resize
+        // Pause auto-scroll on hover (desktop only)
+        const handleMouseEnter = () => {
+            if (!isMobile()) {
+                isAutoScrolling = false;
+            }
+        };
+
+        const handleMouseLeave = () => {
+            if (!isMobile()) {
+                isAutoScrolling = true;
+                startAutoScroll();
+            }
+        };
+
+        // Initialize functionality
         setupMobileSwipe();
         
-        // Only add resize listener once
-        if (!window.testimonialsResizeListenerAdded) {
-            window.addEventListener('resize', setupMobileSwipe);
-            window.testimonialsResizeListenerAdded = true;
+        // Add hover listeners for desktop
+        if (!isMobile()) {
+            testimonialsSection.addEventListener('mouseenter', handleMouseEnter);
+            testimonialsSection.addEventListener('mouseleave', handleMouseLeave);
         }
+        
+        // Handle window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                // Remove old event listeners
+                testimonialsSection.removeEventListener('mouseenter', handleMouseEnter);
+                testimonialsSection.removeEventListener('mouseleave', handleMouseLeave);
+                
+                // Stop current animation
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+                
+                // Reinitialize
+                setupMobileSwipe();
+                
+                // Re-add hover listeners if desktop
+                if (!isMobile()) {
+                    testimonialsSection.addEventListener('mouseenter', handleMouseEnter);
+                    testimonialsSection.addEventListener('mouseleave', handleMouseLeave);
+                }
+            }, 100); // Debounce resize events
+        });
+
+        // Add keyboard navigation support
+        testimonialsTrack.addEventListener('keydown', (e) => {
+            if (!isMobile()) return;
+            
+            const scrollAmount = 300; // Pixels to scroll per key press
+            
+            switch (e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    testimonialsTrack.scrollLeft -= scrollAmount;
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    testimonialsTrack.scrollLeft += scrollAmount;
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    testimonialsTrack.scrollLeft = 0;
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    testimonialsTrack.scrollLeft = testimonialsTrack.scrollWidth;
+                    break;
+            }
+        });
+
+        // Make track focusable for keyboard navigation
+        testimonialsTrack.setAttribute('tabindex', '0');
+        testimonialsTrack.setAttribute('role', 'region');
+        testimonialsTrack.setAttribute('aria-label', 'Testimonials carousel');
+
+        // console.log('Clean modern testimonials functionality initialized successfully');
+        
     } catch (error) {
-        console.error('Error initializing testimonials swipe:', error);
+        console.error('Error initializing testimonials:', error);
         if (window.logger) {
-            window.logger.error('Testimonials swipe initialization failed', { error: error.message });
+            window.logger.error('Testimonials initialization failed', { error: error.message });
         }
     }
 };

@@ -68,7 +68,7 @@ html.no-scroll {
     cursor: pointer;
 }
 
-/* Modal Container - Fixed for mobile viewport */
+/* Modal Container - Fixed for mobile viewport and browser UI */
 .modal-container {
     position: relative;
     width: 80%;
@@ -85,14 +85,19 @@ html.no-scroll {
     overflow: hidden;
     min-height: 0;
     max-height: 90vh;
-    /* Mobile browser UI safe areas */
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+    /* Enhanced mobile browser UI safe areas */
+    padding-top: max(env(safe-area-inset-top, 0px), 20px);
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 20px);
     padding-left: env(safe-area-inset-left, 0px);
     padding-right: env(safe-area-inset-right, 0px);
+    /* Ensure container respects mobile browser UI */
+    box-sizing: border-box;
+    /* Prevent content from being hidden behind browser UI */
+    margin-top: max(env(safe-area-inset-top, 0px), 20px);
+    margin-bottom: max(env(safe-area-inset-bottom, 0px), 20px);
 }
 
-/* Modal Header - Fixed for close button overlap */
+/* Modal Header - Fixed for close button overlap and mobile browser UI */
 .modal-header {
     position: sticky;
     top: 0;
@@ -105,6 +110,13 @@ html.no-scroll {
     z-index: 10;
     flex-shrink: 0;
     min-height: 80px; /* Ensure consistent header height */
+    /* Enhanced mobile browser UI protection */
+    padding-top: max(1.5rem, env(safe-area-inset-top, 0px) + 1rem);
+    margin-top: 0;
+    /* Ensure header is never cut off */
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
 }
 
 .modal-title-section {
@@ -1013,4 +1025,38 @@ body.fullscreen-active {
 /* JavaScript viewport height fix for mobile browsers */
 :root {
     --vh: 1vh;
+}
+
+/* CRITICAL: Ensure modal header is never cut off on any device */
+.project-modal .modal-header {
+    /* Force header to always be visible */
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    background-color: #fff !important;
+    border-bottom: 1px solid #e5e5e5 !important;
+    /* Enhanced mobile browser UI protection */
+    padding-top: max(1.5rem, env(safe-area-inset-top, 0px) + 1rem) !important;
+    margin-top: 0 !important;
+    /* Ensure minimum height for touch targets */
+    min-height: max(80px, env(safe-area-inset-top, 0px) + 60px) !important;
+    /* Prevent any overflow issues */
+    overflow: visible !important;
+    /* Ensure header stays above all content */
+    transform: translateZ(0) !important;
+    will-change: transform !important;
+}
+
+/* Ensure modal container respects mobile browser UI on all devices */
+.project-modal .modal-container {
+    /* Enhanced safe area handling */
+    padding-top: max(env(safe-area-inset-top, 0px), 20px) !important;
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 20px) !important;
+    /* Prevent content from being hidden */
+    margin-top: max(env(safe-area-inset-top, 0px), 20px) !important;
+    margin-bottom: max(env(safe-area-inset-bottom, 0px), 20px) !important;
+    /* Ensure proper box sizing */
+    box-sizing: border-box !important;
+    /* Prevent overflow issues */
+    overflow: hidden !important;
 }
