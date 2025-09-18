@@ -584,8 +584,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         projectGrid.innerHTML = '';
 
-        projectsToShow.forEach(project => {
-            const projectCard = createProjectCard(project);
+        projectsToShow.forEach((project, index) => {
+            const projectCard = createProjectCard(project, index);
             projectGrid.appendChild(projectCard);
         });
         
@@ -593,7 +593,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Create project card element
-    const createProjectCard = (project) => {
+    const createProjectCard = (project, index = 0) => {
         const card = document.createElement('div');
         card.className = 'project-card';
         card.setAttribute('data-project-id', project.id);
@@ -601,15 +601,30 @@ document.addEventListener('DOMContentLoaded', () => {
         // Use hero_image if available, otherwise use first image
         const heroImage = project.hero_image || (project.images && project.images.length > 0 ? project.images[0] : '');
         
+        // Only use lazy loading for images beyond the first 6 (above the fold)
+        const shouldLazyLoad = index >= 6;
+        const loadingAttribute = shouldLazyLoad ? 'loading="lazy"' : 'loading="eager"';
+        
         card.innerHTML = `
             <div class="project-image">
-                <img src="${heroImage}" alt="${project.name}" loading="lazy" />
+                <img src="${heroImage}" alt="${project.name}" ${loadingAttribute} decoding="async" />
             </div>
             <div class="project-info">
                 <h3>${project.displayName || project.name}</h3>
                 <p class="project-type">${formatProjectType(project.type)}</p>
             </div>
         `;
+        
+        // Add image loading optimization to prevent flashing
+        const img = card.querySelector('img');
+        if (img) {
+            // Preload the image to prevent flashing
+            const preloadImg = new Image();
+            preloadImg.onload = () => {
+                img.classList.add('loaded');
+            };
+            preloadImg.src = heroImage;
+        }
         
         // Project cards now open modal instead of navigating to separate pages
         // Click event is handled by gallery-modal.js via event delegation
