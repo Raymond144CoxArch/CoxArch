@@ -303,7 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-6-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-7-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-8-.jpg',
-                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-9-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-10-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-11-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-12-.jpg',

@@ -274,9 +274,9 @@ const initializeTestimonialsSwipe = () => {
 
                 // Add visual feedback
                 testimonialsTrack.style.cursor = 'grab';
-            } else {
+        } else {
                 // Desktop setup
-                isAutoScrolling = true;
+            isAutoScrolling = true;
                 testimonialsTrack.style.width = '';
                 testimonialsTrack.style.overflowX = 'visible';
                 testimonialsTrack.style.cursor = 'default';
@@ -489,7 +489,6 @@ const initializeContinuousGallery = () => {
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-6-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-7-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-8-.jpg',
-                    'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-9-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-10-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-11-.jpg',
                     'images/Portfolio/Renovation+Addition/split-level-makeover/splitlevelmakerover-12-.jpg',
@@ -530,13 +529,10 @@ const initializeContinuousGallery = () => {
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0503.JPG',
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0506.JPG',
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0523.jpg',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0524.jpg',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0525.jpg',
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0526.jpg',
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0527.jpg',
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0528.jpg',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0529.jpg',
-                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0530.jpg',
+                    'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0529.JPG',
                     'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/IMG_0531.jpg'
                 ],
                 hero_image: 'images/Portfolio/Renovation+Addition/heavy-timber-pool-house/hero.png',
@@ -577,19 +573,18 @@ const initializeContinuousGallery = () => {
                 displayName: 'Modern Craftsman',
                 images: [
                     'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
-                    'images/Portfolio/New Construction/Sabik/sabik-1-.jpg',
-                    'images/Portfolio/New Construction/Sabik/sabik-2-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-3-.jpg',
-                    'images/Portfolio/New Construction/Sabik/sabik-4-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-5-.jpg',
-                    'images/Portfolio/New Construction/Sabik/sabik-6-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-7-.jpg',
-                    'images/Portfolio/New Construction/Sabik/sabik-8-.jpg',
-                    'images/Portfolio/New Construction/Sabik/sabik-9-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-10-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-11-.jpg',
                     'images/Portfolio/New Construction/Sabik/sabik-12-.jpg',
-                    'images/Portfolio/New Construction/Sabik/sabik-13-.jpg'
+                    'images/Portfolio/New Construction/Sabik/sabik-13-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-14-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-15-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-16-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-17-.jpg',
+                    'images/Portfolio/New Construction/Sabik/sabik-18-.jpg'
                 ],
                 hero_image: 'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
                 type: 'new-construction',
@@ -635,7 +630,7 @@ const initializeContinuousGallery = () => {
             
             // Add click handler for gallery modal
             galleryItem.addEventListener('click', async (e) => {
-                e.preventDefault();
+        e.preventDefault();
                 if (window.galleryModal && window.galleryModal.isDataAvailable()) {
                     try {
                         await window.galleryModal.openProject(project.id);
@@ -888,7 +883,7 @@ const initializeContinuousGallery = () => {
                    window.galleryModal.setProjectsData(projectsObject);
                    console.log('Gallery modal project data set for homepage');
                    
-               } else {
+            } else {
                    console.log('Gallery modal not ready yet, retrying in 100ms...');
                    setTimeout(initializeHomepageGalleryModal, 100);
                }
@@ -999,7 +994,7 @@ const startContinuousAnimation = () => {
         }, 100);
 
                // Initialize continuous gallery functionality
-               setTimeout(() => {
+    setTimeout(() => {
                    initializeContinuousGallery();
                }, 200);
 
@@ -1007,6 +1002,22 @@ const startContinuousAnimation = () => {
                setTimeout(() => {
                    initializeHomepageGalleryModal();
                }, 300);
+
+               // Ensure featured project images are loaded
+               setTimeout(() => {
+                   const featuredProjectImages = document.querySelectorAll('.featured-project img');
+                   featuredProjectImages.forEach(img => {
+                       if (img.src && !img.complete) {
+                           console.log('Loading featured project image:', img.src);
+                           img.addEventListener('load', () => {
+                               console.log('Featured project image loaded:', img.src);
+                           });
+                           img.addEventListener('error', (e) => {
+                               console.error('Featured project image failed to load:', img.src, e);
+                           });
+                       }
+                   });
+               }, 100);
 
                // Add debugging for gallery modal
                setTimeout(() => {
@@ -1016,7 +1027,7 @@ const startContinuousAnimation = () => {
                            hasData: window.galleryModal.isDataAvailable(),
                            projectCount: window.galleryModal.projectsData ? Object.keys(window.galleryModal.projectsData).length : 0
                        });
-                   } else {
+  } else {
                        console.error('Gallery Modal not found on window object');
                    }
                }, 500);
