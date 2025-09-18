@@ -644,31 +644,9 @@ body.portfolio-page .see-more-work-container {
         transition: max-height 0.3s ease;
     }
     
-    .thumbnails-toggle {
-        position: absolute;
-        top: -30px;
-        right: 10px;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 15px;
-        font-size: 12px;
-        cursor: pointer;
-        z-index: 15;
-    }
-    
     .thumbnails-column.expanded {
         max-height: 120px;
         overflow: visible;
-    }
-    
-    .thumbnails-column:not(.expanded) .thumbnails-toggle {
-        display: block;
-    }
-    
-    .thumbnails-column.expanded .thumbnails-toggle {
-        display: none;
     }
     
     .see-more-work-container {

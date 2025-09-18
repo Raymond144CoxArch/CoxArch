@@ -257,51 +257,8 @@ class GalleryModal {
         if (!this.elements.thumbnailsColumn) return;
         
         // Function to check if we're on mobile
-        const isMobile = () => window.innerWidth <= 768;
-        
-        // Create toggle button
-        const toggleButton = document.createElement('button');
-        toggleButton.className = 'thumbnails-toggle';
-        toggleButton.textContent = 'Show Thumbnails';
-        toggleButton.setAttribute('aria-label', 'Toggle thumbnail view');
-        
-        // Add toggle functionality
-        toggleButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const isExpanded = this.elements.thumbnailsColumn.classList.contains('expanded');
-            
-            if (isExpanded) {
-                // Collapse thumbnails
-                this.elements.thumbnailsColumn.classList.remove('expanded');
-                toggleButton.textContent = 'Show Thumbnails';
-            } else {
-                // Expand thumbnails
-                this.elements.thumbnailsColumn.classList.add('expanded');
-                toggleButton.textContent = 'Hide Thumbnails';
-            }
-        });
-        
-        // Add button to thumbnails column
-        this.elements.thumbnailsColumn.appendChild(toggleButton);
-        
-        // Function to handle mobile thumbnail visibility
-        const handleMobileThumbnails = () => {
-            if (isMobile()) {
-                // On mobile, start with thumbnails collapsed
-                this.elements.thumbnailsColumn.classList.remove('expanded');
-                toggleButton.style.display = 'block';
-            } else {
-                // On desktop, always show thumbnails
-                this.elements.thumbnailsColumn.classList.add('expanded');
-                toggleButton.style.display = 'none';
-            }
-        };
-        
-        // Set initial state and listen for resize
-        window.addEventListener('resize', handleMobileThumbnails);
-        handleMobileThumbnails();
+        // Always show thumbnails - no toggle button needed
+        this.elements.thumbnailsColumn.classList.add('expanded');
     }
     
     // Handle mobile browser UI (address bar, navigation buttons)
