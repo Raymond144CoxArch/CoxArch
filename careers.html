@@ -112,14 +112,16 @@
     </div>
   </nav>
 
-  <main class="careers-page container">
-    <section class="careers-intro">
-      <h1>Join our team today!</h1>
-      <p>Cox Architecture & Design is looking for talented architectural designers to join our growing team in Charlotte, North Carolina. If you have experience in residential architecture and design and want to be part of creating exceptional homes, please submit your application below.</p>
+  <main class="careers-page">
+    <section class="careers-hero-section">
+      <div class="container">
+        <h1 class="page-title">Join our team today!</h1>
+        <p class="careers-intro">Cox Architecture & Design is looking for talented architectural designers to join our growing team in Charlotte, North Carolina. If you have experience in residential architecture and design and want to be part of creating exceptional homes, please submit your application below.</p>
+      </div>
     </section>
 
-    <section class="careers-form-section">
-      <form action="https://rhtejpeywncitzypxuva.functions.supabase.co/apply-job"
+    <section class="careers-form-section container">
+      <form id="careers-form" action="https://rhtejpeywncitzypxuva.functions.supabase.co/apply-job"
       method="POST" enctype="multipart/form-data">
 
         <!-- Honeypot field for spam protection -->
@@ -249,5 +251,75 @@
     Cox Architecture & Design is your trusted architectural partner across the entire Charlotte region. From SouthPark to South End, Myers Park to Matthews, our work reflects the character of each neighborhood while delivering custom solutions that blend form, function, and local style.
   </div>
   <!-- END: Combined Hidden SEO Block -->
+
+  <!-- reCAPTCHA v3 Integration -->
+  <script>
+  (function injectRecaptcha() {
+    // Load reCAPTCHA script asynchronously
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js?render=6LcBtNErAAAAACFEDuqw4nqd24Qzzi-oG5KF8VCq";
+    script.async = true;
+    document.head.appendChild(script);
+
+    // Safe wrapper for grecaptcha.ready so it works even if called before load
+    if (typeof grecaptcha === "undefined") {
+      window.grecaptcha = {
+        ready: function(cb) {
+          const c = "___grecaptcha_cfg";
+          window[c] = window[c] || {};
+          (window[c].fns = window[c].fns || []).push(cb);
+        }
+      };
+    }
+
+    // Attach submit handler once DOM is ready
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.querySelector("#careers-form");
+      if (!form) return;
+
+      // Avoid double binding
+      if (form.__recaptchaBound) return;
+      form.__recaptchaBound = true;
+
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        // Execute reCAPTCHA v3 and get token
+        grecaptcha.ready(function() {
+          grecaptcha.execute("6LcBtNErAAAAACFEDuqw4nqd24Qzzi-oG5KF8VCq", { action: "submit" })
+            .then(function(token) {
+              // Add token to form as hidden input
+              let input = form.querySelector('input[name="g-recaptcha-response"]');
+              if (!input) {
+                input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "g-recaptcha-response";
+                form.appendChild(input);
+              }
+              input.value = token;
+
+              // Optional action field. Useful for server side checks.
+              let actionInput = form.querySelector('input[name="recaptcha-action"]');
+              if (!actionInput) {
+                actionInput = document.createElement("input");
+                actionInput.type = "hidden";
+                actionInput.name = "recaptcha-action";
+                form.appendChild(actionInput);
+              }
+              actionInput.value = "submit";
+
+              // Submit now that the token is attached
+              form.submit();
+            })
+            .catch(function(err) {
+              console.error("reCAPTCHA error", err);
+              // Fallback submit if needed
+              form.submit();
+            });
+        });
+      });
+    });
+  })();
+  </script>
 </body>
 </html>

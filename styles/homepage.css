@@ -393,7 +393,7 @@ body.homepage .nav-link:hover::after {
 
 body.homepage .contact-btn {
     color: var(--accent-color) !important;
-    background: transparent !important;
+    background: rgb(248, 248, 248) !important;
     border: 1px solid var(--accent-color) !important;
     padding: 0.75rem 1.5rem !important;
     text-decoration: none !important;
@@ -1026,7 +1026,7 @@ body.homepage .contact-btn:hover {
 
 /* what-we-do Section */
 .services-section {
-    padding: 8rem 0;
+    padding: 4rem 0;
     text-align: center;
     background: var(--light-gray);
 }
@@ -1112,7 +1112,7 @@ body.homepage .contact-btn:hover {
 
 /* Featured Projects Section */
 .featured-projects-section {
-    padding: 5rem 0;
+    padding: 4rem 0;
     background-color: var(--background-color);
 }
 
@@ -1410,7 +1410,7 @@ body.homepage .contact-btn:hover {
 
 /* Call to Action Section */
 .cta-section {
-    padding: 5rem 0;
+    padding: 4rem 0;
     text-align: center;
 }
 
@@ -1519,241 +1519,6 @@ body.homepage .contact-btn:hover {
 /* === TESTIMONIALS SECTION === */
 /* Testimonial styles moved to modern-testimonials.css to prevent conflicts */
 
-/* Old testimonial animation removed - now handled by modern-testimonials.css */
-
-/* Review Platform Links */
-.review-platforms {
-    text-align: center;
-    margin-top: 3rem;
-}
-
-.review-divider {
-    margin-bottom: 2rem;
-    position: relative;
-}
-
-.review-divider::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--border-color);
-    z-index: 1;
-}
-
-.review-divider span {
-    background: var(--light-gray);
-    padding: 0 2rem;
-    color: var(--secondary-color);
-    font-size: 0.9rem;
-    font-weight: 600;
-    position: relative;
-    z-index: 2;
-}
-
-.review-links {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    align-items: center;
-}
-
-.review-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-
-.review-link:hover {
-    transform: scale(1.05);
-}
-
-.review-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.google-logo-img,
-.houzz-logo-img {
-    max-width: 160px;
-    height: auto;
-    transition: all 0.3s ease;
-}
-
-.review-link:hover .google-logo-img,
-.review-link:hover .houzz-logo-img {
-    filter: brightness(1.1);
-}
-
-/* Mobile Responsive for Testimonials - moved to modern-testimonials.css */
-
-
-/* Elfsight Widget Styling */
-.elfsight-container {
-    margin-top: 1rem;
-}
-
-/* Custom styling for Elfsight widgets to match our design */
-.elfsight-container .eapps-widget-toolbar {
-    display: none !important;
-}
-
-.elfsight-container .eapps-reviews-widget {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-.elfsight-container .eapps-reviews-widget .eapps-reviews-widget-item {
-    background: rgba(255, 255, 255, 0.05) !important;
-    backdrop-filter: blur(8px) !important;
-    border-radius: 12px !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    padding: 1.5rem !important;
-    margin-bottom: 1rem !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
-}
-
-.elfsight-container .eapps-reviews-widget .eapps-reviews-widget-item:hover {
-    background: rgba(255, 255, 255, 0.08) !important;
-    transform: translateY(-4px) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    border-color: rgba(255, 121, 0, 0.3) !important;
-}
-
-.elfsight-container .eapps-reviews-widget .eapps-reviews-widget-item .eapps-reviews-widget-item-header {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: flex-start !important;
-    margin-bottom: 1rem !important;
-}
-
-.elfsight-container .eapps-reviews-widget .eapps-reviews-widget-item .eapps-reviews-widget-item-author {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.75rem !important;
-}
-
-.elfsight-container .eapps-reviews-widget .eapps-reviews-widget-item .eapps-reviews-widget-item-author-avatar {
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 50% !important;
-    background: linear-gradient(135deg, var(--accent-color), #FF7900) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-weight: 600 !important;
-    color: white !important;
-    font-size: 0.9rem !important;
-}
-
-.elfsight-container .eapps-reviews-widget .eapps-reviews-widget-item .eapps-reviews-widget-item-author-name {
-    margin: 0 0 0.25rem 0 !important;
-    font-size: 1rem !important;
-    font-weight: 600 !important;
-    color: var(--primary-color) !important;
-}
-
-.elfsight-container .eapps-reviews-widget .eapps-reviews-widget-item .eapps-reviews-widget-item-stars {
-    font-size: 0.8rem !important;
-    color: var(--accent-color) !important;
-}
-
-.elfsight-container .eapps-reviews-widget .eapps-reviews-widget-item .eapps-reviews-widget-item-date {
-    font-size: 0.8rem !important;
-    color: var(--secondary-color) !important;
-    font-weight: 400 !important;
-}
-
-.elfsight-container .eapps-reviews-widget .eapps-reviews-widget-item .eapps-reviews-widget-item-text {
-    margin: 0 !important;
-    font-size: 0.95rem !important;
-    line-height: 1.6 !important;
-    color: var(--text-color) !important;
-    font-style: italic !important;
-}
-
-/* Custom Review Aggregator Styles */
-.platform-filters {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-}
-
-.filter-btn {
-    background: rgba(255, 121, 0, 0.1);
-    border: 1px solid rgba(255, 121, 0, 0.3);
-    color: var(--accent-color);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.filter-btn:hover {
-    background: rgba(255, 121, 0, 0.2);
-    border-color: var(--accent-color);
-    transform: translateY(-2px);
-}
-
-.filter-btn.active {
-    background: var(--accent-color);
-    color: white;
-    border-color: var(--accent-color);
-}
-
-.review-meta {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.5rem;
-}
-
-.platform-badge {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.8rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-weight: 500;
-}
-
-.platform-badge.google {
-    background: rgba(66, 133, 244, 0.1);
-    color: #4285f4;
-    border: 1px solid rgba(66, 133, 244, 0.3);
-}
-
-.platform-badge.houzz {
-    background: rgba(255, 121, 0, 0.1);
-    color: var(--accent-color);
-    border: 1px solid rgba(255, 121, 0, 0.3);
-}
-
-.verified-badge {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.8rem;
-    color: #34a853;
-    font-weight: 500;
-}
-
-.verified-badge i {
-    font-size: 0.7rem;
-}
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
@@ -1880,7 +1645,7 @@ img {
     }
     
     .services-section {
-        padding: 4.5rem 0;
+        padding: 4rem 0;
     }
     
     .section-header {
