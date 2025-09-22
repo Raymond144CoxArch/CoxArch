@@ -677,26 +677,16 @@
   font-family: 'Roboto', sans-serif;
 }
 
-.google-logo-img {
-  width: 15rem;
-  height: 15rem;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.google-logo-img:hover {
-  transform: scale(1.1);
-}
-
+.google-logo-img,
 .houzz-logo-img {
-  width: 15rem;
-  height: 15rem;
-  object-fit: contain;
-  transition: transform 0.3s ease;
+  max-width: 160px;
+  height: auto;
+  transition: all 0.3s ease;
 }
 
+.google-logo-img:hover,
 .houzz-logo-img:hover {
-  transform: scale(1.1);
+  filter: brightness(1.1);
 }
 
 .stars {

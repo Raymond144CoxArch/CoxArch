@@ -2,18 +2,59 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-/* CRITICAL: Override any conflicting styles from other CSS files */
+/* NUCLEAR OPTION: Force horizontal layout immediately - MUST BE FIRST */
+.testimonials-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  flex-direction: row !important;
+  width: max-content !important;
+  overflow: visible !important;
+  gap: 2rem !important;
+  white-space: nowrap !important;
+  grid: none !important;
+  grid-template: none !important;
+  columns: none !important;
+  float: none !important;
+  clear: none !important;
+}
+
+/* Handle testimonials wrapper (used on press page) */
+.testimonials-wrapper {
+  display: block !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+/* Press page specific testimonials overrides */
+.press-page .testimonials-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  flex-direction: row !important;
+  width: max-content !important;
+  overflow: visible !important;
+  gap: 2rem !important;
+  white-space: nowrap !important;
+  grid: none !important;
+  grid-template: none !important;
+  columns: none !important;
+  float: none !important;
+  clear: none !important;
+  animation: scrollTestimonials 30s linear infinite !important;
+}
+
+/* CRITICAL: Override any conflicting styles from other CSS files - BULLETPROOF */
 html body .testimonials-section .testimonial-card,
 html body .testimonials-section .testimonial-item {
   background: #fff !important;
-  border-radius: 12px !important;
+  border-radius: 0 !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
   border: 1px solid rgba(0, 0, 0, 0.05) !important;
   padding: 2rem !important;
   margin: 0 !important;
-  width: 90vw !important;
-  max-width: 350px !important;
-  min-height: 250px !important;
+  width: 450px !important;
+  max-width: 450px !important;
+  min-width: 450px !important;
+  min-height: 280px !important;
   display: flex !important;
   flex-direction: column !important;
   position: relative !important;
@@ -21,6 +62,198 @@ html body .testimonials-section .testimonial-item {
   box-sizing: border-box !important;
   overflow: hidden !important;
   flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  flex-basis: 450px !important;
+  float: none !important;
+  clear: none !important;
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+  grid-column: none !important;
+  grid-row: none !important;
+  grid-area: none !important;
+  grid-template: none !important;
+  columns: none !important;
+  column-count: none !important;
+  column-width: none !important;
+  column-span: none !important;
+}
+
+/* Testimonial author styling */
+html body .testimonials-section .testimonial-author {
+  margin-top: auto !important;
+  text-align: right !important;
+  font-style: italic !important;
+  font-weight: 500 !important;
+  color: var(--secondary-color, #666) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.4 !important;
+  flex-shrink: 0 !important;
+  align-self: flex-end !important;
+}
+
+/* CRITICAL: Prevent any grid layout from interfering - ULTRA TARGETED */
+html body .testimonials-section .testimonials-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  flex-direction: row !important;
+  grid-template-columns: none !important;
+  grid-template-rows: none !important;
+  grid-auto-flow: row !important;
+  float: none !important;
+  clear: none !important;
+}
+
+/* Override the above for specific elements that need different display */
+html body .testimonials-section .testimonial-card,
+html body .testimonials-section .testimonial-item {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+html body .testimonials-section .testimonials-container {
+  display: block !important;
+}
+
+/* Ensure testimonial content displays properly */
+html body .testimonials-section .testimonial-content {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+}
+
+html body .testimonials-section .testimonial-content p {
+  display: block !important;
+  margin: 0 0 1rem 0 !important;
+}
+
+/* NUCLEAR OPTION: Override any possible layout method - TARGETED */
+html body .testimonials-section .testimonials-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  flex-direction: row !important;
+  grid: none !important;
+  grid-template: none !important;
+  grid-template-columns: none !important;
+  grid-template-rows: none !important;
+  grid-template-areas: none !important;
+  grid-auto-flow: row !important;
+  grid-auto-columns: none !important;
+  grid-auto-rows: none !important;
+  float: none !important;
+  clear: none !important;
+  columns: none !important;
+  column-count: none !important;
+  column-width: none !important;
+  column-span: none !important;
+  position: relative !important;
+}
+
+/* Override for specific elements that need different display */
+html body .testimonials-section .testimonial-card,
+html body .testimonials-section .testimonial-item {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+}
+
+html body .testimonials-section .testimonials-container {
+  display: block !important;
+}
+
+html body .testimonials-section .testimonial-content {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  justify-content: space-between !important;
+}
+
+html body .testimonials-section .testimonial-content p {
+  display: block !important;
+  flex-grow: 1 !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+}
+
+/* Position only the opening quotation mark slightly lower without affecting line spacing */
+html body .testimonials-section .quote-mark:first-child {
+  position: relative !important;
+  top: 0.15em !important;
+  display: inline !important;
+  line-height: 1 !important;
+  vertical-align: baseline !important;
+  font-size: 1.2em !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 300 !important;
+  font-style: italic !important;
+}
+
+/* Keep closing quotation mark at normal position without affecting line spacing */
+html body .testimonials-section .quote-mark:last-child {
+  position: static !important;
+  display: inline !important;
+  vertical-align: baseline !important;
+  line-height: 1 !important;
+  font-size: 1.2em !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 300 !important;
+  font-style: italic !important;
+}
+
+/* Hover pause handled by JavaScript */
+
+/* Ensure section header stays normal */
+html body .testimonials-section .section-header,
+html body .testimonials-section .container {
+  display: block !important;
+}
+
+/* CRITICAL: Force testimonials track to be horizontal - ABSOLUTE BULLETPROOF */
+html body .testimonials-section .testimonials-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  flex-direction: row !important;
+  width: max-content !important;
+  min-width: 100% !important;
+  overflow: visible !important;
+  animation: scrollTestimonials 30s linear infinite !important;
+  gap: 2rem !important;
+  white-space: nowrap !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative !important;
+  cursor: grab !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  grid-template-columns: none !important;
+  grid-template-rows: none !important;
+  grid-auto-flow: row !important;
+  grid-auto-columns: none !important;
+  grid-auto-rows: none !important;
+  float: none !important;
+  clear: none !important;
+  columns: none !important;
+  column-count: none !important;
+  column-width: none !important;
+  grid: none !important;
+  grid-template: none !important;
+  grid-template-areas: none !important;
+  grid-area: none !important;
+  grid-column: none !important;
+  grid-row: none !important;
+  flex-flow: row nowrap !important;
+}
+
+/* CRITICAL: Force testimonials container to stay fixed - BULLETPROOF */
+html body .testimonials-section .testimonials-container {
+  overflow: hidden !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  transform: none !important;
+  animation: none !important;
+  display: block !important;
+  padding: 0 2rem !important;
+  margin: 0 !important;
 }
 
 .testimonials-section {
@@ -30,30 +263,36 @@ html body .testimonials-section .testimonial-item {
 }
 
 .testimonials-container {
-  overflow: hidden;
+  overflow: hidden !important;
   padding: 0 1rem;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
 }
 
 .testimonials-track {
-  display: flex;
-  width: fit-content;
-  gap: 30px;
-  white-space: nowrap;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  width: max-content !important;
+  min-width: 100% !important;
+  gap: 30px !important;
+  white-space: nowrap !important;
   -webkit-overflow-scrolling: touch;
   will-change: transform;
-  align-items: flex-start;
-  padding-bottom: 20px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  align-items: flex-start !important;
+  padding-bottom: 20px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding: 1rem 0 2rem 0;
-  cursor: grab;
+  padding: 1rem 0 2rem 0 !important;
+  cursor: grab !important;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  flex-direction: row !important;
 }
 
 .testimonials-track::-webkit-scrollbar {
@@ -72,7 +311,7 @@ html body .testimonials-section .testimonial-item {
   min-height: 250px !important;
   padding: 2rem !important;
   background-color: #fff !important;
-  border-radius: 12px !important;
+  border-radius: 0 !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
   border: 1px solid rgba(0, 0, 0, 0.05) !important;
   display: flex !important;
@@ -162,28 +401,41 @@ html body .testimonials-section .testimonial-item .quote-mark {
   
   .testimonials-container {
     padding: 0 2rem;
+    overflow: hidden !important;
+    position: relative;
   }
   
   .testimonials-track {
-    display: flex;
-    width: fit-content;
-    gap: 2rem;
-    white-space: nowrap;
-    overflow: visible;
-    cursor: default;
-    padding: 0;
-    animation: scrollTestimonials 30s linear infinite;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: max-content !important;
+    min-width: 100% !important;
+    gap: 2rem !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    cursor: grab !important;
+    padding: 0 !important;
+    animation: scrollTestimonials 30s linear infinite !important;
+    flex-direction: row !important;
+    position: relative !important;
+  }
+  
+  
+  .testimonials-track:active {
+    cursor: grabbing !important;
   }
   
   .testimonials-track:hover {
     animation-play-state: paused;
   }
   
+  /* Hover pause handled by JavaScript */
+  
   .testimonials-section .testimonial-card {
-    flex: 0 0 400px !important;
-    width: 400px !important;
-    max-width: none !important;
-    min-height: 180px !important;
+    flex: 0 0 450px !important;
+    width: 450px !important;
+    max-width: 450px !important;
+    min-height: 280px !important;
     padding: 1.5rem 2rem !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
@@ -229,6 +481,75 @@ html body .testimonials-section .testimonial-item .quote-mark {
   }
 }
 
+/* Review Platform Links */
+.review-platforms {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.review-divider {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.review-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-color);
+  z-index: 1;
+}
+
+.review-divider span {
+  background: var(--light-gray);
+  padding: 0 2rem;
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 2;
+}
+
+.review-links {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  align-items: center;
+}
+
+.review-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.review-link:hover {
+  transform: scale(1.05);
+}
+
+.review-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-logo-img,
+.houzz-logo-img {
+  max-width: 160px;
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+.review-link:hover .google-logo-img,
+.review-link:hover .houzz-logo-img {
+  filter: brightness(1.1);
+}
+
 /* Large Desktop Adjustments */
 @media (min-width: 1024px) {
   .testimonials-container {
@@ -271,6 +592,14 @@ html body .testimonials-section .testimonial-item .quote-mark {
 }
 
 /* Mobile Optimizations */
+@media (max-width: 768px) {
+  .testimonials-track {
+    animation: none !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
+
 @media (max-width: 480px) {
   .testimonials-section {
     padding: 4rem 0;
@@ -312,6 +641,21 @@ html body .testimonials-section .testimonial-item .quote-mark {
     white-space: normal !important;
     overflow: visible !important;
   }
+  
+  /* Mobile review section adjustments */
+  .review-platforms {
+    margin-top: 2rem;
+  }
+  
+  .review-links {
+    gap: 2rem;
+    flex-direction: column;
+  }
+  
+  .google-logo-img,
+  .houzz-logo-img {
+    max-width: 140px;
+  }
 }
 
 /* Accessibility Improvements */
@@ -346,7 +690,7 @@ html body .testimonials-section * {
 html body .testimonials-section .testimonial-card,
 html body .testimonials-section .testimonial-item {
   background: #fff !important;
-  border-radius: 12px !important;
+  border-radius: 0 !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
   border: 1px solid rgba(0, 0, 0, 0.05) !important;
   padding: 2rem !important;

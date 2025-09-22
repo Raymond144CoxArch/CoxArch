@@ -217,23 +217,69 @@ const initializeTestimonialsSwipe = () => {
         // Check if screen is mobile (width <= 768px)
         const isMobile = () => window.innerWidth <= 768;
 
-        // Desktop Auto-Scrolling Functionality
+        // Desktop Auto-Scrolling Functionality - Using CSS animation instead
         const startAutoScroll = () => {
-            if (isMobile() || !isAutoScrolling) return;
-            
-            const scrollSpeed = 1; // pixels per frame
-            const animate = () => {
-                if (isAutoScrolling && !isDragging && !isMobile()) {
-                    testimonialsTrack.scrollLeft += scrollSpeed;
-                    
-                    // Reset to beginning when we reach the end
-                    if (testimonialsTrack.scrollLeft >= testimonialsTrack.scrollWidth - testimonialsTrack.clientWidth) {
-                        testimonialsTrack.scrollLeft = 0;
-                    }
-                }
-                animationId = requestAnimationFrame(animate);
+            // CSS animation handles the scrolling, no JavaScript needed
+            console.log('Using CSS animation for testimonials');
+            return;
+        };
+
+        // Desktop Drag Functionality
+        const setupDesktopDrag = () => {
+            if (isMobile()) return;
+
+            let isDragging = false;
+            let startX = 0;
+            let startScrollLeft = 0;
+
+            const startDrag = (e) => {
+                isDragging = true;
+                startX = e.pageX - testimonialsTrack.offsetLeft;
+                startScrollLeft = testimonialsTrack.scrollLeft;
+                
+                // Pause CSS animation
+                testimonialsTrack.style.animationPlayState = 'paused';
+                
+                // Change cursor
+                testimonialsTrack.style.cursor = 'grabbing';
+                document.body.style.cursor = 'grabbing';
+                
+                e.preventDefault();
             };
-            animate();
+
+            const drag = (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                
+                const x = e.pageX - testimonialsTrack.offsetLeft;
+                const walk = (x - startX) * 2; // Multiply for faster scrolling
+                testimonialsTrack.scrollLeft = startScrollLeft - walk;
+            };
+
+            const stopDrag = () => {
+                isDragging = false;
+                
+                // Resume CSS animation after a short delay
+                setTimeout(() => {
+                    if (!isDragging) {
+                        testimonialsTrack.style.animationPlayState = 'running';
+                    }
+                }, 1000);
+                
+                // Reset cursor
+                testimonialsTrack.style.cursor = 'grab';
+                document.body.style.cursor = 'default';
+            };
+
+            // Add event listeners for desktop drag
+            testimonialsTrack.addEventListener('mousedown', startDrag);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', stopDrag);
+            
+            // Prevent text selection while dragging
+            testimonialsTrack.addEventListener('selectstart', (e) => {
+                if (isDragging) e.preventDefault();
+            });
         };
 
         // Mobile Swipe Functionality
@@ -339,11 +385,32 @@ const initializeTestimonialsSwipe = () => {
 
         // Initialize functionality
         setupMobileSwipe();
+        // setupDesktopDrag(); // Temporarily disabled - causing grid layout issues
         
         // Add hover listeners for desktop
         if (!isMobile()) {
             testimonialsSection.addEventListener('mouseenter', handleMouseEnter);
             testimonialsSection.addEventListener('mouseleave', handleMouseLeave);
+            
+            // Add hover listeners to individual testimonial cards
+            const testimonialCards = testimonialsSection.querySelectorAll('.testimonial-card');
+            testimonialCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    console.log('Hovering over testimonial card - pausing animation');
+                    testimonialsTrack.style.animationPlayState = 'paused';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    console.log('Leaving testimonial card - resuming animation');
+                    testimonialsTrack.style.animationPlayState = 'running';
+                });
+            });
+            
+            // Start auto-scroll with a small delay to ensure DOM is ready
+            setTimeout(() => {
+                console.log('Starting desktop auto-scroll...');
+                startAutoScroll();
+            }, 500);
         }
         
         // Handle window resize
@@ -416,11 +483,22 @@ const initializeTestimonialsSwipe = () => {
 // ===== CONTINUOUS GALLERY FUNCTIONALITY =====
 const initializeContinuousGallery = () => {
     try {
+        console.log('Initializing continuous gallery...');
         continuousGalleryTrack = document.getElementById('featuredContinuousGallery');
         if (!continuousGalleryTrack) {
-            console.log('Continuous gallery track not found, skipping initialization.');
-            return;
+            console.log('Continuous gallery track not found by ID, trying by class...');
+            continuousGalleryTrack = document.querySelector('.continuous-gallery-track');
+            if (!continuousGalleryTrack) {
+                console.log('Continuous gallery track not found, skipping initialization.');
+                console.log('Available elements with "gallery" in ID:', 
+                    Array.from(document.querySelectorAll('[id*="gallery"]')).map(el => el.id));
+                console.log('Available elements with "gallery" in class:', 
+                    Array.from(document.querySelectorAll('[class*="gallery"]')).map(el => el.className));
+                return;
+            }
         }
+        console.log('Found continuous gallery track:', continuousGalleryTrack);
+        console.log('Gallery track parent:', continuousGalleryTrack.parentElement);
 
         // Full project data for the continuous gallery (matching portfolio structure)
         const projects = [
@@ -646,9 +724,17 @@ const initializeContinuousGallery = () => {
             continuousGalleryTrack.appendChild(galleryItem);
             galleryItems.push(galleryItem);
         });
+        
+        console.log(`Continuous gallery populated with ${allProjects.length} items`);
+        console.log('Gallery track element:', continuousGalleryTrack);
 
         // Start continuous animation
-        startContinuousAnimation();
+        try {
+            startContinuousAnimation();
+            console.log('Continuous animation started successfully');
+        } catch (error) {
+            console.error('Error starting continuous animation:', error);
+        }
 
         // Pause animation on hover
         continuousGalleryTrack.addEventListener('mouseenter', () => {
@@ -989,10 +1075,7 @@ const startContinuousAnimation = () => {
             initializeTestimonialsSwipe();
         }, 100);
 
-               // Initialize continuous gallery functionality
-    setTimeout(() => {
-                   initializeContinuousGallery();
-               }, 200);
+               // Continuous gallery removed
 
                // Initialize homepage gallery modal
                setTimeout(() => {

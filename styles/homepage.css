@@ -1225,6 +1225,8 @@ body.homepage .contact-btn:hover {
 /* === Continuous Convertible Portfolio Gallery === */
 .continuous-gallery-section {
     margin-top: 2rem;
+    min-height: 200px; /* Ensure section has minimum height */
+    background: transparent; /* Debug: make sure it's visible */
 }
 
 .continuous-gallery-viewport {
@@ -1232,6 +1234,7 @@ body.homepage .contact-btn:hover {
     width: 100%;
     overflow: visible;
     padding: 20px 0;
+    min-height: 150px; /* Ensure viewport has minimum height */
 }
 
 /* Mobile optimization for continuous gallery */
@@ -1286,6 +1289,8 @@ body.homepage .contact-btn:hover {
     align-items: center;
     gap: 1.5rem;
     will-change: transform;
+    min-height: 120px; /* Ensure track has minimum height */
+    background: rgba(0, 0, 0, 0.05); /* Debug: temporary background to see track */
 }
 
 .continuous-gallery-item {
