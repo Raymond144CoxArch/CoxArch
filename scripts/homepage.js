@@ -1,4 +1,4 @@
-// Homepage JavaScript - CACHE BUST v10 (Clean Modern Testimonials)
+// Homepage JavaScript - CACHE BUST v12 (Clean Modern Testimonials)
 // Logger is available globally from logger.js
 
 // Debug: Check if logger exists
@@ -81,14 +81,14 @@ const stopAutoSlide = () => {
     return isMobile ? [
         'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
         'images/Portfolio/Renovation+Addition/myers-park-renovation/2.jpg',
-        'images/Portfolio/Renovation+Addition/mid-century-modern-addition/Mid Century_01.jpg',
+        'images/Portfolio/Renovation+Addition/mid-century-modern-addition/Mid-Century_01.jpg',
         'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
         'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
         'images/HeroProjects/hero-19.jpg'
     ] : [
         'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
         'images/Portfolio/Renovation+Addition/myers-park-renovation/2.jpg',
-        'images/Portfolio/Renovation+Addition/mid-century-modern-addition/Mid Century_01.jpg',
+        'images/Portfolio/Renovation+Addition/mid-century-modern-addition/Mid-Century_01.jpg',
         'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
         'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
         'images/HeroProjects/hero-19.jpg'
