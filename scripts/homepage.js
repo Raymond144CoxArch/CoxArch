@@ -1,4 +1,4 @@
-// Homepage JavaScript - CACHE BUST v12 (Clean Modern Testimonials)
+// Homepage JavaScript - CACHE BUST v13 (Production Console Cleanup)
 // Logger is available globally from logger.js
 
 // Debug: Check if logger exists
@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const images = document.querySelectorAll('img');
     images.forEach(function(img) {
         img.addEventListener('error', function(e) {
-            console.warn('Image failed to load:', e.target.src);
             if (window.logger) {
                 window.logger.warn('Image failed to load', { src: e.target.src, alt: e.target.alt });
             }
@@ -118,7 +117,6 @@ const stopAutoSlide = () => {
         imgElement.decoding = 'async';
         
         imgElement.addEventListener('error', function(e) {
-            console.warn('Slideshow image failed to load:', e.target.src);
             if (window.logger) {
                 window.logger.warn('Slideshow image failed to load', { src: e.target.src, alt: e.target.alt });
             }
@@ -198,7 +196,9 @@ const initializeTestimonialsSwipe = () => {
 
         const testimonialsTrack = testimonialsSection.querySelector('.testimonials-track');
         if (!testimonialsTrack) {
-            console.error('Testimonials track not found.');
+            if (window.logger) {
+                window.logger.error('Testimonials track not found.');
+            }
             return;
         }
 
@@ -220,7 +220,6 @@ const initializeTestimonialsSwipe = () => {
         // Desktop Auto-Scrolling Functionality - Using CSS animation instead
         const startAutoScroll = () => {
             // CSS animation handles the scrolling, no JavaScript needed
-            console.log('Using CSS animation for testimonials');
             return;
         };
 
@@ -396,19 +395,16 @@ const initializeTestimonialsSwipe = () => {
             const testimonialCards = testimonialsSection.querySelectorAll('.testimonial-card');
             testimonialCards.forEach(card => {
                 card.addEventListener('mouseenter', () => {
-                    console.log('Hovering over testimonial card - pausing animation');
                     testimonialsTrack.style.animationPlayState = 'paused';
                 });
                 
                 card.addEventListener('mouseleave', () => {
-                    console.log('Leaving testimonial card - resuming animation');
                     testimonialsTrack.style.animationPlayState = 'running';
                 });
             });
             
             // Start auto-scroll with a small delay to ensure DOM is ready
             setTimeout(() => {
-                console.log('Starting desktop auto-scroll...');
                 startAutoScroll();
             }, 500);
         }
@@ -473,7 +469,6 @@ const initializeTestimonialsSwipe = () => {
         // console.log('Clean modern testimonials functionality initialized successfully');
         
     } catch (error) {
-        console.error('Error initializing testimonials:', error);
         if (window.logger) {
             window.logger.error('Testimonials initialization failed', { error: error.message });
         }
@@ -483,22 +478,13 @@ const initializeTestimonialsSwipe = () => {
 // ===== CONTINUOUS GALLERY FUNCTIONALITY =====
 const initializeContinuousGallery = () => {
     try {
-        console.log('Initializing continuous gallery...');
         continuousGalleryTrack = document.getElementById('featuredContinuousGallery');
         if (!continuousGalleryTrack) {
-            console.log('Continuous gallery track not found by ID, trying by class...');
             continuousGalleryTrack = document.querySelector('.continuous-gallery-track');
             if (!continuousGalleryTrack) {
-                console.log('Continuous gallery track not found, skipping initialization.');
-                console.log('Available elements with "gallery" in ID:', 
-                    Array.from(document.querySelectorAll('[id*="gallery"]')).map(el => el.id));
-                console.log('Available elements with "gallery" in class:', 
-                    Array.from(document.querySelectorAll('[class*="gallery"]')).map(el => el.className));
                 return;
             }
         }
-        console.log('Found continuous gallery track:', continuousGalleryTrack);
-        console.log('Gallery track parent:', continuousGalleryTrack.parentElement);
 
         // Full project data for the continuous gallery (matching portfolio structure)
         const projects = [
@@ -713,7 +699,6 @@ const initializeContinuousGallery = () => {
                     try {
                         await window.galleryModal.openProject(project.id);
                     } catch (error) {
-                        console.error('Failed to open project:', error);
                         if (window.logger) {
                             window.logger.error('Failed to open project from continuous gallery', { error: error.message, projectId: project.id });
                         }
@@ -725,15 +710,13 @@ const initializeContinuousGallery = () => {
             galleryItems.push(galleryItem);
         });
         
-        console.log(`Continuous gallery populated with ${allProjects.length} items`);
-        console.log('Gallery track element:', continuousGalleryTrack);
-
         // Start continuous animation
         try {
             startContinuousAnimation();
-            console.log('Continuous animation started successfully');
         } catch (error) {
-            console.error('Error starting continuous animation:', error);
+            if (window.logger) {
+                window.logger.error('Error starting continuous animation', { error: error.message });
+            }
         }
 
         // Pause animation on hover
@@ -745,11 +728,8 @@ const initializeContinuousGallery = () => {
             isGalleryPaused = false;
             startContinuousAnimation();
         });
-
-               console.log('Continuous gallery initialized successfully');
                
            } catch (error) {
-               console.error('Error initializing continuous gallery:', error);
                if (window.logger) {
                    window.logger.error('Continuous gallery initialization failed', { error: error.message });
                }
@@ -760,7 +740,6 @@ const initializeContinuousGallery = () => {
        const initializeHomepageGalleryModal = () => {
            try {
                if (window.galleryModal && window.galleryModal.isReady()) {
-                   console.log('Setting up gallery modal for homepage');
                    
                    // Get the same project data used in continuous gallery
                    const projects = [
@@ -963,14 +942,11 @@ const initializeContinuousGallery = () => {
                    
                    // Set project data in gallery modal
                    window.galleryModal.setProjectsData(projectsObject);
-                   console.log('Gallery modal project data set for homepage');
                    
             } else {
-                   console.log('Gallery modal not ready yet, retrying in 100ms...');
                    setTimeout(initializeHomepageGalleryModal, 100);
                }
            } catch (error) {
-               console.error('Error initializing homepage gallery modal:', error);
                if (window.logger) {
                    window.logger.error('Homepage gallery modal initialization failed', { error: error.message });
                }
@@ -1085,33 +1061,19 @@ const startContinuousAnimation = () => {
                // Ensure featured project images are loaded
                setTimeout(() => {
                    const featuredProjectImages = document.querySelectorAll('.featured-project img');
-                   console.log('Found featured project images:', featuredProjectImages.length);
                    featuredProjectImages.forEach((img, index) => {
-                       console.log(`Image ${index + 1}:`, {
-                           src: img.src,
-                           complete: img.complete,
-                           naturalWidth: img.naturalWidth,
-                           naturalHeight: img.naturalHeight,
-                           offsetWidth: img.offsetWidth,
-                           offsetHeight: img.offsetHeight
-                       });
-                       
                        // Force load the image if it's not complete
                        if (img.src && !img.complete) {
-                           console.log('Loading featured project image:', img.src);
-                           img.addEventListener('load', () => {
-                               console.log('Featured project image loaded:', img.src);
-                           });
                            img.addEventListener('error', (e) => {
-                               console.error('Featured project image failed to load:', img.src, e);
+                               if (window.logger) {
+                                   window.logger.error('Featured project image failed to load', { src: img.src });
+                               }
                            });
                            
                            // Force reload the image
                            const originalSrc = img.src;
                            img.src = '';
                            img.src = originalSrc;
-                       } else if (img.complete) {
-                           console.log('Featured project image already loaded:', img.src);
                        }
                        
                        // Ensure the image is visible
@@ -1121,21 +1083,14 @@ const startContinuousAnimation = () => {
                    });
                }, 100);
 
-               // Add debugging for gallery modal
+               // Check gallery modal status
                setTimeout(() => {
-                   if (window.galleryModal) {
-                       console.log('Gallery Modal Status:', {
-                           isReady: window.galleryModal.isReady(),
-                           hasData: window.galleryModal.isDataAvailable(),
-                           projectCount: window.galleryModal.projectsData ? Object.keys(window.galleryModal.projectsData).length : 0
-                       });
-  } else {
-                       console.error('Gallery Modal not found on window object');
+                   if (!window.galleryModal && window.logger) {
+                       window.logger.error('Gallery Modal not found on window object');
                    }
                }, 500);
 
     } catch (error) {
-        console.error('Error in homepage initialization:', error);
         if (window.logger) {
             window.logger.error('Homepage initialization failed', { error: error.message });
         }

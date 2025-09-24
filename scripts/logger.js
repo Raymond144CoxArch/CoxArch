@@ -9,8 +9,8 @@ class Logger {
             // Environment detection
             isDevelopment: this.detectDevelopment(),
             
-            // Logging levels
-            logLevel: config.logLevel || (this.isDevelopment ? 'debug' : 'error'),
+            // Logging levels - production only shows errors
+            logLevel: config.logLevel || (this.detectDevelopment() ? 'debug' : 'error'),
             
             // Error reporting service configuration
             enableErrorReporting: config.enableErrorReporting !== false,
@@ -178,7 +178,7 @@ class Logger {
                              level === 'warn' ? 'warn' : 
                              level === 'success' ? 'log' : 'log';
         
-        if (this.isDevelopment) {
+        if (this.config.isDevelopment) {
             // Rich console output for development
             const emoji = this.getLevelEmoji(level);
             const style = this.getLevelStyle(level);
@@ -189,8 +189,11 @@ class Logger {
                 data ? data : ''
             );
         } else {
-            // Minimal console output for production
-            console[consoleMethod](`[${level.toUpperCase()}] ${message}`, data || '');
+            // Production: only show errors, suppress all other logs
+            if (level === 'error') {
+                console[consoleMethod](`[ERROR] ${message}`);
+            }
+            // All other log levels are suppressed in production
         }
     }
 
