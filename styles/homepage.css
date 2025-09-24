@@ -612,6 +612,11 @@ body.homepage .contact-btn:hover {
         display: none !important;
     }
     
+    /* Hide desktop glass box completely on mobile */
+    .glass-box {
+        display: none !important;
+    }
+    
     .mobile-glass-section {
         display: block !important;
         padding: clamp(1.5rem, 5vw, 2rem) 0;
@@ -907,10 +912,14 @@ body.homepage .contact-btn:hover {
 }
 
 
-/* DEFAULT DESKTOP GLASS BOX - DARK SLATE */
+/* DEFAULT DESKTOP GLASS BOX - DARK SLATE - PRODUCTION SAFE */
 .glass-box {
     background: rgba(47, 79, 79, 0.4) !important;
     backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    -moz-backdrop-filter: blur(10px) !important;
+    -ms-backdrop-filter: blur(10px) !important;
+    -o-backdrop-filter: blur(10px) !important;
     border-radius: 0 !important;
     border: 1px solid rgba(255, 255, 255, 0.3) !important;
     padding: 0.5rem 1rem !important;
@@ -919,6 +928,7 @@ body.homepage .contact-btn:hover {
     display: flex !important;
     flex-direction: column !important;
     gap: 0.5rem !important;
+    font-family: 'Inter', sans-serif !important;
 }
 
 .glass-text {
@@ -963,38 +973,32 @@ body.homepage .contact-btn:hover {
 
 /* Desktop-only glass box styling - ensure dark slate glass */
 @media (min-width: 768px) {
-    body.homepage .hero-content .glass-box,
-    body.homepage .desktop-glass-box,
-    .hero-content .glass-box,
-    .desktop-glass-box,
-    .glass-box {
+    /* Show desktop glass box */
+    .glass-box,
+    .desktop-glass-box {
+        display: flex !important;
         background: rgba(47, 79, 79, 0.4) !important;
         border: 1px solid rgba(255, 255, 255, 0.3) !important;
         backdrop-filter: blur(10px) !important;
     }
     
-    body.homepage .hero-content .glass-box .glass-text,
-    body.homepage .desktop-glass-box .glass-text,
-    .hero-content .glass-box .glass-text,
-    .desktop-glass-box .glass-text,
-    .glass-box .glass-text {
+    /* Fix desktop font styling */
+    .glass-text {
         color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 300 !important;
+        font-family: 'Inter', sans-serif !important;
     }
     
-    body.homepage .hero-content .glass-box .glass-text b,
-    body.homepage .desktop-glass-box .glass-text b,
-    .hero-content .glass-box .glass-text b,
-    .desktop-glass-box .glass-text b,
-    .glass-box .glass-text b {
+    .glass-text b {
         color: var(--accent-color) !important;
+        font-weight: 600 !important;
+        font-family: 'Inter', sans-serif !important;
     }
     
-    body.homepage .hero-content .glass-box .glass-button,
-    body.homepage .desktop-glass-box .glass-button,
-    .hero-content .glass-box .glass-button,
-    .desktop-glass-box .glass-button,
-    .glass-box .glass-button {
+    .glass-button {
         color: rgba(255, 255, 255, 0.9) !important;
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 400 !important;
     }
 }
 
@@ -1730,53 +1734,106 @@ img {
     }
 }
 
-/* DESKTOP ONLY - Glass Box Protection */
+/* PRODUCTION-SAFE DESKTOP GLASS BOX */
 @media screen and (min-width: 768px) {
+    html body.homepage .hero-content .desktop-glass-box,
+    html body.homepage .desktop-glass-box,
+    html body .hero-content .desktop-glass-box,
+    html body .desktop-glass-box,
+    html .hero-content .desktop-glass-box,
+    html .desktop-glass-box,
     .hero-content .desktop-glass-box,
     .desktop-glass-box {
         background: rgba(47, 79, 79, 0.4) !important;
         border: 1px solid rgba(255, 255, 255, 0.3) !important;
         backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
     }
+    html body.homepage .hero-content .desktop-glass-box .glass-text,
+    html body.homepage .desktop-glass-box .glass-text,
+    html body .hero-content .desktop-glass-box .glass-text,
+    html body .desktop-glass-box .glass-text,
+    html .hero-content .desktop-glass-box .glass-text,
+    html .desktop-glass-box .glass-text,
     .hero-content .desktop-glass-box .glass-text,
     .desktop-glass-box .glass-text {
         color: rgba(255, 255, 255, 0.9) !important;
     }
+    html body.homepage .hero-content .desktop-glass-box .glass-text b,
+    html body.homepage .desktop-glass-box .glass-text b,
+    html body .hero-content .desktop-glass-box .glass-text b,
+    html body .desktop-glass-box .glass-text b,
+    html .hero-content .desktop-glass-box .glass-text b,
+    html .desktop-glass-box .glass-text b,
     .hero-content .desktop-glass-box .glass-text b,
     .desktop-glass-box .glass-text b {
         color: var(--accent-color) !important;
     }
 }
 
-/* MOBILE ONLY - White Glass Box Protection */
+/* PRODUCTION-SAFE MOBILE WHITE GLASS BOX */
 @media screen and (max-width: 767px) {
+    html body.homepage .mobile-glass-section,
+    html body .mobile-glass-section,
+    html .mobile-glass-section,
     .mobile-glass-section,
+    html body.homepage .mobile-glass-box,
+    html body .mobile-glass-box,
+    html .mobile-glass-box,
     .mobile-glass-box {
         display: block !important;
     }
+    html body.homepage .mobile-glass-section .mobile-glass-box,
+    html body .mobile-glass-section .mobile-glass-box,
+    html .mobile-glass-section .mobile-glass-box,
     .mobile-glass-section .mobile-glass-box,
+    html body.homepage .mobile-glass-box,
+    html body .mobile-glass-box,
+    html .mobile-glass-box,
     .mobile-glass-box {
         background: rgba(255, 255, 255, 0.9) !important;
         border: 1px solid rgba(255, 255, 255, 0.2) !important;
         backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         text-align: center !important;
     }
+    html body.homepage .mobile-glass-section .glass-text,
+    html body .mobile-glass-section .glass-text,
+    html .mobile-glass-section .glass-text,
     .mobile-glass-section .glass-text,
+    html body.homepage .mobile-glass-box .glass-text,
+    html body .mobile-glass-box .glass-text,
+    html .mobile-glass-box .glass-text,
     .mobile-glass-box .glass-text {
         color: rgba(0, 0, 0, 0.9) !important;
         text-align: center !important;
+        font-family: 'Inter', sans-serif !important;
     }
+    html body.homepage .mobile-glass-section .glass-text b,
+    html body .mobile-glass-section .glass-text b,
+    html .mobile-glass-section .glass-text b,
     .mobile-glass-section .glass-text b,
+    html body.homepage .mobile-glass-box .glass-text b,
+    html body .mobile-glass-box .glass-text b,
+    html .mobile-glass-box .glass-text b,
     .mobile-glass-box .glass-text b {
         color: var(--accent-color) !important;
+        font-family: 'Inter', sans-serif !important;
     }
+    html body.homepage .mobile-glass-section .glass-button,
+    html body .mobile-glass-section .glass-button,
+    html .mobile-glass-section .glass-button,
     .mobile-glass-section .glass-button,
+    html body.homepage .mobile-glass-box .glass-button,
+    html body .mobile-glass-box .glass-button,
+    html .mobile-glass-box .glass-button,
     .mobile-glass-box .glass-button {
         align-self: center !important;
         margin: 0 auto !important;
+        font-family: 'Inter', sans-serif !important;
     }
 }
 
