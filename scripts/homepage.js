@@ -117,10 +117,21 @@ const stopAutoSlide = () => {
         imgElement.decoding = 'async';
         
         imgElement.addEventListener('error', function(e) {
-            if (window.logger) {
-                window.logger.warn('Slideshow image failed to load', { src: e.target.src, alt: e.target.alt });
+            // Retry loading the image once before logging error
+            const retryCount = e.target.dataset.retryCount || 0;
+            if (retryCount < 1) {
+                e.target.dataset.retryCount = parseInt(retryCount) + 1;
+                setTimeout(() => {
+                    const originalSrc = e.target.src;
+                    e.target.src = '';
+                    e.target.src = originalSrc;
+                }, 100);
+            } else {
+                if (window.logger) {
+                    window.logger.warn('Slideshow image failed to load after retry', { src: e.target.src, alt: e.target.alt });
+                }
+                slideItem.style.display = 'none';
             }
-            slideItem.style.display = 'none';
         });
         
         imgElement.addEventListener('load', function(e) {

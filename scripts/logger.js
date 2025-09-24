@@ -546,17 +546,36 @@ class Logger {
     trackPagePerformance() {
         if (window.performance && window.performance.timing) {
             const timing = window.performance.timing;
-            const loadTime = timing.loadEventEnd - timing.navigationStart;
-            const domReady = timing.domContentLoadedEventEnd - timing.navigationStart;
             
-            this.performance('page_load_time', loadTime);
-            this.performance('dom_ready_time', domReady);
-            
-            this.info('Page performance metrics', {
-                loadTime,
-                domReady,
-                navigationStart: timing.navigationStart
-            });
+            // Only calculate if timing events have completed
+            if (timing.loadEventEnd > 0 && timing.domContentLoadedEventEnd > 0) {
+                const loadTime = timing.loadEventEnd - timing.navigationStart;
+                const domReady = timing.domContentLoadedEventEnd - timing.navigationStart;
+                
+                // Only log if values are reasonable (less than 30 seconds)
+                if (loadTime > 0 && loadTime < 30000) {
+                    this.performanceMetrics.set('page_load_time', loadTime);
+                    if (this.shouldLog('debug')) {
+                        this.log('performance', `page_load_time: ${loadTime}ms`);
+                    }
+                }
+                
+                if (domReady > 0 && domReady < 30000) {
+                    this.performanceMetrics.set('dom_ready_time', domReady);
+                    if (this.shouldLog('debug')) {
+                        this.log('performance', `dom_ready_time: ${domReady}ms`);
+                    }
+                }
+                
+                this.info('Page performance metrics', {
+                    loadTime: loadTime > 0 ? loadTime : 'measuring...',
+                    domReady: domReady > 0 ? domReady : 'measuring...',
+                    navigationStart: timing.navigationStart
+                });
+            } else {
+                // If timing isn't ready, try again in a moment
+                setTimeout(() => this.trackPagePerformance(), 100);
+            }
         }
     }
 
