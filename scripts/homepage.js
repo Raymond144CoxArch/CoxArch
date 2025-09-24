@@ -81,14 +81,14 @@ const stopAutoSlide = () => {
     return isMobile ? [
         'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
         'images/Portfolio/Renovation+Addition/myers-park-renovation/2.jpg',
-        'images/Portfolio/New Construction/Woodland/woodland-hero-.jpg',
+        'images/Portfolio/Renovation+Addition/mid-century-modern-addition/Mid Century_01.jpg',
         'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
         'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
         'images/HeroProjects/hero-19.jpg'
     ] : [
         'images/Portfolio/New Construction/lake-house/lakehouse-hero-.jpg',
         'images/Portfolio/Renovation+Addition/myers-park-renovation/2.jpg',
-        'images/Portfolio/New Construction/Woodland/woodland-hero-.jpg',
+        'images/Portfolio/Renovation+Addition/mid-century-modern-addition/Mid Century_01.jpg',
         'images/Portfolio/New Construction/Sabik/sabik-hero-.jpg',
         'images/Portfolio/New Construction/modern-warehouse/modern-warehouse-hero-.jpg',
         'images/HeroProjects/hero-19.jpg'
