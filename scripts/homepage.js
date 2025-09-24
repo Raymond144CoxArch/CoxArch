@@ -1,4 +1,4 @@
-// Homepage JavaScript - CACHE BUST v9 (Clean Modern Testimonials)
+// Homepage JavaScript - CACHE BUST v10 (Clean Modern Testimonials)
 // Logger is available globally from logger.js
 
 // Debug: Check if logger exists
