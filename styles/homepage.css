@@ -932,7 +932,7 @@ body.homepage .contact-btn:hover {
 }
 
 .glass-text {
-    font-size: 0.8rem !important;
+    font-size: 1rem !important;
     color: rgba(255, 255, 255, 0.9) !important;
     margin-bottom: 0 !important;
     line-height: 1.3 !important;
@@ -1292,6 +1292,12 @@ body.homepage .contact-btn:hover {
     margin-top: 3rem;
 }
 
+.featured-projects-cta a,
+.featured-projects-cta .glass-button,
+.featured-projects-cta .glass-button span {
+    color: var(--accent-color) !important;
+}
+
 /* === Continuous Convertible Portfolio Gallery === */
 .continuous-gallery-section {
     margin-top: 2rem;
@@ -1525,6 +1531,10 @@ body.homepage .contact-btn:hover {
     text-transform: uppercase;
 }
 
+.cta-section .glass-button,
+.cta-section .glass-button span {
+    color: var(--accent-color) !important;
+}
 
 /* Desktop Styles: Show the main navigation and hide the mobile button */
 @media (min-width: 768px) {
