@@ -697,6 +697,17 @@ body.homepage .contact-btn:hover {
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     }
     
+    /* Mobile glass box text styling - black text for mobile */
+    .mobile-glass-section .glass-text,
+    .mobile-glass-box .glass-text {
+        color: rgba(0, 0, 0, 0.9) !important;
+    }
+    
+    .mobile-glass-section .glass-text b,
+    .mobile-glass-box .glass-text b {
+        color: var(--accent-color) !important;
+    }
+    
     .glass-text {
         font-size: 0.85rem;
         margin-bottom: 0.75rem;
@@ -773,6 +784,17 @@ body.homepage .contact-btn:hover {
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     }
     
+    /* Mobile glass box text styling - black text for mobile */
+    .mobile-glass-section .glass-text,
+    .mobile-glass-box .glass-text {
+        color: rgba(0, 0, 0, 0.9) !important;
+    }
+    
+    .mobile-glass-section .glass-text b,
+    .mobile-glass-box .glass-text b {
+        color: var(--accent-color) !important;
+    }
+    
     /* Ensure mobile glass button text stays orange */
     .mobile-glass-section .mobile-glass-box .glass-button,
     .mobile-glass-box .glass-button {
@@ -805,6 +827,17 @@ body.homepage .contact-btn:hover {
     .mobile-glass-box {
         max-width: 320px;
         padding: 1rem;
+    }
+    
+    /* Mobile glass box text styling - black text for mobile */
+    .mobile-glass-section .glass-text,
+    .mobile-glass-box .glass-text {
+        color: rgba(0, 0, 0, 0.9) !important;
+    }
+    
+    .mobile-glass-section .glass-text b,
+    .mobile-glass-box .glass-text b {
+        color: var(--accent-color) !important;
     }
     
     .glass-text {
